@@ -7,10 +7,10 @@ import React, {
   } from "react";
   import "./Table.css";
   import ReactPaginate from "react-paginate";
-  import apiClient from "../../api/config";
-  import { ICON } from "../../Utils/icons";
-  import Utils from "../../Utils";
   import Dropdown from "../DropDown/Dropdown";
+import Utils from "../../utils";
+import apiClient from "../../api/config";
+import { ICON } from "../../utils/icon";
   
   const TableComponent = ({ tableData }) => {
     const [data, setData] = useState(tableData);

@@ -4,13 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { LoaderProvider } from "./context/LoaderContext";
+import { CaseProvider } from "./context/CaseContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   
   <BrowserRouter>
     <LoaderProvider>
-      <App />
+      <CaseProvider>
+        <App />
+      </CaseProvider>
     </LoaderProvider>
   </BrowserRouter>
 );
