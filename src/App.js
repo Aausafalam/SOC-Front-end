@@ -1,16 +1,22 @@
 import "./App.css";
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader/Loader";
+import AssetsManagementModule from "./pages/AssetsManagementModule";
+import Layout from "./layout";
 const Case = React.lazy(() => import("./pages/CaseModule"));
 
 function App() {
   
   return (
-    <Routes>
+    <Layout>
+      <Routes>
           <Route path="/" element={<>MAIN SOC PAGE</>}/>
           <Route path="/case" element={<React.Suspense fallback={<Loader/>}><Case /></React.Suspense>} />
+          <Route path="/assetsmanagement" element={<React.Suspense fallback={<Loader/>}><AssetsManagementModule /></React.Suspense>} />
     </Routes>
+    </Layout>
+    
   )
 }
 

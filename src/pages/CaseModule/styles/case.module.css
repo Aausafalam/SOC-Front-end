@@ -1,0 +1,8 @@
+.case_overview_container{
+    display: flex;
+    border: 1px solid #e9e6e6db;
+    border-radius: 10px;
+    background: white;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}

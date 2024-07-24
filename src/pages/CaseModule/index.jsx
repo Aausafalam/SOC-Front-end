@@ -3,6 +3,8 @@ import { useCase } from "../../context/CaseContext";
 import Utils from "../../utils";
 import Table from "../../components/Table/Table";
 import Box from "./components/Box";
+import Styles from "./styles/case.module.css";
+import { ICON } from "../../utils/icon";
 
 const Case = () => {
     const {caseList, fetchCaseList} = useCase();
@@ -106,10 +108,11 @@ const Case = () => {
 
     return (
         <div>
-            <div style={{display:"flex"}}>
-                <Box label={"Without Case Id Alerts"} count={20}/>
-                <Box label={"Pending Cases"} count={150}/>
-                <Box label={"Closed"} count={60}/>
+            <div className={Styles.case_overview_container}>
+                <Box label="Without Case Id Alerts" count={20} icon={ICON.ALERT} />
+                <Box label="Pending Cases" count={150} icon={ICON.PENDING} />
+                <Box label="Closed" count={60} icon={ICON.CLOSED} />
+                <Box label="Pending Cases" count={150} icon={ICON.PENDING} />
             </div>
             <Table tableData={tableData} />
            
