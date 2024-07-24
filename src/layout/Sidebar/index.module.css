@@ -1,5 +1,78 @@
 .container {
     height: 100%;
-    width: 5rem;
+    width: 6rem;
     background-color: #253db6;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.container>ul {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-direction: column;
+    background-color: #253db6;
+}
+
+.container>ul>li {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding-top: 0.5rem;
+    cursor: pointer;
+
+}
+
+.underline {
+    background-color: rgb(222, 238, 252);
+    height: 1.2px;
+    width: 2.2rem;
+    margin-top: 0.5rem;
+}
+
+.container>ul>li svg {
+    width: 28px;
+    color: white;
+    /* transition: filter 0.3s ease; */
+}
+
+.container>ul>li p {
+    font-size: 0.75rem;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding-inline: 0.5rem;
+    margin-top: -0.4rem;
+}
+
+.container>ul>li:last-of-type .underline {
+    display: none;
+}
+
+.container>ul>li:hover {
+    background-color: white;
+    color: #133DB5;
+}
+
+.container>ul>li:hover p {
+    color: #133DB5;
+}
+
+.container>ul>li:hover svg,
+.container>ul>li:first-of-type svg {
+    color: #133DB5;
+}
+
+.container>ul>li:first-of-type {
+    background-color: white;
+    color: #133DB5;
+}
+
+.container>ul>li:first-of-type p {
+    color: #133DB5;
 }
