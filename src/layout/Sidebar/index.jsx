@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from "./index.module.css"
-import data from "./index.json"
+import {data} from "./index.js"
 import { useNavigate } from 'react-router'
-
+import { ReactSVG } from 'react-svg';
 
 const Sidebar = () => {
     const navigate = useNavigate()
@@ -11,8 +11,9 @@ const Sidebar = () => {
        { 
          data.map((item) => (
             <li onClick={() => {navigate(item.url)}}>
-            <img src={item.icon} alt="" />
+            <ReactSVG src={item.icon} className="icon" />
             <p>{item.name}</p>
+            <div className={styles.underline}></div>
         </li>
          ))
        }
