@@ -1,0 +1,46 @@
+/* Dropdown Component CSS */
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-trigger {
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border-radius: 5px;
+    padding: 0.6rem 0.8rem;
+    right: 1rem;
+    white-space: nowrap;
+  }
+  
+  .dropdown-content p {
+    display: flex;
+    font-size: 15px;
+    cursor: pointer;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    padding-block: 0.35rem;
+  }
+  
+  .dropdown-content p svg {
+    width: 20px;
+  }
+  
+  .dropdown-content p:hover {
+    background-color: #ebe8e885;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .dropdown-content {
+      left: 0rem !important;
+      width: fit-content;
+    }
+  }
+  
