@@ -1,5 +1,5 @@
 .box {
-  box-shadow: var(--card-box-shadow);
+  /* box-shadow: var(--card-box-shadow); */
   border-radius: .30rem;
   background-color: var(--white);
   display: flex;
@@ -7,7 +7,7 @@
   padding: 1rem;
   position: relative;
   width: 100%;
-  margin: 1rem;
+  /* margin: 1rem; */
   border:1px solid #E8E6FC;
 }
 
@@ -99,3 +99,4 @@
   text-transform: none;
   width: 300px;
 }
+
