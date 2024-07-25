@@ -1,0 +1,86 @@
+{
+    "status": "success",
+    "message": "SBOM data list retrieved successfully",
+    "data": [
+      {
+        "_id": "668b72d6b2412ed5984c9b3c",
+        "agentId": 21019,
+        "value": 21
+      },
+      {
+        "_id": "668b72d6b2412ed5984c9b4e",
+        "agentId": 21025,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72d5b2412ed5984c9b2a",
+        "agentId": 21013,
+        "value": 21
+       
+      },
+      {
+        "_id": "668b72dbb2412ed5984c9ce0",
+        "agentId": 21159,
+        "value": 21
+       
+      },
+      {
+        "_id": "668b72dab2412ed5984c9c6b",
+        "agentId": 21120,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72d9b2412ed5984c9c4d",
+        "agentId": 21110,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72dbb2412ed5984c9ce3",
+        "agentId": 21160,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72dbb2412ed5984c9cdd",
+        "agentId": 21158,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72dbb2412ed5984c9cd7",
+        "agentId": 21156,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72dbb2412ed5984c9cda",
+        "agentId": 21157,
+        "value": 21
+      },
+      {
+        "_id": "668b72d6b2412ed5984c9b3c",
+        "agentId": 21019,
+        "value": 21
+      },
+      {
+        "_id": "668b72d6b2412ed5984c9b4e",
+        "agentId": 21025,
+        "value": 21
+        
+      },
+      {
+        "_id": "668b72d5b2412ed5984c9b2a",
+        "agentId": 21013,
+        "value": 21
+       
+      }
+    ],
+    "pagination": {
+      "totalPages": 40,
+      "currentPage": 1,
+      "totalItems": 393
+    }
+  }

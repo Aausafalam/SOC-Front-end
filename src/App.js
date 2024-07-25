@@ -11,7 +11,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-          <Route path="/" element={<>MAIN SOC PAGE</>}/>
+          <Route path="/" element={<AssetsManagementModule/>}/>
           <Route path="/case" element={<React.Suspense fallback={<Loader/>}><Case /></React.Suspense>} />
           <Route path="/assetsmanagement" element={<React.Suspense fallback={<Loader/>}><AssetsManagementModule /></React.Suspense>} />
     </Routes>
