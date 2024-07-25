@@ -45,7 +45,7 @@ const CaseCountChart = () => {
 
     return (
         <div>
-            {loading ? <span className={Style.loading}>{ICON.LOADING}</span>: data && (
+            {loading ? <span className="chart-loading">{ICON.LOADING}</span>: data && (
                 <ChartComponent
                     type="pie"
                     data={data}

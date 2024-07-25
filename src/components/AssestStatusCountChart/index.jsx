@@ -1,9 +1,11 @@
 // AssetsCountChart.js
 import React, { useEffect, useState } from 'react';
 import ChartComponent from '../Chart';
+import { ICON } from '../../utils/icon';
 
 const AssestStatusCountChart = () => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
     const roles = ["Agent Installed", "vulnerable", "Verified"];
 
     const fetchDataInitially = async (url, token) => {
@@ -38,12 +40,13 @@ const AssestStatusCountChart = () => {
         (async () => {
             const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
             setData(initialData);
+            setLoading(false);
         })();
     }, []);
 
     return (
         <div>
-            {data && (
+            {loading ? <span className="chart-loading">{ICON.LOADING}</span>:data && (
                 <ChartComponent
                     type="bar"
                     data={data}

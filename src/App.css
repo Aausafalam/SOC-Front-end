@@ -81,3 +81,17 @@ body {
   /* background-color: #ffefe1; */
   color: #ff7c00;
 }
+
+.chart-loading {
+  display: flex;
+  justify-content: center;
+}
+
+.chart-loading svg {
+  width:10rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
