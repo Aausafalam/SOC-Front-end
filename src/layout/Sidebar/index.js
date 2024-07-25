@@ -65,7 +65,7 @@ export const data = [
   {
     name: "Vulnerability Management",
     icon: VulnerabilityManagementIcon,
-    url: "/"
+    url: "/case"
   },
   {
     name: "File Analysis",

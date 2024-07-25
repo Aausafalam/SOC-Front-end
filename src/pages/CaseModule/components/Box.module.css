@@ -1,5 +1,5 @@
 .box {
-  box-shadow: var(--card-box-shadow);
+  /* box-shadow: var(--card-box-shadow); */
   border-radius: .30rem;
   background-color: var(--white);
   display: flex;
