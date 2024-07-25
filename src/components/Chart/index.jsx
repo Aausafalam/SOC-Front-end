@@ -38,7 +38,7 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
             }
         };
 
-        if (chartInstance.current.options.scales && type !== 'pie') {
+        if (chartInstance.current.options.scales && type !== 'pie' && type != "doughnut") {
             updatedOptions.scales = {
                 x: {
                     ticks: {
@@ -52,7 +52,31 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
                 }
             };
         }
+        chartInstance.current.data.datasets.forEach(dataset => {
+            if (type === 'pie' || type === 'doughnut') {
+                dataset.borderColor = isDarkMode ? 'transparent' : '#ffffff';
+            }
+        });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         chartInstance.current.options = updatedOptions;
         chartInstance.current.update();
     };

@@ -43,7 +43,7 @@ const AssetsCountChart = () => {
         <div>
             {data && (
                 <ChartComponent
-                    type="pie"
+                    type="doughnut"
                     data={data}
                     options={{
                         responsive: true,
