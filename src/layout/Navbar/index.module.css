@@ -2,15 +2,40 @@
     width: 100%;
     height: 4rem;
     position: sticky;
-    top: 0rem;
+    top: 0;
     background-color: white;
     display: flex;
     align-items: center;
     padding: 1rem;
-
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.container>img {
+.container > img {
     height: 3.5rem;
-    margin-top: 0.4rem;
+    margin-right: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+}
+
+.themeSwitcher {
+    margin-left: auto;
+}
+
+.themeSwitcher button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
 }

@@ -34,6 +34,10 @@ const Case = () => {
                 value: index + 1,
                 removeFromAutoSuggestion: true,
               },
+              "Case ID": {
+                key: "caseId",
+                value: Utils.capitalizeEachWord(item.caseId),
+              },
               Title: {
                 key: "title",
                 value: Utils.capitalizeEachWord(item.title),
@@ -48,7 +52,7 @@ const Case = () => {
               },
             };
 
-            const severityClass = `badge badge-${item.severity.toLowerCase()}`;
+            const severityClass = `badge-${item.severity.toLowerCase()}`;
             row["Severity"] = {
               key: "severity",
               value: (
@@ -59,7 +63,7 @@ const Case = () => {
               originalValue:item.severity,
             };
 
-            const statusClass = `badge ${getStatusBadgeClass(item.status)}`;
+            const statusClass = `${getStatusBadgeClass(item.status)}`;
             row["Status"] = {
               key: "status",
               value: (
