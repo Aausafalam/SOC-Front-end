@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ChartComponent from '../Chart';
 import Style from "./index.module.css";
+import { ICON } from '../../utils/icon';
 
 const CaseCountChart = () => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const roles = ["Software", "Web Application", "Desktop", "Laptop"];
 
     const fetchDataInitially = async (url, token) => {
@@ -36,12 +39,13 @@ const CaseCountChart = () => {
         (async () => {
             const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
             setData(initialData);
+            setLoading(false);
         })();
     }, []);
 
     return (
         <div>
-            {data && (
+            {loading ? <span className={Style.loading}>{ICON.LOADING}</span>: data && (
                 <ChartComponent
                     type="pie"
                     data={data}

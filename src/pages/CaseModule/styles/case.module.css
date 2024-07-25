@@ -6,7 +6,7 @@
 .case_overview_container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    background-color: var(--white);
+    /* background-color: var(--white); */
     gap: 1rem;
     /* border: 1px solid var(--border-color); */
     border-radius: 10px;
@@ -15,7 +15,7 @@
     overflow: auto;
     position: relative;
     width: 100%;
-    padding:1rem;
+    /* padding:1rem; */
   }
 
   .case_chart_container {
@@ -28,21 +28,37 @@
     overflow: auto;
     width: 100%;
     padding-block:2rem;
-    max-width: 98%;
+    max-width: 97%;
+    text-align: center;
+    margin-inline:1rem;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1400px) {
     .case_overview_container{
       grid-template-columns: repeat(2, 1fr);
     }
     .main_container {
       grid-template-columns: repeat(1, 1fr);
     }
+    .case_chart_container{
+      margin-inline:0px;
+    }
   }
 
-  @media (max-width: 845px) {
+  @media (max-width: 1300px) {
+    .case_chart_container{
+      max-width: 100%;
+      margin-inline:0px;
+    }
+  }
+
+  @media (max-width: 760px) {
     .case_overview_container {
       grid-template-columns: 1fr;
+    }
+    .case_chart_container{
+      max-width: 100%;
+      margin-inline:0px;
     }
   }
 
@@ -87,8 +103,13 @@
   
   .case_overview_container:hover {
     overflow: auto; /* Enable scrolling on hover */
-  }
+  }hart-1
   
   .case_overview_container .container {
     padding-top:2rem !important;
+  }
+
+  .case_overview_container canvas {
+   width:100px;
+   height: 100px;
   }

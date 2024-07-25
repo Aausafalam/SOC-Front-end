@@ -139,7 +139,7 @@ const Case = () => {
           <Card label="Closed" count={60} icon={ICON.CLOSED} />
           <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
         </div>
-        <div className={Styles.case_chart_container} style={{display:"flex", textAlign:"center", justifyContent:"center", marginInline:"1rem"}}>
+        <div className={Styles.case_chart_container} >
           <CaseCountChart/>
         </div>
       </div>
