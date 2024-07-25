@@ -1,8 +1,19 @@
-import React from 'react';
-import Style from './Box.module.css';
-import { ICON } from '../../../utils/icon';
+import React, { useEffect, useRef } from "react";
+import Style from "./Box.module.css";
+import { ICON } from "../../../utils/icon";
+import Dropdown from "../../../components/DropDown/Dropdown";
 
 const Box = ({ label, count, icon }) => {
+  
+
+  const actions = [
+    {
+      name: "refresh",
+      functions: () => {},
+      label: "Refresh",
+    },
+  ];
+
   return (
     <div className={Style.box}>
       <div className={Style.vCardText}>
@@ -16,7 +27,19 @@ const Box = ({ label, count, icon }) => {
             <div className={Style.boxLabel}>{label}</div>
           </div>
           <span className={Style.dotMenu}>
-            {ICON.DOT_MENU}
+            <Dropdown
+              trigger={<span>{ICON.DOT_MENU}</span>}
+              content={actions.map((action, index) => (
+                <p
+                  key={index}
+                  onClick={() => action.functions()}
+                  className=""
+                  title={action.label}
+                >
+                  {ICON[action.name.toUpperCase()]} {action.label}
+                </p>
+              ))}
+            />
           </span>
         </div>
 

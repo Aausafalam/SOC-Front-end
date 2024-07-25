@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useCase } from "../../context/CaseContext";
 import Utils from "../../utils";
 import Table from "../../components/Table/Table";
@@ -78,19 +78,35 @@ const Case = () => {
           }),
           actionData: [
             {
-              name: "Edit",
+              name: "Open",
               functions: (index) => {
                 // handleEditNotice(index, data);
               },
-              label: "Edit",
+              label: "Open",
               Id: "Id",
             },
             {
-              name: "Delete",
+              name: "delete",
               functions: (index) => {
                 // deleteNotice(index, data);
               },
-              label: "Delete",
+              label: "Remove",
+              Id: "Id",
+            },
+            {
+              name: "Alert",
+              functions: (index) => {
+                // deleteNotice(index, data);
+              },
+              label: "Open Alerts",
+              Id: "Id",
+            },
+            {
+              name: "Close",
+              functions: (index) => {
+                // deleteNotice(index, data);
+              },
+              label: "Close",
               Id: "Id",
             },
           ],

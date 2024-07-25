@@ -14,7 +14,7 @@ export const useCaseList = () => {
             setCaseList(list);
         } catch (error) {
             setCaseList([]);
-            console.error("Error fetching Department list:", error);
+            console.error("Error fetching Case list:", error);
         } finally {
             hideLoader();
         }
