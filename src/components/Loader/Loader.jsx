@@ -1,7 +1,7 @@
 import React from "react";
 import "./Loader.css";
 import { useLoader } from "../../context/LoaderContext";
-import { ICONS } from "../../utils/icons";
+import { ICON } from "../../utils/icon";
 
 const Loader = () => {
   const { loading } = useLoader();
@@ -10,7 +10,7 @@ const Loader = () => {
   return (
     <div style={{ background: "white" }} className="loader-container">
       <div>
-        {ICONS.LOADER}
+        {ICON.LOADER}
       </div>
     </div>
   );
