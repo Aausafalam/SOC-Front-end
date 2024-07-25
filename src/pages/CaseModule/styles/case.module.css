@@ -1,6 +1,12 @@
+.main_container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
 .case_overview_container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    background-color: var(--white);
     gap: 1rem;
     /* border: 1px solid var(--border-color); */
     border-radius: 10px;
@@ -8,26 +14,49 @@
     padding: 0px;
     overflow: auto;
     position: relative;
+    width: 100%;
+    padding:1rem;
   }
 
-  @media (max-width: 1500px) {
+  .case_chart_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    overflow: auto;
+    width: 100%;
+    padding-block:2rem;
+    max-width: 98%;
+  }
+
+  @media (max-width: 1200px) {
+    .case_overview_container{
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .main_container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media (max-width: 845px) {
+    .case_overview_container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* @media (max-width: 1500px) {
     .case_overview_container {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  
-
-  /* @media (max-width: 1024px) {
-    .case_overview_container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  } */
   
   @media (max-width: 760px) {
     .case_overview_container {
       grid-template-columns: 1fr;
     }
-  }
+  } */
   
   /* For WebKit-based browsers (Chrome, Safari, Edge) */
   .case_overview_container::-webkit-scrollbar {
@@ -60,3 +89,6 @@
     overflow: auto; /* Enable scrolling on hover */
   }
   
+  .case_overview_container .container {
+    padding-top:2rem !important;
+  }
