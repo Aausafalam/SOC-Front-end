@@ -1,5 +1,6 @@
 [
     {
+        "caseId":"#CASE1230",
         "status": "new",
         "title": "Initial Setup for Project A",
         "severity": "high",
@@ -7,6 +8,7 @@
         "updatedAt": "12-06-2024"
     },
     {
+        "caseId":"#CASE1231",
         "status": "inprogress",
         "title": "Fix Bugs in Module B",
         "severity": "low",
@@ -14,6 +16,7 @@
         "updatedAt": "12-06-2024"
     },
     {
+        "caseId":"#CASE1232",
         "status": "onhold",
         "title": "Review and Update Documentation",
         "severity": "high",
@@ -21,6 +24,7 @@
         "updatedAt": "12-06-2024"
     },
     {
+        "caseId":"#CASE1233",
         "status": "new",
         "title": "Design New User Interface",
         "severity": "medium",
@@ -28,6 +32,7 @@
         "updatedAt": "12-06-2024"
     },
     {
+        "caseId":"#CASE1234",
         "status": "new",
         "title": "Implement API for Feature X",
         "severity": "high",
@@ -35,6 +40,7 @@
         "updatedAt": "12-06-2024"
     },
     {
+        "caseId":"#CASE1235",
         "status": "new",
         "title": "Complete Testing for Module Y",
         "severity": "high",

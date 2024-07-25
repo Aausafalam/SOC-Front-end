@@ -1,3 +1,8 @@
 export const constants = { 
-    API_BASE_URL: process.env.BACKEND_API_BASE_URL
+    API_BASE_URL: process.env.BACKEND_API_BASE_URL,
+
+    THEME : {
+        LIGHT : "light",
+        DARK : "dark"
+    }
 }
