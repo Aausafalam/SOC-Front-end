@@ -1,8 +1,41 @@
-.case_overview_container{
+.case_overview_container {
     display: flex;
-    border: 1px solid #e9e6e6db;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
-    background: white;
     margin-bottom: 2rem;
-    padding: 1rem;
-}
+    padding: 0px;
+    overflow: auto;
+    position: relative;
+  }
+  
+  /* For WebKit-based browsers (Chrome, Safari, Edge) */
+  .case_overview_container::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s; /* Smooth transition */
+  }
+  
+  .case_overview_container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners of the scrollbar thumb */
+  }
+  
+  .case_overview_container::-webkit-scrollbar-track {
+    background-color: transparent; /* Background color of the track */
+  }
+  
+  /* Show scrollbar on hover */
+  .case_overview_container:hover::-webkit-scrollbar {
+    opacity: 1; /* Show scrollbar on hover */
+  }
+  
+  /* For Firefox */
+  .case_overview_container {
+    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Thumb color and track color */
+  }
+  
+  .case_overview_container:hover {
+    overflow: auto; /* Enable scrolling on hover */
+  }
+  

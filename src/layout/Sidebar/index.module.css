@@ -1,7 +1,7 @@
 .container {
     height: 100%;
     width: 6rem;
-    background-color: #253db6;
+    background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -14,7 +14,7 @@
     align-items: center;
     gap: 1.2rem;
     flex-direction: column;
-    background-color: #253db6;
+    background-color: var(--primary-color);
 }
 
 .container>ul>li {

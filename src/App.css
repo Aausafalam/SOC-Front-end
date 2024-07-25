@@ -1,12 +1,48 @@
+:root {
+  --primary-color: #253DB6;
+  --light-gray-color:#eee;
+  --white:white;
+  --background-color: #F5F5F5;
+  --text-color: #000000;
+  --transparent: #2F3349;
+  --card-primary-color: #253DB6;
+  --border-primary-color:  var(--primary-color);
+  --card-icon-color: white;
+  --border-color:#e9e6e6db;
+  --card-box-shadow: 3px 3px 15px #d5d5d5, -7px -7px 15px #f4f4f4;
+}
+
+[data-theme='dark'] {
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --white: var(--transparent);
+  --light-gray-color: #7B7E8B;
+  --card-primary-color: white;
+  --border-primary-color: white;
+  --card-icon-color: black;
+  --border-color:none;
+  --primary-color: var(--transparent);
+  --card-box-shadow:none;
+}
+
+input[type="text"]{
+  background-color: var(--white);
+}
+select{
+  background-color: var(--white);
+  color: var(--text-color) !important;
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body
-{
-  background-color: #F5F5F5;
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
+
 *{
   font-family: "Nunito", sans-serif !important;
 }
@@ -25,23 +61,23 @@ body
 
 .badge-low,
 .badge-green {
-  background-color: #dcf6e8;
-  color: #28c76f;
+  /* background-color: #dcf6e8; */
+  color: #03b403;
 }
 
 .badge-high,
 .badge-red {
-  background-color: #ffe2e3;
-  color: #ff4c51;
+  /* background-color: #ffe2e3; */
+  color: #ff6347;
 }
 
 .badge-violet {
-  background-color: #e8e6fc;
+  /* background-color: #e8e6fc; */
   color: #7367f0;
 }
 
 .badge-medium,
 .badge-orange {
-  background-color: #ffefe1;
+  /* background-color: #ffefe1; */
   color: #ff7c00;
 }
