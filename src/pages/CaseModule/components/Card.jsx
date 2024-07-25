@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import Style from "./Box.module.css";
+import Style from "./Card.module.css";
 import { ICON } from "../../../utils/icon";
 import Dropdown from "../../../components/DropDown/Dropdown";
 
-const Box = ({ label, count, icon }) => {
-  
-
+const Card = ({ label, count, icon }) => {
   const actions = [
     {
       name: "refresh",
@@ -58,4 +56,4 @@ const Box = ({ label, count, icon }) => {
   );
 };
 
-export default Box;
+export default Card;

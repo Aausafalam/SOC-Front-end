@@ -1,12 +1,13 @@
-// AssetsCountChart.js
 import React, { useEffect, useState } from 'react';
 import ChartComponent from '../Chart';
+import Style from "./index.module.css";
 import { ICON } from '../../utils/icon';
 
-const AssestCriticalCount = () => {
+const CaseCountChart = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const roles = ["Expired", "Public Facing Web Application", "Unverified"];
+
+    const roles = ["Software", "Web Application", "Desktop", "Laptop"];
 
     const fetchDataInitially = async (url, token) => {
         try {
@@ -44,7 +45,7 @@ const AssestCriticalCount = () => {
 
     return (
         <div>
-            {loading ? <span className="chart-loading">{ICON.LOADING}</span>:data && (
+            {loading ? <span className="chart-loading">{ICON.LOADING}</span>: data && (
                 <ChartComponent
                     type="pie"
                     data={data}
@@ -60,12 +61,12 @@ const AssestCriticalCount = () => {
                             }
                         }
                     }}
-                    canvaId="chart-3"
-                    title="Assets Count"
+                    canvaId="chart-1"
+                    title="Case Count"
                 />
             )}
         </div>
     );
 };
 
-export default AssestCriticalCount;
+export default CaseCountChart;
