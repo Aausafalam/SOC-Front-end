@@ -1,13 +1,13 @@
 import React from 'react';
-import './Box.css';
+import Style from './Box.module.css';
 
 const Box = ({ label, count, icon }) => {
   return (
-    <div className="box">
-      <span class="box-icon">{icon}</span>
-      <div class="box-content">
-            <span class="box-label">{label}</span>
-            <span class="box-count">{count}</span>
+    <div className={Style.box}>
+      <span class={Style.boxIcon} >{icon}</span>
+      <div class={Style.boxContent}>
+            <span class={Style.boxLabel}>{label}</span>
+            <span class={Style.boxCount}>{count}</span>
       </div>
     </div>
   );
