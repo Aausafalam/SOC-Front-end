@@ -46,7 +46,7 @@ const AssetsCountChart = () => {
         <div>
             {loading ? <span className="chart-loading">{ICON.LOADING}</span>:data && (
                 <ChartComponent
-                    type="pie"
+                    type="doughnut"
                     data={data}
                     options={{
                         responsive: true,

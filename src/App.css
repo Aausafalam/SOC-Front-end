@@ -1,14 +1,14 @@
 :root {
   --primary-color: #253DB6;
-  --light-gray-color:#eee;
-  --white:white;
+  --light-gray-color: #eee;
+  --white: white;
   --background-color: #F5F5F5;
   --text-color: #000000;
   --transparent: #2F3349;
   --card-primary-color: #253DB6;
-  --border-primary-color:  var(--primary-color);
+  --border-primary-color: var(--primary-color);
   --card-icon-color: white;
-  --border-color:#e9e6e6db;
+  --border-color: #e9e6e6db;
   --card-box-shadow: 3px 3px 15px #d5d5d5, -7px -7px 15px #f4f4f4;
 }
 
@@ -20,32 +20,35 @@
   --card-primary-color: white;
   --border-primary-color: white;
   --card-icon-color: black;
-  --border-color:none;
+  --border-color: none;
   --primary-color: var(--transparent);
-  --card-box-shadow:none;
+  --card-box-shadow: none;
 }
 
-input[type="text"]{
+input[type="text"] {
   background-color: var(--white);
 }
-select{
+
+select {
   background-color: var(--white);
   color: var(--text-color) !important;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
-*{
+* {
   font-family: "Nunito", sans-serif !important;
 }
+
 .badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -88,7 +91,7 @@ body {
 }
 
 .chart-loading svg {
-  width:10rem;
+  width: 10rem;
   height: 5rem;
   display: flex;
   justify-content: center;
