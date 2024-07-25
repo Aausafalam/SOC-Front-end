@@ -1,5 +1,5 @@
 // ChartComponent.js
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-moment';
 import styles from "./index.module.css"
@@ -10,6 +10,7 @@ Chart.register(...registerables);
 const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, getDatasets }) => {
     const chartContainer = useRef(null);
     const chartInstance = useRef(null);
+    const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme'));
 
     const fetchData = async (url, startDate, endDate) => {
         const response = await fetch(`${url}?startDate=${startDate}&endDate=${endDate}`);
@@ -25,6 +26,62 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
         chartInstance.current.update();
     };
 
+    const updateChartOptions = () => {
+        const isDarkMode = theme === 'dark';
+        chartInstance.current.options = {
+            ...chartInstance.current.options,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: isDarkMode ? '#ffffff' : '#000000'
+                    }
+                }
+            }
+        };
+        if(chartInstance.current.options.scales)
+        {
+            chartInstance.current.options = {
+                ...chartInstance.current.options,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: isDarkMode ? '#ffffff' : '#000000'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: isDarkMode ? '#ffffff' : '#000000'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: isDarkMode ? '#ffffff' : '#000000'
+                        }
+                    }
+                }
+            };
+        }
+        chartInstance.current.update();
+    };
+
+    useEffect(() => {
+        const handleThemeChange = () => {
+            setTheme(document.documentElement.getAttribute('data-theme'));
+        };
+        
+        const observer = new MutationObserver(handleThemeChange);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme'],
+        });
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     useEffect(() => {
         if (chartContainer && chartContainer.current) {
             const ctx = chartContainer.current.getContext('2d');
@@ -34,10 +91,17 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
                 options,
             });
         }
+
         return () => {
             chartInstance.current.destroy();
         };
     }, [chartContainer, data, options]);
+
+    useEffect(() => {
+        if (chartInstance.current) {
+            updateChartOptions();
+        }
+    }, [theme]);
 
     return (
         <div className={styles.container}>

@@ -13,7 +13,7 @@
 }
 
 .body>div {
-    background-color: white;
+    background-color: var(--white);
     border-radius: 1rem;
     padding: 1rem;
 }
@@ -30,19 +30,21 @@
     margin-top: 0.5rem;
     padding-inline: 0.8rem;
     border-radius: 0.5rem;
-    background-color: whitesmoke;
+    background-color: var(--background-color);
     padding-block: 0.3rem;
-}
-.assets_table
-{
-    grid-column: span 3;
-}
-.total_assets_count h1
-{
-  font-size: 1.4rem;
+    color: var(--text-color) !important;
 }
 
-.total_assets_count h2
-{
-  font-size: 1.2rem;
+.assets_table {
+    grid-column: span 3;
+}
+
+.total_assets_count h1 {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.total_assets_count h2 {
+    font-size: 1.2rem;
+    color: var(--text-color);
 }

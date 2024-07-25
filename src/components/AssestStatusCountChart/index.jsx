@@ -64,7 +64,7 @@ const AssestStatusCountChart = () => {
                                 title: {
                                     display: true,
                                     text: 'Status'
-                                }
+                                },
                             },
                             y: {
                                 display: true,
