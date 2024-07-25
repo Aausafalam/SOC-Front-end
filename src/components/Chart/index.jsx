@@ -1,4 +1,3 @@
-// ChartComponent.js
 import React, { useRef, useEffect, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-moment';
@@ -28,7 +27,7 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
 
     const updateChartOptions = () => {
         const isDarkMode = theme === 'dark';
-        chartInstance.current.options = {
+        const updatedOptions = {
             ...chartInstance.current.options,
             plugins: {
                 legend: {
@@ -38,31 +37,23 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
                 }
             }
         };
-        if(chartInstance.current.options.scales)
-        {
-            chartInstance.current.options = {
-                ...chartInstance.current.options,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: isDarkMode ? '#ffffff' : '#000000'
-                        }
+
+        if (chartInstance.current.options.scales && type !== 'pie') {
+            updatedOptions.scales = {
+                x: {
+                    ticks: {
+                        color: isDarkMode ? '#ffffff' : '#000000'
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: isDarkMode ? '#ffffff' : '#000000'
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            color: isDarkMode ? '#ffffff' : '#000000'
-                        }
+                y: {
+                    ticks: {
+                        color: isDarkMode ? '#ffffff' : '#000000'
                     }
                 }
             };
         }
+
+        chartInstance.current.options = updatedOptions;
         chartInstance.current.update();
     };
 
