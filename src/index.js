@@ -7,6 +7,7 @@ import { LoaderProvider } from "./context/LoaderContext";
 import { CaseProvider } from "./context/CaseContext";
 import { AssetsProvider } from "./context/AssetsContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { VulnerabilityProvider } from "./context/VulnerabilityContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,7 +16,9 @@ root.render(
       <LoaderProvider>
         <CaseProvider>
           <AssetsProvider>
+            <VulnerabilityProvider>
             <App />
+            </VulnerabilityProvider>
           </AssetsProvider>
         </CaseProvider>
       </LoaderProvider>
