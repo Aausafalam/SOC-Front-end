@@ -15,7 +15,7 @@
     overflow: auto;
     position: relative;
     width: 100%;
-    /* padding:1rem; */
+    padding:0.25rem;
   }
 
   .case_chart_container {
