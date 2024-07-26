@@ -18,17 +18,12 @@ root.render(
         <CaseProvider>
           <AssetsProvider>
             <VulnerabilityProvider>
-            <App />
+           <AlertProvider>
+           <App />
+           </AlertProvider>
             </VulnerabilityProvider>
           </AssetsProvider>
         </CaseProvider>
-        <AlertProvider>
-          <CaseProvider>
-            <AssetsProvider>
-              <App />
-            </AssetsProvider>
-          </CaseProvider>
-        </AlertProvider>
       </LoaderProvider>
     </ThemeProvider>
   </BrowserRouter>
