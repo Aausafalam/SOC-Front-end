@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import ChartComponent from '../Chart';
 import { ICON } from '../../utils/icon';
+import styles from "./index.module.css"
+import { Line, Circle } from 'rc-progress';
+import ProgressBar from '../progressBar';
 
 const AssestCriticalCount = () => {
     const [data, setData] = useState(null);
@@ -43,27 +46,44 @@ const AssestCriticalCount = () => {
     }, []);
 
     return (
-        <div>
-            {loading ? <span className="chart-loading">{ICON.LOADING}</span>:data && (
-                <ChartComponent
-                    type="pie"
-                    data={data}
-                    options={{
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            title: {
-                                display: true,
-                                // text: 'Assets Count by Support Role'
-                            }
-                        }
-                    }}
-                    canvaId="chart-3"
-                    title="Assets Count"
-                />
-            )}
+        <div className={styles.container}>
+            <h2>Critical Stats <span><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="0.50"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></g></svg></span></h2>
+             <div className={styles.body}>
+              <div>
+                <div>
+                    <ProgressBar 
+                    data={{
+                        title:"Critical Applications",
+                        value:20,
+                        strokeColor:"#9460ff"
+                    }}/>
+                </div>
+                <div>
+                    <ProgressBar 
+                    data={{
+                        title:"Hardware Warranty Expired",
+                        value:40,
+                        strokeColor:"#6fcd9e"
+                    }}/>
+                </div>
+                <div>
+                    <ProgressBar 
+                    data={{
+                        title:"Software License Expired",
+                        value:70,
+                        strokeColor:"#ff8e06"
+                    }}/>
+                </div>
+                <div>
+                    <ProgressBar 
+                    data={{
+                        title:"Active Agents",
+                        value:90,
+                        strokeColor:"#388e3c"
+                    }}/>
+                </div>
+              </div>
+             </div>
         </div>
     );
 };

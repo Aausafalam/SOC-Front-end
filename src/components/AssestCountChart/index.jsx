@@ -27,7 +27,7 @@ const AssetsCountChart = () => {
                 labels: roles,
                 datasets: [{
                     label: 'Assets Counts',
-                    backgroundColor: ['blue', 'red', 'orange', 'green', 'purple'],
+                    // backgroundColor: ['blue', 'red', 'orange', 'green', 'purple'],
                     data: [82, 140, 350, 100],
                 }]
             };
@@ -62,6 +62,7 @@ const AssetsCountChart = () => {
                     }}
                     canvaId="chart-1"
                     title="Assets Count"
+                    style={{maxHeigth:"300px"}}
                 />
             )}
         </div>

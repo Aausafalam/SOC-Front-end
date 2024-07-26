@@ -1,0 +1,26 @@
+.icon {
+    width: fit-content;
+    color: white;
+    padding: 0.3rem;
+    border-radius: 1rem;
+    height: fit-content;
+    background-color: rgb(126, 73, 240);
+    padding-bottom: 0rem;
+}
+
+.container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.container>div p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.container>div:nth-child(2) {
+    width: 100%;
+}
