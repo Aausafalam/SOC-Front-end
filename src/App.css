@@ -10,6 +10,7 @@
   --card-icon-color: white;
   --border-color: #e9e6e6db;
   --card-box-shadow: 3px 3px 15px #d5d5d5, -7px -7px 15px #f4f4f4;
+  --border-box: #ebeff5;
 }
 
 [data-theme='dark'] {
@@ -23,6 +24,7 @@
   --border-color: none;
   --primary-color: var(--transparent);
   --card-box-shadow: none;
+  --border-box: #31425c;
 }
 
 input[type="text"] {
@@ -97,4 +99,12 @@ body {
   justify-content: center;
   align-items: center;
   vertical-align: middle;
+}
+
+#chart-2 {
+  max-height: 320px;
+}
+
+#chart-1 {
+  max-height: 260px;
 }

@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables,Colors } from 'chart.js';
 import 'chartjs-adapter-moment';
 import styles from "./index.module.css"
 
 // Register the required components
-Chart.register(...registerables);
+Chart.register(...registerables,Colors);
 
-const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, getDatasets }) => {
+const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, getDatasets,style }) => {
     const chartContainer = useRef(null);
     const chartInstance = useRef(null);
     const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme'));
@@ -76,7 +76,7 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
 
 
 
-        
+
         chartInstance.current.options = updatedOptions;
         chartInstance.current.update();
     };
@@ -120,7 +120,7 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
 
     return (
         <div className={styles.container}>
-            {title && <h2>{title}</h2>}
+            {title && <h2>{title} <span><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="0.50"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></g></svg></span></h2>}
             {apiUrl && (
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '10px' }}>
                     <div>
@@ -140,7 +140,7 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
                     </button>
                 </div>
             )}
-            <canvas id={canvaId} ref={chartContainer} />
+            <canvas style={style} id={canvaId} ref={chartContainer} />
         </div>
     );
 };

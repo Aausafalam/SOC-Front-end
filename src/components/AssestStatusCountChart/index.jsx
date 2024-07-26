@@ -6,7 +6,18 @@ import { ICON } from '../../utils/icon';
 const AssestStatusCountChart = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const roles = ["Agent Installed", "vulnerable", "Verified"];
+    const roles = [
+        "Agent Installed",
+        "Vulnerable",
+        "Verified",
+        "Expired",
+        // "Public Facing Web Application",
+        "Unverified",
+        // "Needs Attention",
+        "High Risk",
+        // "Low Risk",
+        // "Pending Verification"
+    ];
 
     const fetchDataInitially = async (url, token) => {
         try {
@@ -28,8 +39,8 @@ const AssestStatusCountChart = () => {
                 datasets: [
                     {
                         label: 'Assets Status',
-                        backgroundColor: ['blue', 'red', 'orange'],
-                        data: [82, 140, 500], // Example data
+                        // backgroundColor: ['blue', 'red', 'orange'],
+                        data: [82, 140, 500,400,200,150,600,240], // Example data
                     }
                 ],
             };
@@ -68,6 +79,8 @@ const AssestStatusCountChart = () => {
                                     display: true,
                                     text: 'Status'
                                 },
+                                barPercentage: 0.1,  // Adjust this value to reduce the bar width
+                                categoryPercentage: 0.5  // Adjust this value to reduce the category width
                             },
                             y: {
                                 display: true,
@@ -80,8 +93,7 @@ const AssestStatusCountChart = () => {
                     }}
                     canvaId="chart-2"
                     title="Critical Assets Count"
-                    maxWidth="400px"
-                    maxHeight="400px"
+                   style={{maxHeigth:"340px"}}
                 />
             )}
         </div>
