@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useLoader } from "../context/LoaderContext";
-import { getCaseList } from "../api/case";
+import { getCaseDashboardData, getCaseList } from "../api/case";
 
 export const useCaseList = () => {
     const [caseList, setCaseList] = useState([]);
@@ -23,3 +23,25 @@ export const useCaseList = () => {
 
     return { caseList, fetchCaseList };
 };
+
+export const useCaseDashboardData = () => {
+    const [caseDashboardData, setCaseDashboardData] = useState([]);
+    const {showLoader, hideLoader} = useLoader();
+
+    const fetchCaseDashboardData = useCallback(async () => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const list = await getCaseDashboardData(controller.signal);
+            setCaseDashboardData(list);
+        } catch (error) {
+            setCaseDashboardData([]);
+            console.error("Error fetching Case Dashboard data:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return { caseDashboardData, fetchCaseDashboardData };
+}

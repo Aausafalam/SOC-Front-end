@@ -58,25 +58,6 @@ const ChartComponent = ({ type, data, options, canvaId, apiUrl, title, labels, g
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         chartInstance.current.options = updatedOptions;
         chartInstance.current.update();
     };

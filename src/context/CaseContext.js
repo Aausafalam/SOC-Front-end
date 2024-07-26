@@ -1,13 +1,14 @@
 import { createContext, useContext } from "react";
-import { useCaseList } from "../hooks/useCase";
+import { useCaseDashboardData, useCaseList } from "../hooks/useCase";
 
 const CaseContext = createContext();
 
 export const CaseProvider = ({ children }) => {
     const caseListState = useCaseList();
+    const caseDashboardDataState = useCaseDashboardData();
 
     return (
-        <CaseContext.Provider value={{ ...caseListState}}>
+        <CaseContext.Provider value={{ ...caseListState, ...caseDashboardDataState}}>
             {children}
         </CaseContext.Provider>
     );

@@ -5,9 +5,11 @@ import Table from "../../components/Table/Table";
 import Styles from "./styles/case.module.css";
 import { ICON } from "../../utils/icon";
 import Card from "./components/Card";
-import CaseCountChart from "../../components/CaseCountChart";
 import Popup from "../../components/Popup/Popup";
 import CaseForm from "./components/CaseForm";
+import SeverityCountChart from "./components/Charts/SeverityCountChart";
+import CaseStatsCards from "./components/CaseStatsCards";
+import CaseStateChart from "./components/Charts/CaseStateChart";
 
 const Case = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -171,25 +173,20 @@ const Case = () => {
   return (
     <div>
       <div className={Styles.main_container}>
-        <div className={Styles.case_overview_container}>
-          <Card label="Without Case Id Alerts" count={20} icon={ICON.ALERT} />
-          <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
-          <Card label="Closed" count={60} icon={ICON.CLOSED} />
-          <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
-        </div>
+        <CaseStatsCards />
         <div className={Styles.case_chart_container}>
           <div>
-            <CaseCountChart />
+            <SeverityCountChart />
           </div>
           <div>
-            <CaseCountChart />
+            <CaseStateChart />
           </div>
         </div>
       </div>
       <div style={{ marginTop: "1rem" }}>
         <Table tableData={tableData} />
       </div>
-      <Popup width="70%" show={showPopup} onClose={togglePopup} title="Edit">
+      <Popup width="70%" show={showPopup} onClose={togglePopup} title={`Edit- Case Id: #${selectedCase?.id}`}>
         <CaseForm
           data={selectedCase}
           onSuccess={handleSuccess}
