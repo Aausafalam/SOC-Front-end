@@ -1,13 +1,25 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Style from "./Card.module.css";
 import { ICON } from "../../../utils/icon";
 import Dropdown from "../../../components/DropDown/Dropdown";
 
-const Card = ({ label, count, icon }) => {
+const Card = ({label, count = 0, icon, percentageChangeWeek = 0, percentageChangeMonth = 0}) => {
+  const formatPercentage = (value) => {
+    if(!value){
+      return `${0}%`;
+    }
+    return value >= 0 ? `+${value}%` : `${value}%`;
+  };
+
+  const weekArrow = percentageChangeWeek >= 0 ? ICON.ARROW_UP : ICON.ARROW_DOWN;
+  const monthArrow = percentageChangeMonth >= 0 ? ICON.ARROW_UP : ICON.ARROW_DOWN;
+
   const actions = [
     {
       name: "refresh",
-      functions: () => {},
+      functions: () => {
+        // Implement refresh logic here
+      },
       label: "Refresh",
     },
   ];
@@ -30,7 +42,7 @@ const Card = ({ label, count, icon }) => {
               content={actions.map((action, index) => (
                 <p
                   key={index}
-                  onClick={() => action.functions()}
+                  onClick={action.functions}
                   className=""
                   title={action.label}
                 >
@@ -43,11 +55,15 @@ const Card = ({ label, count, icon }) => {
 
         <div className={Style.footer}>
           <div className={Style.footerItem}>
-            <span className={Style.increase}>+ 18.2% {ICON.ARROW_UP}</span>
+            <span className={Style.increase}>
+              {formatPercentage(percentageChangeWeek)} {weekArrow}
+            </span>
             <span className={Style.footerText}>than last week</span>
           </div>
           <div className={Style.footerItem}>
-            <span className={Style.decrease}>- 15% {ICON.ARROW_DOWN}</span>
+            <span className={Style.decrease}>
+              {formatPercentage(percentageChangeMonth)} {monthArrow}
+            </span>
             <span className={Style.footerText}>than last month</span>
           </div>
         </div>

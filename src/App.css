@@ -12,6 +12,7 @@
   --card-box-shadow: 3px 3px 15px #d5d5d5, -7px -7px 15px #f4f4f4;
   --border-box: #ebeff5;
   --input-background: #edededde;
+  --input-text-color: #6e6b7b;
 }
 
 [data-theme="dark"] {
@@ -27,6 +28,7 @@
   --primary-color: var(--transparent);
   --card-box-shadow: none;
   --border-box: #31425c;
+  --input-text-color: white;
 }
 
 input[type="text"],
@@ -160,7 +162,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.45;
-  color: #6e6b7b;
+  color: var(--input-text-color);
   background-color: #edededde;
   background-clip: padding-box;
   border: 1px solid #d8d6de;
