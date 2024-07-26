@@ -1,0 +1,27 @@
+{
+  "status": "success",
+  "message": "Alert Detail fetched successfully",
+  "code": 200,
+  "data": [
+    {
+      "severity": "High",
+      "timestamp": "2024 -07 -26 T12 :34:56 Z",
+      "category": "Network",
+      "ruleName": "Unauthorized Access",
+      "fields": {
+        "field1": "value1",
+        "field2": "value2"
+      }
+    },
+    {
+      "severity": "Medium",
+      "timestamp": "2024 -07 -26 T12 :34:56 Z",
+      "category": "Endpoint",
+      "ruleName": "Malware Detected",
+      "fields": {
+        "field1": "value1",
+        "field2": "value2"
+      }
+    }
+  ]
+}
