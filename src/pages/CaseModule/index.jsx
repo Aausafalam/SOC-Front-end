@@ -27,29 +27,44 @@ const Case = () => {
     }
   };
 
+  const getSeverity = (severity) => {
+    switch (severity) {
+      case 1:
+        return "critical";
+      case 2:
+        return "high";
+      case 3:
+        return "medium";
+      case 4:
+        return "low";
+      default: 
+        return "NA"
+    }
+  }
+
   function getTableData(data) {
     return {
       ...Utils.GetTableData(),
       title: "All Cases",
-      rows: data?.map((item, index) => {
+      rows: data?.result?.map((item, index) => {
         const row = {
-          Id: { key: "_id", value: item._id, type: "hidden" },
+          Id: { key: "id", value: item.id, type: "hidden" },
           "S.No.": {
             key: "S.No.",
             value: index + 1,
             removeFromAutoSuggestion: true,
           },
           "Case ID": {
-            key: "caseId",
-            value: Utils.capitalizeEachWord(item.caseId),
+            key: "id",
+            value: item.id,
           },
           Title: {
             key: "title",
             value: Utils.capitalizeEachWord(item.title),
           },
-          "Start Date": {
-            key: "startDate",
-            value: Utils.getFormatedDate(item.startDate),
+          "Created At": {
+            key: "createdAt",
+            value: Utils.getFormatedDate(item.createdAt),
           },
           "Updated At": {
             key: "updatedAt",
@@ -57,26 +72,27 @@ const Case = () => {
           },
         };
 
-        const severityClass = `badge-${item.severity.toLowerCase()}`;
+        const severity = getSeverity(item.severity);
+        const severityClass = `badge-${severity}`;
         row["Severity"] = {
           key: "severity",
           value: (
             <span className={severityClass}>
-              {Utils.capitalizeEachWord(item.severity)}
+              {Utils.capitalizeEachWord(severity)}
             </span>
           ),
-          originalValue: item.severity,
+          originalValue: severity,
         };
 
-        const statusClass = `${getStatusBadgeClass(item.status)}`;
-        row["Status"] = {
-          key: "status",
+        const statusClass = `${getStatusBadgeClass(item.caseStateName)}`;
+        row["Case State"] = {
+          key: "caseStateName",
           value: (
             <span className={statusClass}>
-              {Utils.capitalizeEachWord(item.status)}
+              {Utils.capitalizeEachWord(item.caseStateName)}
             </span>
           ),
-          originalValue: item.status,
+          originalValue: item.caseStateName,
         };
 
         return row;
@@ -140,10 +156,17 @@ const Case = () => {
           <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
         </div>
         <div className={Styles.case_chart_container} >
-          <CaseCountChart/>
+          <div>
+            <CaseCountChart/>
+          </div>
+          <div>
+            <CaseCountChart/>
+          </div>
         </div>
       </div>
-      <Table tableData={tableData} />
+      <div style={{marginTop:"1rem"}}>
+        <Table tableData={tableData} />
+      </div>
     </div>
   );
 };

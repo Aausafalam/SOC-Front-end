@@ -28,7 +28,7 @@ const CaseCountChart = () => {
                 labels: roles,
                 datasets: [{
                     label: 'Assets Counts',
-                    backgroundColor: ['blue', 'red', 'orange', 'green', 'purple'],
+                    // backgroundColor: ['blue', 'red', 'orange', 'green', 'purple'],
                     data: [82, 140, 350, 100],
                 }]
             };
