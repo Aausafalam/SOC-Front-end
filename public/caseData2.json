@@ -12,16 +12,16 @@
         "caseStateName": "Closed",
         "tlp": "tlp",
         "pap": "pap",
-        "intel": null,
-        "remarks": null,
-        "observation": null,
-        "learning": null,
+        "intel": "intel",
+        "remarks": "remarks",
+        "observation": "observation",
+        "learning": "learning",
         "actionTaken": null,
         "createdAt": "2024-07-19T12:43:27.289Z",
         "updatedAt": "2024-07-25T06:24:50.314Z",
         "alerts": [],
         "tags": [],
-        "assignedTo": null
+        "assignedTo": 1
       },
       {
         "id": 12,

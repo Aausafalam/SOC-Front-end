@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useCase } from "../../context/CaseContext";
 import Utils from "../../utils";
 import Table from "../../components/Table/Table";
@@ -6,9 +6,15 @@ import Styles from "./styles/case.module.css";
 import { ICON } from "../../utils/icon";
 import Card from "./components/Card";
 import CaseCountChart from "../../components/CaseCountChart";
+import Popup from "../../components/Popup/Popup";
+import CaseForm from "./components/CaseForm";
 
 const Case = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedCase, setSelectedCase] = useState(null);
   const { caseList, fetchCaseList } = useCase();
+
+  const togglePopup = () => setShowPopup(!showPopup);
 
   useEffect(() => {
     fetchCaseList();
@@ -37,10 +43,26 @@ const Case = () => {
         return "medium";
       case 4:
         return "low";
-      default: 
-        return "NA"
+      default:
+        return "NA";
     }
-  }
+  };
+
+  const handleEditCaseDetails = (id, data, type) => {
+    const caseData = data?.result?.find((elem) => elem.id === id);
+    if (caseData) {
+      setSelectedCase({
+        ...caseData,
+        type: type,
+      });
+      togglePopup();
+    }
+  };
+
+  const handleSuccess = () => {
+    togglePopup();
+    fetchCaseList();
+  };
 
   function getTableData(data) {
     return {
@@ -101,7 +123,7 @@ const Case = () => {
         {
           name: "Open",
           functions: (index) => {
-            // handleEditNotice(index, data);
+            handleEditCaseDetails(index, data);
           },
           label: "Open",
           Id: "Id",
@@ -155,18 +177,25 @@ const Case = () => {
           <Card label="Closed" count={60} icon={ICON.CLOSED} />
           <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
         </div>
-        <div className={Styles.case_chart_container} >
+        <div className={Styles.case_chart_container}>
           <div>
-            <CaseCountChart/>
+            <CaseCountChart />
           </div>
           <div>
-            <CaseCountChart/>
+            <CaseCountChart />
           </div>
         </div>
       </div>
-      <div style={{marginTop:"1rem"}}>
+      <div style={{ marginTop: "1rem" }}>
         <Table tableData={tableData} />
       </div>
+      <Popup width="70%" show={showPopup} onClose={togglePopup} title="Edit">
+        <CaseForm
+          data={selectedCase}
+          onSuccess={handleSuccess}
+          onCancel={togglePopup}
+        />
+      </Popup>
     </div>
   );
 };
