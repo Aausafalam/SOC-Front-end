@@ -1549,3 +1549,8 @@ label {
     --bs-gutter-y: 3rem;
   }
 }
+
+
+.table-container {
+  border-collapse: collapse;
+}

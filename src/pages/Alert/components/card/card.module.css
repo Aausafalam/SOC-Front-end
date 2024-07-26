@@ -1,0 +1,105 @@
+.box {
+    /* box-shadow: var(--card-box-shadow); */
+    border-radius: .30rem;
+    background-color: var(--white);
+    display: flex;
+    min-height: 80px;
+    padding: 1rem;
+    position: relative;
+    width: 100%;
+    /* margin: 1rem; */
+    /* border:1px solid #E8E6FC; */
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .vavatar {
+    flex: none;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    line-height: normal;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    transition: .2s cubic-bezier(.4,0,.2,1);
+    border-radius: 5px;
+    width: 5rem;
+    height: 5rem;
+    background-color: #E8E6FC;
+  }
+  
+  .vavatar svg {
+    width: 28px;
+    height: 28px;
+    color: #7366EF;
+  }
+  
+  .textContainer {
+    display: block;
+    padding-inline: 1rem;
+  }
+  
+  .boxCount {
+    font-size: 2rem;
+  }
+  
+  .boxLabel {
+    color: var(--border-primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dotMenu {
+    position: absolute;
+    right: 1.5rem;
+    top:1rem;
+  }
+  
+  .footer {
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-between;
+  }
+  
+  .footerItem {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .increase {
+    color: #49ef49;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .decrease {
+    color: #ff6347;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footerText {
+    padding-inline: 0.3rem;
+  }
+  
+  .vCardText{
+    flex: 1 1 auto;
+    font-size: .9375rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    width: 300px;
+  }
+  
+  

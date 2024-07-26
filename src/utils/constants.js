@@ -4,5 +4,10 @@ export const constants = {
     THEME : {
         LIGHT : "light",
         DARK : "dark"
+    },
+
+
+    API_URLS : {
+        ALERT : "http://192.168.42.39:3000/api/alerts"
     }
 }
