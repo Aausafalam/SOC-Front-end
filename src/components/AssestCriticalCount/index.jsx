@@ -6,7 +6,7 @@ import styles from "./index.module.css"
 import { Line, Circle } from 'rc-progress';
 import ProgressBar from '../progressBar';
 
-const AssestCriticalCount = () => {
+const AssestCriticalCount = ({initialData}) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const roles = ["Expired", "Public Facing Web Application", "Unverified"];
@@ -39,8 +39,11 @@ const AssestCriticalCount = () => {
 
     useEffect(() => {
         (async () => {
-            const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
-            setData(initialData);
+            // const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
+            setData({
+                // criticalApplications:initialData.criticalApplications,
+
+            });
             setLoading(false);
         })();
     }, []);

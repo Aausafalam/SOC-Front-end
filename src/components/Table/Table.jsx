@@ -9,7 +9,7 @@ import React, {
   import ReactPaginate from "react-paginate";
   import Dropdown from "../DropDown/Dropdown";
 import Utils from "../../utils";
-import apiClient from "../../api/config";
+import axios from "axios";
 import { ICON } from "../../utils/icon";
   
   const TableComponent = ({ tableData }) => {
@@ -75,14 +75,19 @@ import { ICON } from "../../utils/icon";
       async (page, limit, sortBy, order, searchText) => {
         setIsLoading(true);
         setError(null);
+        let params = { sortBy, order }
+        if(searchText)
+        {
+          params.searchText = searchText;
+        }
         try {
-          const response = await apiClient.get(
+          const response = await axios.get(
             data.paginationUrl.replace("input", page).replace("count", limit),
             {
-              params: { sortBy, order, searchText },
+              params,
             }
           );
-          const newData = { ...data.getTableData(response.data.data) };
+          const newData = { ...data.getTableData(response.data) };
           setData(newData);
           generateSuggestions(newData.rows);
         } catch (err) {
@@ -123,7 +128,7 @@ import { ICON } from "../../utils/icon";
           setError(null);
           try {
             if (data?.autoSuggestionUrl) {
-              const result = await apiClient.get(
+              const result = await axios.get(
                 data?.autoSuggestionUrl.replace("inputText", searchText)
               );
               setSuggestions(result.data.data || []);

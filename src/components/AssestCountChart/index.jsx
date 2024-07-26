@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ChartComponent from '../Chart';
 import { ICON } from '../../utils/icon';
 
-const AssetsCountChart = () => {
+const AssetsCountChart = ({initialData}) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const roles = ["Software", "Web Application", "Desktop", "Laptop"];
@@ -32,16 +32,30 @@ const AssetsCountChart = () => {
                 }]
             };
         }
-    };
+    }; 
+
+    function transformInventoryData(inventoryAssetTypeCounts) {
+        const labels = Object.keys(inventoryAssetTypeCounts);
+        const data = Object.values(inventoryAssetTypeCounts);
+    
+        return {
+            labels: labels,
+            datasets: [{
+                label: 'Assets Counts',
+                // backgroundColor: ['blue', 'red', 'orange', 'green', 'purple'],
+                data: data,
+            }]
+        };
+    }
 
     useEffect(() => {
         (async () => {
-            const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
-            setData(initialData);
+            // const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
+            initialData && setData(transformInventoryData(initialData));
             setLoading(false);
         })();
-    }, []);
-
+    }, [initialData]);
+   console.log(data,initialData)
     return (
         <div>
             {loading ? <span className="chart-loading">{ICON.LOADING}</span>:data && (
