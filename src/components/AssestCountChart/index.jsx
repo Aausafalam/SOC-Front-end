@@ -35,7 +35,7 @@ const AssetsCountChart = ({initialData}) => {
     }; 
 
     function transformInventoryData(inventoryAssetTypeCounts) {
-        const labels = Object.keys(inventoryAssetTypeCounts);
+        const labels = Object.entries(inventoryAssetTypeCounts || {}).map(([key,value]) => `${key}: ${value}`);;
         const data = Object.values(inventoryAssetTypeCounts);
     
         return {
@@ -66,7 +66,7 @@ const AssetsCountChart = ({initialData}) => {
                         responsive: true,
                         plugins: {
                             legend: {
-                                position: 'top',
+                                position: 'right',
                             },
                             title: {
                                 display: true,
