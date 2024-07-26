@@ -1,0 +1,42 @@
+#alerts-dashboard-container{
+    height: 250px;
+    background-color: #e4e2e2;
+    display: flex;
+    margin: 20px;
+    padding: 5px
+}
+
+#alerts-kanban-container{
+    width: 33%;
+    background-color: beige;
+    margin: 5px;
+}
+#alerts-count{
+    display: flex;
+    max-height: 33%;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#alerts-count > div{
+    background-color: white;
+    width: 150px;
+    text-align: center;
+    justify-items: center;
+    padding: 5px;
+    padding-top: 10px;
+}
+#alerts-count > div >p{
+  font-size: 12px;
+}
+
+#alerts-chartone-container{
+    width: 33%;
+    background-color: rgb(243, 243, 242);
+    margin: 5px;
+}
+#alerts-chartwo-container{
+    width: 33%;
+    background-color: beige;
+    margin: 5px;
+}
