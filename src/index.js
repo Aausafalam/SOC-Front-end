@@ -7,6 +7,7 @@ import { LoaderProvider } from "./context/LoaderContext";
 import { CaseProvider } from "./context/CaseContext";
 import { AssetsProvider } from "./context/AssetsContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { ComplianceProvider } from "./context/ComplianceContext";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,7 +18,9 @@ root.render(
       <LoaderProvider>
         <CaseProvider>
         <AssetsProvider>
+          <ComplianceProvider>
           <App />
+          </ComplianceProvider>
           </AssetsProvider>
         </CaseProvider>
       </LoaderProvider>
