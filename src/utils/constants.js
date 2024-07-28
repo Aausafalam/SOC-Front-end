@@ -8,6 +8,7 @@ export const constants = {
 
 
     API_URLS : {
-        ALERT : "http://192.168.42.39:3000/api/alerts"
+        ALERT : "http://192.168.42.39:3000/api/alerts",
+        CASE : "http://192.168.42.39:3000/api/case"
     }
 }
