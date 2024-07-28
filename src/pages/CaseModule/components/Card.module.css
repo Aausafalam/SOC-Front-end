@@ -3,7 +3,8 @@
   border-radius: .30rem;
   background-color: var(--white);
   display: flex;
-  min-height: 80px;
+  /* min-height: 80px; */
+  max-height: 112px;
   padding: 1rem;
   position: relative;
   width: 100%;
@@ -46,7 +47,7 @@
 }
 
 .boxCount {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .boxLabel {
@@ -64,12 +65,12 @@
 
 .footer {
   display: flex;
-  margin-top: 2rem;
+  padding-top: 0.5rem;
   justify-content: space-between;
 }
 
 .footerItem {
-  font-size: 14px;
+  font-size: 11px;
   text-align: center;
 }
 
