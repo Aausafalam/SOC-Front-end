@@ -113,12 +113,12 @@ const Alert = () => {
             label: "Open",
             Id: "Id"
           },
-          {
-            name: "delete",
-            functions: (index) => { /* deleteNotice(index, data); */ },
-            label: "Remove",
-            Id: "Id"
-          },
+          // {
+          //   name: "delete",
+          //   functions: (index) => { /* deleteNotice(index, data); */ },
+          //   label: "Remove",
+          //   Id: "Id"
+          // },
           {
             name: "Alert",
             functions: (index) => { 
@@ -126,7 +126,7 @@ const Alert = () => {
               handleViewDetail(index)
               setShowEditPopup(true);
              },
-            label: "Open Alerts",
+            label: "Resolve",
             Id: "Id"
           },
           {
@@ -140,14 +140,14 @@ const Alert = () => {
         export:false,
         print:false,
         searchUrl: "http://192.168.40.48:8080/api/alerts?page=input&limit=count&id=searchText",
-        exportDataUrl: "/caseData.json",
-        printUrl: "/caseData.json",
+        exportDataUrl:false,
+        printUrl: false,
         paginationUrl: "http://192.168.40.48:8080/api/alerts?page=input&limit=count",
         totalPage: parseInt(data[1]?.totalRecords/data[1]?.limit),
         totalItemCount: data[1]?.totalRecords,
         autoSuggestionUrl: "/caseData.json",
         initialSort: "severity",
-        getTableData: getTableData
+        getTableData: getTableData,
       };
     };
     

@@ -9,6 +9,7 @@ import Alert from "./pages/Alert";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import VulnerabilityAnalyticsPage from "./pages/VulnerabilitiesModule/VulnerabilityAnalytics";
+import Configuration from "./pages/Configuration";
 const Case = React.lazy(() => import("./pages/CaseModule"));
 
 
@@ -23,11 +24,13 @@ function App() {
           <Route path="/vulnerability" element={<React.Suspense fallback={<Loader/>}><VulnerabilitiesModule /></React.Suspense>} />
           <Route path="/vulnerability/analytics" element={<React.Suspense fallback={<Loader/>}><VulnerabilityAnalyticsPage /></React.Suspense>} />
           <Route path="/alerts" element={<React.Suspense fallback={<Loader/>}><Alert /></React.Suspense>} />
+          <Route path="/configuration" element={<React.Suspense fallback={<Loader/>}><Configuration /></React.Suspense>} />
     </Routes>
     <ToastContainer />
     </Layout>
     
   )
 }
+// Configuration
 
 export default App;
