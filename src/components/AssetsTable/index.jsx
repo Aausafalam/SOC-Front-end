@@ -31,7 +31,7 @@ const AsstesTable = () => {
                 key: "inventoryId",
                 value: item.inventoryId,
               },
-              "asset Type": {
+              "Asset Type": {
                 key: "assetTypeName",
                 value: Utils.capitalizeEachWord(item.assetTypeName),
               },
@@ -39,7 +39,7 @@ const AsstesTable = () => {
                 key: "custodianName",
                 value: Utils.capitalizeEachWord(item.custodianName),
               },
-              "Asstes Status": {
+              "Asset Status": {
                 key: "statusName",
                 value: Utils.capitalizeEachWord(item.statusName),
               },

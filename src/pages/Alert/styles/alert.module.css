@@ -126,10 +126,23 @@
         overflow: hidden;
         margin-top: 2rem;
     }
-    
+    .alert_details_view
+    {
+      height: 100%;
+      max-height: 800px;
+    }
+    .alert_details_view tbody td
+    {
+     word-break: break-all;
+    }
+    .alert_details_view tbody td:first-of-type
+    {
+      text-transform: capitalize;
+    }
     @media (max-width: 1350px) {
         .content_container {
             grid-template-columns: 1fr;
         }
     }
     
+  
