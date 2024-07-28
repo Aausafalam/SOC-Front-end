@@ -7,17 +7,24 @@ import AlertStatCards from "./components/AlertStatCards";
 import AlertSecurityChart from "./components/charts/AlertSecurityChart";
 import AlertStateChart from "./components/charts/AlertStateChart";
 import { useAlert } from "../../context/AlertContext";
+import Popup from "../../components/Popup/Popup";
+import EditAlertDetails from "../../components/EditAlertDetails";
+// import Popup from '../Popup/Popup';
 
 const Alert = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [selectedCase, setSelectedCase] = useState(null);
     const { AlertList, fetchAlertList, alertDetail, fetchAlertDetail} = useAlert();
-  
+    const [showEditPop,setShowEditPopup] = useState(false);
+    const [id,setId] = useState(null);
+    const [caseIds,setCaseIds] = useState([]) 
+
+
     useEffect(() => {
         fetchAlertList();
     }, []);
   
-    const togglePopup = () => setShowPopup(prev => !prev);
+    const togglePopup = () => setShowEditPopup(prev => !prev);
   
     const getStatusBadgeClass = (status) => {
       const statusMap = {
@@ -55,32 +62,45 @@ const Alert = () => {
       togglePopup();
       fetchAlertList();
     };
-  
+    
+    const onSuccess = (data) => {
+      console.log(data)
+    }
+
+
+    const handleSubmit = (formData) => {
+      console.log(formData)
+    }
+
+
+
+    // const togglePopup = () => setShowPopup(prev => !prev);
     const getTableData = (data) => {
+      console.log( " dfdsfdsf",data[1])
       return {
         ...Utils.GetTableData(),
-        title: "All Cases",
-        rows: data?.result?.map((item, index) => {
+        title: "All Alerts",
+        rows: data[0]?.map((item, index) => {
           const severity = getSeverity(item.severity);
           const severityClass = `badge-${severity}`;
-          const statusClass = getStatusBadgeClass(item.caseStateName);
+          const statusClass = "";
   
           return {
             Id: { key: "id", value: item.id, type: "hidden" },
-            "S.No.": { key: "S.No.", value: index + 1, removeFromAutoSuggestion: true },
-            "Case ID": { key: "id", value: item.id },
-            Title: { key: "title", value: Utils.capitalizeEachWord(item.title) },
             "Created At": { key: "createdAt", value: Utils.getFormatedDate(item.createdAt) },
             "Updated At": { key: "updatedAt", value: Utils.getFormatedDate(item.updatedAt) },
+            "Status": { key: "alertStateName", value: item.alertStateName },
+            "Category": { key: "category", value: Utils.capitalizeEachWord(item.category) },
+            
             Severity: {
               key: "severity",
               value: <span className={severityClass}>{Utils.capitalizeEachWord(severity)}</span>,
               originalValue: severity
             },
-            "Case State": {
-              key: "caseStateName",
-              value: <span className={statusClass}>{Utils.capitalizeEachWord(item.caseStateName)}</span>,
-              originalValue: item.caseStateName
+            "Signature": {
+              key: "signature",
+              value: <span className={statusClass}>{Utils.capitalizeEachWord(item.signature)}</span>,
+              originalValue: item.signature
             }
           };
         }),
@@ -99,7 +119,11 @@ const Alert = () => {
           },
           {
             name: "Alert",
-            functions: (index) => { /* deleteNotice(index, data); */ },
+            functions: (index) => { 
+              setId(index);
+              handleViewDetail(index)
+              setShowEditPopup(true);
+             },
             label: "Open Alerts",
             Id: "Id"
           },
@@ -111,18 +135,26 @@ const Alert = () => {
           }
         ],
         action: true,
-        searchUrl: "/caseData.json",
+        export:false,
+        print:false,
+        searchUrl: "http://192.168.40.48:8080/api/alerts?page=input&limit=count&id=searchText",
         exportDataUrl: "/caseData.json",
         printUrl: "/caseData.json",
-        paginationUrl: "/caseData.json",
-        totalPage: data?.totalPages,
-        totalItemCount: data?.totalDocuments,
+        paginationUrl: "http://192.168.40.48:8080/api/alerts?page=input&limit=count",
+        totalPage: parseInt(data[1]?.totalRecords/data[1]?.limit),
+        totalItemCount: data[1]?.totalRecords,
         autoSuggestionUrl: "/caseData.json",
         initialSort: "severity",
         getTableData: getTableData
       };
     };
-  
+    
+
+   console.log(alertDetail)
+
+    
+    
+    
     const tableData = React.useMemo(() => getTableData(AlertList), [AlertList]);
 
   return (
@@ -136,7 +168,7 @@ const Alert = () => {
       </div>
       <div className={Styles.content_container}>
         <Table tableData={tableData} />
-        <div className="table-container" style={{maxHeight:"76vh"}}>
+        <div className={`table-container ${Styles.alert_details_view}`}>
           <table>
             <thead>
               <tr>
@@ -145,16 +177,26 @@ const Alert = () => {
               </tr>
             </thead>
             <tbody>
-            {alertDetail && Object.entries(alertDetail)?.map(([key, value]) => (
-                <tr key={key}>
+            {alertDetail && Object.entries(alertDetail)?.map(([key, value]) => {
+                if(typeof value === "object")
+                {
+                  return <tr key={key}>
                   <td>{key}</td>
-                  <td>{value}</td>
+                  <td>{value?.name}</td>
                 </tr>
-              ))}
+                }
+                return <tr key={key}>
+                <td>{key}</td>
+                <td>{value}</td>
+              </tr>
+})}
             </tbody>
           </table>
         </div>
       </div>
+      <Popup width="70%" show={showEditPop} onClose={togglePopup} title={`Details`}>
+        <EditAlertDetails setCaseIds={setCaseIds} data={alertDetail} id={id} onCancel={togglePopup} handleSubmit={handleSubmit}/>
+      </Popup>
     </div>
   );
 };

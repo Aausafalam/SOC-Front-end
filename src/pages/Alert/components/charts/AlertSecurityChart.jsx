@@ -2,16 +2,24 @@
 import React, { useEffect, useState } from 'react';
 import { ICON } from '../../../../utils/icon';
 import ChartComponent from '../../../../components/Chart';
+import axios from 'axios';
 
 const AlertSecurityChart = () => {
     const [loading, setLoading] = useState(false);
     // const {caseDashboardData, fetchCaseDashboardData} = useCase();
-    const severityCountData = {
-        high : 30,
-        medium: 40,
-        low: 20
-    };
+    const [chartData,setChartData] = useState({
+        1:0,
+        2:0,
+        3:0
+     })
 
+    const severityCountData = {
+        high : chartData?.["3"],
+        medium: chartData?.["2"],
+        low: chartData?.["1"]
+    };
+     
+    
 
 
     function transformInventoryData(serverityCounts) {
@@ -26,13 +34,23 @@ const AlertSecurityChart = () => {
             }]
         };
     }
+     
 
-    // useEffect(() => {
-    //     (async () => {
-    //         await fetchCaseDashboardData();
-    //         setLoading(false);
-    //     })();
-    // }, []);
+
+    const fetchData = () => {
+        axios.get("http://192.168.40.48:8080/api/alerts/severity-chart")
+        .then((response) => {
+            // console.log("wetrwtr",response.data)
+            setChartData(response.data.severity)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+// console.log("rewrwt",matricsData)
+   
+useEffect(() => {
+    fetchData()
+},[])
 
     return (
         <div>
@@ -52,7 +70,7 @@ const AlertSecurityChart = () => {
                         }
                     }}
                     canvaId="chart-1"
-                    title="Alert Security Chart"
+                    title="Alert Severity Chart"
                     style={{maxHeigth:"300px"}}
                 />
             )}
