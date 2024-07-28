@@ -307,7 +307,7 @@ import { ICON } from "../../utils/icon";
                       Reset
                     </button>
                   )}
-                  {data.export && (
+                  {data.exportDataUrl && (
                     <div>
                       <a
                         download
@@ -342,7 +342,7 @@ import { ICON } from "../../utils/icon";
                       </a>
                     </div>
                   )}
-                  {data.print && (
+                  {data.printUrl && (
                     <a
                       download={"Employee List"}
                       href={`${Utils.appendTokenToUrl(

@@ -9,6 +9,7 @@ import CaseForm from "./components/CaseForm";
 import SeverityCountChart from "./components/Charts/SeverityCountChart";
 import CaseStatsCards from "./components/CaseStatsCards";
 import CaseStateChart from "./components/Charts/CaseStateChart";
+import { constants } from "../../utils/constants";
 
 const Case = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -42,7 +43,7 @@ const Case = () => {
   };
 
   const handleEditCaseDetails = (id, data, type) => {
-    const caseData = data?.result?.find((item) => item.id === id);
+    const caseData = data[0]?.find((item) => item.id === id);
     if (caseData) {
       setSelectedCase({ ...caseData, type });
       togglePopup();
@@ -58,7 +59,7 @@ const Case = () => {
     return {
       ...Utils.GetTableData(),
       title: "All Cases",
-      rows: data?.result?.map((item, index) => {
+      rows: data[0]?.map((item, index) => {
         const severity = getSeverity(item.severity);
         const severityClass = `badge-${severity}`;
         const statusClass = getStatusBadgeClass(item.caseStateName);
@@ -109,13 +110,13 @@ const Case = () => {
         }
       ],
       action: true,
-      searchUrl: "/caseData.json",
-      exportDataUrl: "/caseData.json",
-      printUrl: "/caseData.json",
-      paginationUrl: "/caseData.json",
-      totalPage: data?.totalPages,
-      totalItemCount: data?.totalDocuments,
-      autoSuggestionUrl: "/caseData.json",
+      searchUrl: constants.API_URLS.SEARCH_CASE,
+      exportDataUrl: false,
+      printUrl: false,
+      paginationUrl: constants.API_URLS.PAGINATE_CASE,
+      totalPage: parseInt(data[1]?.totalRecords/10),
+      totalItemCount: data[1]?.totalRecords,
+      // autoSuggestionUrl: "/caseData.json",
       initialSort: "severity",
       getTableData: getTableData
     };

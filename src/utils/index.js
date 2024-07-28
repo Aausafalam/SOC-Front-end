@@ -70,6 +70,7 @@ class Utils {
     };
 
     static appendTokenToUrl = (url, token) => {
+      if(!url) return null;
       const hasQueryParams = url.includes('?');
       return `${url}${hasQueryParams ? '&' : '?'}token=${token}`;
     }
