@@ -420,7 +420,9 @@ import { ICON } from "../../utils/icon";
                                 >
                                   {cell.viewAs}
                                 </span>
-                              ) : (
+                              ) :  cell.type === "checkbox" ? 
+                               <input type="checkbox"/>
+                              : (
                                 <a
                                   style={{ cursor: "pointer", color: "blue" }}
                                   href={cell.value?.startsWith("http")
@@ -431,7 +433,7 @@ import { ICON } from "../../utils/icon";
                                   {cell.viewAs}
                                 </a>
                               )
-                            ) : "-----"
+                            ) :     "-----"
                           ) : cell.value}
                         </td>
                       )

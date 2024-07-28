@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./index.module.css"
 import DynamicForm from '../../../../components/Form/DynamicForm';
 import { ICON } from '../../../../utils/icon';
 import Popup from '../../../../components/Popup/Popup';
+import { useCase } from '../../../../context/CaseContext';
+import Utils from '../../../../utils';
+import Table from '../../../../components/Table/Table';
 
 const EditAlertForm = ({handleSubmit,onCancel}) => {
   
@@ -104,6 +107,80 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
       ];
 
    const togglePopup = () => setShowCaseIdPopUp(!showCaseIdPopUp)
+  
+   const { caseList, fetchCaseList } = useCase();
+
+   useEffect(() => {
+   }, []);
+
+   const getStatusBadgeClass = (status) => {
+    const statusMap = {
+      new: "badge-violet",
+      inprogress: "badge-green",
+      onhold: "badge-orange",
+      closed: "badge-red"
+    };
+    return statusMap[status.toLowerCase()] || "";
+  };
+
+   const getSeverity = (severity) => {
+    const severityMap = {
+      1: "critical",
+      2: "high",
+      3: "medium",
+      4: "low"
+    };
+    return severityMap[severity] || "NA";
+  };
+
+   const getTableData = (data) => {
+    return {
+      ...Utils.GetTableData(),
+      title: "All Cases",
+      rows: data?.result?.map((item, index) => {
+        const severity = getSeverity(item.severity);
+        const severityClass = `badge-${severity}`;
+        const statusClass = getStatusBadgeClass(item.caseStateName);
+
+        return {
+          Id: { key: "id", value: item.id, type: "hidden" },
+          "Action": { key: "data", value: "e", type:"checkbox" ,viewAs:true },
+          "Case ID": { key: "id", value: item.id },
+          Title: { key: "title", value: Utils.capitalizeEachWord(item.title) },
+          "Created At": { key: "createdAt", value: Utils.getFormatedDate(item.createdAt) },
+          "Updated At": { key: "updatedAt", value: Utils.getFormatedDate(item.updatedAt) },
+          Severity: {
+            key: "severity",
+            value: <span className={severityClass}>{Utils.capitalizeEachWord(severity)}</span>,
+            originalValue: severity
+          },
+          "Case State": {
+            key: "caseStateName",
+            value: <span className={statusClass}>{Utils.capitalizeEachWord(item.caseStateName)}</span>,
+            originalValue: item.caseStateName
+          }
+        };
+      }),
+      action: false,
+      export:false,
+      print:false,
+      searchUrl: "/caseData.json",
+      exportDataUrl: "/caseData.json",
+      printUrl: "/caseData.json",
+      paginationUrl: "/caseData.json",
+      totalPage: data?.totalPages,
+      totalItemCount: data?.totalDocuments,
+      autoSuggestionUrl: "/caseData.json",
+      initialSort: "severity",
+      getTableData: getTableData
+    };
+  };
+
+  const tableData = React.useMemo(() => getTableData(caseList), [caseList]);
+
+  
+  console.log( "rerwe",tableData)
+
 
   return (<div className={styles.container}>
     <h3>Edit Alert Details</h3>
@@ -115,7 +192,8 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
       <label for="domainsmain">Case Id <span style={{color:"red"}}>&nbsp;*</span></label>
       <input type="text" id="caseid" name="caseid" class="form-control" required="true" value=""/>
       </div>
-      <button>Show Case Ids</button>
+      <button onClick={() => {setShowCaseIdPopUp(true);
+      fetchCaseList();}}>Show Case Ids</button>
     </div>
 
     <DynamicForm
@@ -125,7 +203,7 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
       />
      
      <Popup  width="70%" show={showCaseIdPopUp} onClose={togglePopup} title={`Case Id List`}>
-      
+     <Table tableData={tableData} />
      </Popup>
      
      
