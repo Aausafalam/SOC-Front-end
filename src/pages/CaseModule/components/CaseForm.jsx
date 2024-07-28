@@ -2,14 +2,19 @@ import React, { useEffect, useMemo } from "react";
 import DynamicForm from "../../../components/Form/DynamicForm";
 import { ICON } from "../../../utils/icon";
 import { useCase } from "../../../context/CaseContext";
+import { useUser } from "../../../context/UserContext";
 
 const CaseForm = ({ data, onSuccess, onCancel }) => {
   const {caseDetail, fetchCaseDetail, handleEditCase } = useCase();
+  const {UserList, fetchUserList} = useUser();
 
   useEffect(()=>{
     fetchCaseDetail(data?.id);
   },[data?.id]);
 
+  useEffect(()=>{
+    fetchUserList();
+  },[]);
 
   const handleSubmit = async (formData) => {
     if (data) {
@@ -33,7 +38,13 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
     },
   ];
 
-  const userOptions = [{label:"User1", value:1}, {label:"User2", value:2}, {label:"User3", value:3}];
+  const userOptions = useMemo(() => {
+    return UserList?.map((user) => ({
+      value: user.id,
+      label: user.name,
+    })) || [];
+  }, [UserList]);
+
   const serverityOptions = [{label:"High", value:1}, {label:"Medium", value:2}, {label:"Low", value:3}];
   const caseStateOptions = [{label:"New", value:1}, {label:"InProgress", value:2}, {label:"Closed", value:3},{label:"OnHold", value:4}];
 
@@ -88,7 +99,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 2,
         required: true,
         options: userOptions,
-        defaultValue: caseDetail?.assignedTo,
+        defaultValue: caseDetail?.assignedTo?.id,
     },
     {
       type: "textarea",
