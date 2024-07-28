@@ -15,7 +15,7 @@ import { ICON } from "../../utils/icon";
   const TableComponent = ({ tableData }) => {
     const [data, setData] = useState(tableData);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(tableData?.limit || 10);
     const [searchText, setSearchText] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -421,7 +421,7 @@ import { ICON } from "../../utils/icon";
                                   {cell.viewAs}
                                 </span>
                               ) :  cell.type === "checkbox" ? 
-                               <input type="checkbox"/>
+                               <input checked={cell.checked} name={cell.name} value={cell.value} type="checkbox" onChange={cell.onchange}/>
                               : (
                                 <a
                                   style={{ cursor: "pointer", color: "blue" }}
