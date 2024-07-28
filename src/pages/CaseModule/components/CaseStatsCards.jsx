@@ -36,23 +36,23 @@ const CaseStatsCards = () => {
                     <>
                     <Card 
                             label="Without Case Id Alerts" 
-                            count={caseMatrixData?.withoutCaseIdAlerts?.count} 
-                            percentageChangeWeek={caseMatrixData?.withoutCaseIdAlerts?.percentageChangeWeek} 
-                            percentageChangeMonth={caseMatrixData?.withoutCaseIdAlerts?.percentageChangeMonth} 
+                            count={parseInt(caseMatrixData?.withoutCaseIdAlerts?.count)} 
+                            percentageChangeWeek={parseInt(caseMatrixData?.withoutCaseIdAlerts?.percentageChangeWeek)} 
+                            percentageChangeMonth={parseInt(caseMatrixData?.withoutCaseIdAlerts?.percentageChangeMonth)} 
                             icon={ICON.ALERT}
                         />
                         <Card 
                             label="Pending Cases" 
-                            count={caseMatrixData?.pendingCases?.count} 
-                            percentageChangeWeek={caseMatrixData?.pendingCases?.percentageChangeWeek} 
-                            percentageChangeMonth={caseMatrixData?.pendingCases?.percentageChangeMonth} 
+                            count={parseInt(caseMatrixData?.pendingCases?.count)} 
+                            percentageChangeWeek={parseInt(caseMatrixData?.pendingCases?.percentageChangeWeek)} 
+                            percentageChangeMonth={parseInt(caseMatrixData?.pendingCases?.percentageChangeMonth)} 
                             icon={ICON.PENDING}
                         />
                         <Card 
                             label="Closed Cases" 
-                            count={caseMatrixData?.closedCases?.count} 
-                            percentageChangeWeek={caseMatrixData?.closedCases?.percentageChangeWeek} 
-                            percentageChangeMonth={caseMatrixData?.closedCases?.percentageChangeMonth} 
+                            count={parseInt(caseMatrixData?.closedCases?.count)} 
+                            percentageChangeWeek={parseInt(caseMatrixData?.closedCases?.percentageChangeWeek)} 
+                            percentageChangeMonth={parseInt(caseMatrixData?.closedCases?.percentageChangeMonth)} 
                             icon={ICON.CLOSED}
                         />
                     </>

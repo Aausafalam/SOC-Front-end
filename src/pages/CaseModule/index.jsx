@@ -3,13 +3,12 @@ import { useCase } from "../../context/CaseContext";
 import Utils from "../../utils";
 import Table from "../../components/Table/Table";
 import Styles from "./styles/case.module.css";
-import Card from "./components/Card";
 import Popup from "../../components/Popup/Popup";
-import CaseForm from "./components/CaseForm";
 import SeverityCountChart from "./components/Charts/SeverityCountChart";
 import CaseStatsCards from "./components/CaseStatsCards";
 import CaseStateChart from "./components/Charts/CaseStateChart";
 import { constants } from "../../utils/constants";
+import CaseTabForm from "./components/CaseTabForm";
 
 const Case = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -114,7 +113,7 @@ const Case = () => {
       exportDataUrl: false,
       printUrl: false,
       paginationUrl: constants.API_URLS.PAGINATE_CASE,
-      totalPage: parseInt(data[1]?.totalRecords/10),
+      totalPage: parseInt(data[1]?.totalRecords/data[1]?.limit),
       totalItemCount: data[1]?.totalRecords,
       // autoSuggestionUrl: "/caseData.json",
       initialSort: "severity",
@@ -137,7 +136,7 @@ const Case = () => {
         <Table tableData={tableData} />
       </div>
       <Popup width="70%" show={showPopup} onClose={togglePopup} title={`Edit- Case Id: #${selectedCase?.id}`}>
-        <CaseForm data={selectedCase} onSuccess={handleSuccess} onCancel={togglePopup} />
+        <CaseTabForm data={selectedCase} onSuccess={handleSuccess} onCancel={togglePopup} />
       </Popup>
     </div>
   );

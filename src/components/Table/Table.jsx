@@ -19,7 +19,7 @@ import { ICON } from "../../utils/icon";
     const [searchText, setSearchText] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [suggestions, setSuggestions] = useState(tableData.autoSuggestion);
+    const [suggestions, setSuggestions] = useState(tableData?.autoSuggestion);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchRef = useRef(null);
     const [sortBy, setSortBy] = useState();

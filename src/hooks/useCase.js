@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useLoader } from "../context/LoaderContext";
-import { getCaseDashboardData, getCaseList, getCaseMatrix, getCaseServerityChart } from "../api/case";
+import { editCase, getCaseDashboardData, getCaseDetail, getCaseList, getCaseMatrix, getCaseServerityChart } from "../api/case";
+import { notifySuccess } from "../utils/toastUtil";
 
 export const useCaseList = () => {
     const [caseList, setCaseList] = useState([]);
@@ -67,3 +68,45 @@ export const useCaseMatricesData = () => {
 
     return { caseMatrixData, fetchCaseMatricesData };
 }
+
+export const useGetCaseDetail = () => {
+    const [caseDetail, setCaseDetail] = useState([]);
+    const {showLoader, hideLoader} = useLoader();
+
+    const fetchCaseDetail = useCallback(async (id) => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const list = await getCaseDetail(id, controller.signal);
+            setCaseDetail(list);
+        } catch (error) {
+            setCaseDetail([]);
+            console.error("Error fetching Case detail data:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return { caseDetail, fetchCaseDetail };
+}
+
+export const useEditCase = () => {
+    const {showLoader, hideLoader} = useLoader();
+ 
+    const handleEditCase = useCallback(async (id, payload) => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const data = await editCase(id, payload,controller.signal);
+            notifySuccess(data.message);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return {handleEditCase};
+};
