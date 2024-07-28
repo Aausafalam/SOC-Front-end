@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import DynamicForm from "../../../components/Form/DynamicForm";
 import { ICON } from "../../../utils/icon";
+import { useCase } from "../../../context/CaseContext";
 
 const CaseForm = ({ data, onSuccess, onCancel }) => {
+  const {caseDetail, fetchCaseDetail, handleEditCase } = useCase();
+
+  useEffect(()=>{
+    fetchCaseDetail(data?.id);
+  },[data?.id]);
+
+
   const handleSubmit = async (formData) => {
     if (data) {
-      //edit
-    } else {
-        //add
-    }
-    onSuccess();
+      handleEditCase(data?.id, formData);
+      onSuccess();
+    } 
   };
 
   const buttons = [
@@ -31,14 +37,15 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
   const serverityOptions = [{label:"High", value:1}, {label:"Medium", value:2}, {label:"Low", value:3}];
   const caseStateOptions = [{label:"New", value:1}, {label:"InProgress", value:2}, {label:"Closed", value:3},{label:"OnHold", value:4}];
 
-  const formData = [
+  const formData = useMemo(
+    () =>[
     {
       type: "text",
       name: "title",
       label: "Title",
       required: true,
       grid:4,
-      defaultValue: data?.title,
+      defaultValue: caseDetail?.title,
     },
     {
         type: "text",
@@ -46,7 +53,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "TLP",
         required: true,
         grid:4,
-        defaultValue: data?.tlp,
+        defaultValue: caseDetail?.tlp,
       },
       {
         type: "text",
@@ -54,7 +61,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "PAP",
         required: true,
         grid:4,
-        defaultValue: data?.pap,
+        defaultValue: caseDetail?.pap,
       },
     {
         type: "select",
@@ -63,7 +70,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 4,
         required: true,
         options: serverityOptions,
-        defaultValue: data?.severity,
+        defaultValue: caseDetail?.severity,
     },
     {
         type: "select",
@@ -72,7 +79,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 2,
         required: true,
         options: caseStateOptions,
-        defaultValue: data?.caseState,
+        defaultValue: caseDetail?.caseState,
     },
     {
         type: "select",
@@ -81,7 +88,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 2,
         required: true,
         options: userOptions,
-        defaultValue: data?.assignedTo,
+        defaultValue: caseDetail?.assignedTo,
     },
     {
       type: "textarea",
@@ -89,7 +96,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
       label: "Intel",
       grid: 2,
       style: {input:{ height: "100px" }},
-      defaultValue: data?.intel,
+      defaultValue: caseDetail?.intel,
     },
     {
         type: "textarea",
@@ -97,7 +104,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "Remarks",
         grid: 2,
         style: {input:{ height: "100px" }},
-        defaultValue: data?.remarks,
+        defaultValue: caseDetail?.remarks,
       },
       {
         type: "textarea",
@@ -105,7 +112,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "Observation",
         grid: 2,
         style: {input:{ height: "100px" }},
-        defaultValue: data?.observation,
+        defaultValue: caseDetail?.observation,
       },
       {
         type: "textarea",
@@ -113,9 +120,9 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "Learning",
         grid: 2,
         style: {input:{ height: "100px" }},
-        defaultValue: data?.learning,
+        defaultValue: caseDetail?.learning,
       },
-  ];
+  ],[caseDetail]);
 
   return (
     <div>

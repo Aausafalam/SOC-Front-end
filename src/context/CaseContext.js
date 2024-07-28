@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { useCaseDashboardData, useCaseList, useCaseMatricesData, useCaseSeverityChartData } from "../hooks/useCase";
+import { useCaseDashboardData, useCaseList, useCaseMatricesData, useCaseSeverityChartData, useEditCase, useGetCaseDetail } from "../hooks/useCase";
 
 const CaseContext = createContext();
 
@@ -7,9 +7,11 @@ export const CaseProvider = ({ children }) => {
     const caseListState = useCaseList();
     const caseSeverityChartState = useCaseSeverityChartData();
     const caseMatrixState = useCaseMatricesData();
+    const getCaseDetailState = useGetCaseDetail();
+    const editCaseState = useEditCase();
 
     return (
-        <CaseContext.Provider value={{ ...caseListState, ...caseSeverityChartState, ...caseMatrixState}}>
+        <CaseContext.Provider value={{ ...caseListState, ...caseSeverityChartState, ...caseMatrixState, ...getCaseDetailState, ...editCaseState}}>
             {children}
         </CaseContext.Provider>
     );

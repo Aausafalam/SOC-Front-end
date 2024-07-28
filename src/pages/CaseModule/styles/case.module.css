@@ -134,3 +134,17 @@
    width:100px;
    height: 100px;
   }
+
+  .alert_details_view
+  {
+    height: 100%;
+    max-height: 800px;
+  }
+  .alert_details_view tbody td
+  {
+   word-break: break-all;
+  }
+  .alert_details_view tbody td:first-of-type
+  {
+    text-transform: capitalize;
+  }
