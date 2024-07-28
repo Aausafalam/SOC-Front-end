@@ -9,6 +9,7 @@ import AlertStateChart from "./components/charts/AlertStateChart";
 import { useAlert } from "../../context/AlertContext";
 import Popup from "../../components/Popup/Popup";
 import EditAlertDetails from "../../components/EditAlertDetails";
+import { toast } from "react-toastify";
 // import Popup from '../Popup/Popup';
 
 const Alert = () => {
@@ -68,8 +69,9 @@ const Alert = () => {
     }
 
 
-    const handleSubmit = (formData) => {
-      console.log(formData)
+    const handleSubmit = (data) => {
+      toast("Updated ....")
+      togglePopup()
     }
 
 
@@ -195,7 +197,7 @@ const Alert = () => {
         </div>
       </div>
       <Popup width="70%" show={showEditPop} onClose={togglePopup} title={`Details`}>
-        <EditAlertDetails setCaseIds={setCaseIds} data={alertDetail} id={id} onCancel={togglePopup} handleSubmit={handleSubmit}/>
+        <EditAlertDetails  setCaseIds={setCaseIds} data={alertDetail} id={id} onCancel={togglePopup} onSuccess={handleSubmit}/>
       </Popup>
     </div>
   );

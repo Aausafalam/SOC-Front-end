@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./index.module.css";
 import EditAlertForm from '../../pages/Alert/components/forms/editAlert';
 
-const EditAlertDetails = ({data,id,onCancel,handleSubmit,setCaseIds}) => {
+const EditAlertDetails = ({data,id,onCancel,onSuccess}) => {
+   
+  const [caseIds,setCaseIds] = useState({})
+  const [caseIdInput,setCaseIdsInput] = useState("")
+
   return (<div className={styles.container}>
       <div>
-        <EditAlertForm setCaseIds={setCaseIds} id={id} onCancel={onCancel} handleSubmit={handleSubmit}/>
+        <EditAlertForm onSuccess={onSuccess} id={id} caseIdInput={caseIdInput} setCaseIdsInput={setCaseIdsInput}  caseIds={caseIds} setCaseIds={setCaseIds}  onCancel={onCancel} />
       </div>
       <div>
       <div className={`table-container ${styles.alert_details_view}`}>
