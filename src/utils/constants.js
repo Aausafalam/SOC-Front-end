@@ -12,8 +12,8 @@ export const constants = {
 
 
         CASE : "http://192.168.42.39:3000/api/case",
-        SEARCH_CASE: `http://192.168.42.39:3000/api/case/?searchText=inputText`,
-        PAGINATE_CASE: `http://192.168.42.39:3000/api/case/?page=input&limit=count`,
+        SEARCH_CASE: `http://192.168.42.39:3000/api/case?searchText=inputText`,
+        PAGINATE_CASE: `http://192.168.42.39:3000/api/case?page=input&limit=count`,
 
         USER_LIST : "http://192.168.42.39:3000/auth/analystList",
     }

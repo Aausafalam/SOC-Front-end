@@ -54,6 +54,17 @@ const Case = () => {
     fetchCaseList();
   };
 
+  const [filterOptions, setFilterOptions] = useState({
+    radioButtons: [
+      { label: "Option 1", value: "14" },
+      { label: "Option 2", value: "11" },
+    ],
+    selectBox: [
+      { label: "Select 1", value: "13" },
+      { label: "Select 2", value: "8" },
+    ],
+  });
+
   const getTableData = (data) => {
     return {
       ...Utils.GetTableData(),
@@ -133,7 +144,7 @@ const Case = () => {
         </div>
       </div>
       <div style={{ marginTop: "1rem" }}>
-        <Table tableData={tableData} />
+        <Table tableData={tableData} filterOptions={filterOptions} />
       </div>
       <Popup width="70%" show={showPopup} onClose={togglePopup} title={`Edit- Case Id: #${selectedCase?.id}`}>
         <CaseTabForm data={selectedCase} onSuccess={handleSuccess} onCancel={togglePopup} />

@@ -148,3 +148,74 @@
   {
     text-transform: capitalize;
   }
+
+
+  /* Container styling */
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Alert container styling */
+.alertContainer {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Accordion button styling */
+.accordionButton {
+  background: #f4f4f4;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Icon styling */
+.icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Accordion content styling */
+.accordionContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 1rem;
+}
+
+/* Show class to expand the content */
+.show {
+  max-height: 1000px; /* Adjust based on your content */
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background: #f4f4f4;
+}
+
+.valueCell {
+  color: #F48634;
+}

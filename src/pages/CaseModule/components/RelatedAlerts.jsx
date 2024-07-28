@@ -1,30 +1,142 @@
-import React from "react";
+
+import React, { useState } from "react";
 import Styles from "../styles/case.module.css";
+import { ICON } from "../../../utils/icon";
+
+const alertData = [
+    {
+      id: 1087,
+      elasticId: "ingest-logs-prod-alert+0+507",
+      elasticIndex: "ingest-logs-prod-alert",
+      sourceIp: "89.248.163.200",
+      destinationIp: "172.26.234.88",
+      sourcePort: 40652,
+      destinationPort: 80,
+      severity: 2,
+      category: "Misc Attack",
+      signature: "Poor Reputation IP group 16",
+      origin: "NIDS",
+      timestamp: "2024-07-22T09:45:51.491Z",
+      alertState: 2,
+      alertStateName: "Escalated with CaseId",
+      intel: "sd",
+      remarks: "testing remarks",
+      timeout: "2024-07-22T14:24:40.890Z",
+      hashValue: "64cfb6db46075699f6a63b47169107aa1d79e2e28579fe5e5d40fd0ea44c92a0",
+      iocs: {
+        domains: ["dsdsd"],
+        ips: ["ds"],
+        urls: ["dd"]
+      },
+      pcapLink: "https://172.26.234.125:5000/pcaps/2111952249939086.pcap",
+      tactic: "Reconnaissance",
+      technique: "T1595 - Active Scanning",
+      controls: "SC-4 (Prevent unauthorized and unintended information transfer)",
+      whois: "http://whois.domaintools.com/89.248.163.200",
+      asn: "AS202425 ip volume inc",
+      countryName: "United Kingdom of Great Britain and Northern Ireland",
+      assetid: "NA",
+      createdAt: "2024-07-22T10:24:40.893Z",
+      updatedAt: "2024-07-25T11:44:51.623Z"
+    },
+    {
+      id: 1097,
+      elasticId: "ingest-logs-prod-alert+0+517",
+      elasticIndex: "ingest-logs-prod-alert",
+      sourceIp: "83.97.73.245",
+      destinationIp: "172.26.234.86",
+      sourcePort: 53866,
+      destinationPort: 80,
+      severity: 2,
+      category: "Misc Attack",
+      signature: "DROP Spamhaus DROP Listed Traffic Inbound group 9",
+      origin: "NIDS",
+      timestamp: "2024-07-22T13:20:22.368Z",
+      alertState: 2,
+      alertStateName: "Escalated with CaseId",
+      intel: "intell",
+      remarks: "sadfasdf",
+      timeout: "2024-07-23T09:27:42.158Z",
+      hashValue: "c5cae4396e6bda8daaf34a76a4de9eebc08c96074571f507be176b2dcb4fd0c8",
+      iocs: {
+        domains: ["sdfsdf", "sdf", "sdfsadf"],
+        ips: ["asdflkjlj", "werfdsf"],
+        urls: ["wersdfsdfw"]
+      },
+      file_hashes: ["asdfwefwef", "arwefs"],
+      pcapLink: "https://172.26.234.125:5000/pcaps/1864854323460606.pcap",
+      tactic: "Reconnaissance",
+      technique: "T1595 - Active Scanning",
+      controls: "SC-4 (Prevent unauthorized and unintended information transfer)",
+      whois: "http://whois.domaintools.com/83.97.73.245",
+      asn: "ASNone",
+      countryName: "Germany",
+      assetid: "NA",
+      createdAt: "2024-07-23T05:27:42.159Z",
+      updatedAt: "2024-07-25T11:44:47.584Z"
+    }
+  ];
 
 const RelatedAlerts = () => {
-  const alertData = Array.from({ length: 10 }, (_, i) => ({
-    key: `key${i}`,
-    value: `value${i}`
-  }));
+  const [expanded, setExpanded] = useState(null);
+
+  const handleToggle = (id) => {
+    setExpanded(expanded === id ? null : id);
+  };
+
+  const formatValue = (value) => {
+    if (Array.isArray(value)) {
+      return value.join(", ");
+    }
+    if (typeof value === "object" && value !== null) {
+      // Convert object to a string representation
+      return Object.entries(value)
+        .map(([key, val]) => `${key}: ${Array.isArray(val) ? val.join(", ") : val}`)
+        .join("; ");
+    }
+    return value;
+  };
 
   return (
-    <div className={`table-container ${Styles.alert_details_view}`} style={{ padding: "0px" }}>
-      <table>
-        <thead>
-          <tr>
-            <th>Field</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {alertData.map(({ key, value }) => (
-            <tr key={key}>
-              <td>{key}</td>
-              <td style={{ color: "#F48634" }}>{value}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className={Styles.container}>
+      {alertData.map((alert) => (
+        <div key={alert.id} className={Styles.alertContainer}>
+          <button
+            className={Styles.accordionButton}
+            onClick={() => handleToggle(alert.id)}
+            aria-expanded={expanded === alert.id}
+          >
+            <span>Alert ID: {alert.id}</span>
+            <span className={Styles.icon}>
+              {expanded === alert.id ? ICON.CHEVRON_UP : ICON.CHEVRON_DOWN}
+            </span>
+          </button>
+          <div
+            className={`${Styles.accordionContent} ${
+              expanded === alert.id ? Styles.show : ""
+            }`}
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(alert).map(([key, value]) => (
+                  <tr key={key}>
+                    <td>{key}</td>
+                    <td className={Styles.valueCell}>
+                      {formatValue(value)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
