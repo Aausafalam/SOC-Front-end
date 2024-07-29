@@ -24,6 +24,11 @@ const Alert = () => {
     useEffect(() => {
         fetchAlertList();
     }, []);
+    
+    useEffect(() => {
+      AlertList?.length > 0 && fetchAlertDetail(AlertList[0][0].id)
+    },[AlertList])
+
   
     const togglePopup = () => setShowEditPopup(prev => !prev);
   
@@ -196,7 +201,7 @@ const Alert = () => {
           </table>
         </div>
       </div>
-      <Popup width="70%" show={showEditPop} onClose={togglePopup} title={`Details`}>
+      <Popup width="90%" show={showEditPop} onClose={togglePopup} title={`Details`}>
         <EditAlertDetails  setCaseIds={setCaseIds} data={alertDetail} id={id} onCancel={togglePopup} onSuccess={handleSubmit}/>
       </Popup>
     </div>

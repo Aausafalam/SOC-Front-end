@@ -3,7 +3,7 @@ import { constants } from "../../utils/constants";
 import apiClient from "../config";
 
 export const getConfigurationList = async (signal) => {
-  const response = await axios.get("https://backend.assets.k8.c3ihub/assetList", { signal });
+  const response = await axios.get("http://192.168.40.52:6001/api/benchmark_summary", { signal });
   return response.data;
 };
 

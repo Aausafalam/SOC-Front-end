@@ -10,6 +10,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { VulnerabilityProvider } from "./context/VulnerabilityContext";
 import { AlertProvider } from "./context/AlertContext";
 import { ConfigurationProvider } from "./context/AlertContext copy";
+import { UserProvider } from "./context/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,7 +22,9 @@ root.render(
             <VulnerabilityProvider>
            <AlertProvider>
             <ConfigurationProvider>
+            <UserProvider>
             <App />
+            </UserProvider>
             </ConfigurationProvider>
            </AlertProvider>
             </VulnerabilityProvider>
