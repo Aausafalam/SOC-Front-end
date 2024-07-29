@@ -81,7 +81,6 @@ const TableComponent = ({ tableData, filterOptions }) => {
       {
         params.searchText = searchText;
       }
-      console.log("filter",filter)
       if(filter){
         params[filter.filterKey] = filter.value;
       }

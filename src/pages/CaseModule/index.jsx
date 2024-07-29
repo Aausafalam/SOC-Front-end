@@ -11,6 +11,7 @@ import { constants } from "../../utils/constants";
 import CaseTabForm from "./components/CaseTabForm";
 import { ICON } from "../../utils/icon";
 import CaseForm from "./components/CaseForm";
+import Loader from "../../components/Loader/Loader";
 
 const Case = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -28,8 +29,8 @@ const Case = () => {
   const getStatusBadgeClass = (status) => {
     const statusMap = {
       new: "badge-violet",
-      inprogress: "badge-green",
-      onhold: "badge-orange",
+      "in-progress": "badge-green",
+      "on-hold": "badge-orange",
       closed: "badge-red"
     };
     return statusMap[status.toLowerCase()] || "";
@@ -37,10 +38,9 @@ const Case = () => {
 
   const getSeverity = (severity) => {
     const severityMap = {
-      1: "critical",
-      2: "high",
-      3: "medium",
-      4: "low"
+      3: "high",
+      2: "medium",
+      1: "low"
     };
     return severityMap[severity] || "NA";
   };
@@ -53,14 +53,15 @@ const Case = () => {
     }
   };
 
-  const handleSuccess = async (type="add") => {
+  const handleSuccess = (type="add") => {
     if(type=="add"){
       toggleAddCasePopup();
     }else{
       togglePopup();
     }
-    await fetchCaseList();
+    fetchCaseList();
   };
+
 
   const [filterOptions, setFilterOptions] = useState({
     radioButtons: {
@@ -131,7 +132,7 @@ const Case = () => {
     };
   };
 
-  const tableData = React.useMemo(() => getTableData(caseList), [caseList, toggleAddCasePopup]);
+  const tableData = React.useMemo(() => getTableData(caseList), [caseList]);
 
   return (
     <div>
