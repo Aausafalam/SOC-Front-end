@@ -1,10 +1,10 @@
-/* Main Container */
 .Main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* flex-wrap: wrap; */
   justify-content: space-between;
   gap: 1rem;
+  /* padding: 20px; */
 }
 
 .top_section {
@@ -24,7 +24,6 @@
 .first_main_box {
 
   grid-column: span 2;
-  
   width: 100%;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   /* border-radius: 8px; */
@@ -111,12 +110,24 @@
 }
 
 /* Query Count */
-.query_count {
+.main_data h3 {
   margin: 10px 0;
   font-size: 1.1rem;
   font-weight: bold;
+  color: #007BFF;
 }
-
+.log_second_child h3{
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007BFF;
+}
+.log_first_child h3{
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007BFF;
+}
 /* Content Area */
 
 
@@ -175,7 +186,7 @@
 .log_first_child h3 {
   margin-bottom: 1rem;
   /* Space below heading */
-  /* color: #333; */
+  color:var(--text-color);
   /* Dark text color */
   font-size: 1.5rem;
   /* Larger font size */
@@ -207,11 +218,6 @@
 .log_second_child:hover {
   transform: scale(1.02);
 } */
-
-.log_second_child h3 {
-  /* color: #333; */
-  margin-bottom: 1rem;
-}
 
 .log_second_child p {
   font-size: 1rem;
@@ -315,6 +321,9 @@
 .Data_display{
   width: 100%;
   height: 38rem;
+  overflow: hidden;
+  overflow-y: auto;
+
   
 
   background-color: var(--white);
@@ -323,11 +332,16 @@
   border: 1px solid var(--border-box);
   position: relative;
 }
+
+.Data_display::-webkit-scrollbar {
+  width: 0px; /* Hide scrollbar in WebKit browsers */
+  height: 0px; /* Hide scrollbar in WebKit browsers */
+}
 .main_data {
   width: 100%;
   background-color: var(--white);
-  overflow: hidden;
-  overflow-y: auto;
+  /* /* overflow: hidden;* */
+  /* overflow-y: auto;  */
   /* border: 1px solid #ccc; */
   padding: 10px;
   /* height: 27rem; */
@@ -361,9 +375,6 @@
   transition: background-color 0.3s ease;
 }
 
-.expand_button:hover {
-  background-color: #0056b3;
-}
 
 
 .expand_button {
@@ -373,9 +384,9 @@
   /* Additional styling for the button if needed */
 }
 
-.expand_button:hover {
+/* .expand_button:hover {
   background: rgba(0, 0, 0, 0.1);
-}
+} */
 
 .main_data .data_item:last_child {
   border-bottom: none;
@@ -398,9 +409,14 @@
   }
 
   .Main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 20px;
   }
+  
 
   .log_node_type,
   .node_type,
