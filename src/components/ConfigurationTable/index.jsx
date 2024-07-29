@@ -647,7 +647,7 @@ const ConfigurationTable = () => {
     {
       name:"Fail",
       count:configurationDetail?.fail,
-      color:"#eb032c"
+      color:"#ff6347"
     },
     {
       name:"Score",
@@ -662,7 +662,7 @@ const ConfigurationTable = () => {
   ]
  
 
-  console.log("sasdfds",id)
+  // console.log("sasdfds",id)
 
   const tableData = React.useMemo(() => getTableData(configurationList), [configurationList]);
    

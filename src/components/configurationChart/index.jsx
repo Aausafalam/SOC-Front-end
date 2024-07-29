@@ -72,7 +72,7 @@ const EChartComponent = ({ isDarkMode, data }) => {
         },
         data: formattedData.failData,
         itemStyle: {
-          color: '#eb032c',
+          color: '#ff6347',
         },
       },
       {

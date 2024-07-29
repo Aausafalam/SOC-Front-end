@@ -267,7 +267,8 @@ const TableComponent = ({ tableData, filterOptions }) => {
             {data.title && <h2>{data.title}</h2>}
 
             <div className="search_export_print_container">
-              <div className="filter-container">
+              {
+                filterOptions &&  <div className="filter-container">
                 {filterOptions && filterOptions.radioButtons && (
                   <div className="radio-buttons">
                     {filterOptions.radioButtons?.data.map((option, index) => (
@@ -320,6 +321,8 @@ const TableComponent = ({ tableData, filterOptions }) => {
                   </select>
                 )}
               </div>
+              }
+             
             
               {data.searchBar && (
                 <form
