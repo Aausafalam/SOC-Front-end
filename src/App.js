@@ -20,7 +20,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-          <Route path="/" element={<AssetsManagementModule/>}/>
+      <Route path="/" element={<React.Suspense fallback={<Loader/>}><AssetsManagementModule /></React.Suspense>} />
           <Route path="/case" element={<React.Suspense fallback={<Loader/>}><Case /></React.Suspense>} />
           <Route path="/assetsmanagement" element={<React.Suspense fallback={<Loader/>}><AssetsManagementModule /></React.Suspense>} />
           <Route path="/compliance" element={<React.Suspense fallback={<Loader/>}><Compliance/></React.Suspense>} />

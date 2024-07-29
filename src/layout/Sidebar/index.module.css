@@ -64,15 +64,15 @@
 }
 
 .container>ul>li:hover svg,
-.container>ul>li:first-of-type svg {
+.container>ul>li.active svg {
     color: #133DB5;
 }
 
-.container>ul>li:first-of-type {
+.container>ul>li.active {
     background-color: white;
     color: #133DB5;
 }
 
-.container>ul>li:first-of-type p {
+.container>ul>li.active p {
     color: #133DB5;
 }

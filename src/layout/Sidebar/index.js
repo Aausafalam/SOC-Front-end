@@ -36,6 +36,7 @@ import AssetsManagementIcon from './icons/assets.svg';
 import VulnerabilityManagementIcon from './icons/vulnerabilities.svg';
 import FileAnalysisIcon from './icons/fileAnalysis.svg';
 import LogManagementIcon from './icons/log.svg';
+import { useLocation } from 'react-router';
 
 const icons = {
   Overview: OverviewIcon,
@@ -45,6 +46,9 @@ const icons = {
   "File Analysis": FileAnalysisIcon,
   "Log Management": LogManagementIcon,
 };
+ 
+
+
 
 export const data = [
   {
@@ -55,12 +59,12 @@ export const data = [
   {
     name: "Risk Management",
     icon: RiskManagementIcon,
-    url: "/"
+    url: "/alerts"
   },
   {
     name: "Assets Management",
     icon: AssetsManagementIcon,
-    url: "/"
+    url: "/assetsmanagement"
   },
   {
     name: "Vulnerability Management",
@@ -68,13 +72,18 @@ export const data = [
     url: "/vulnerability"
   },
   {
-    name: "File Analysis",
+    name: "Case Analysis",
     icon: FileAnalysisIcon,
-    url: "/"
+    url: "/case"
   },
   {
-    name: "Log Management",
+    name: "Compliance Management",
     icon: LogManagementIcon,
-    url: "/"
+    url: "/compliance"
+  },
+  {
+    name: "Configuration Management",
+    icon: LogManagementIcon,
+    url: "/configuration"
   }
 ];
