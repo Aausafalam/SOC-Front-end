@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useLoader } from "../context/LoaderContext";
-import { editCase, getCaseDashboardData, getCaseDetail, getCaseList, getCaseMatrix, getCaseServerityChart } from "../api/case";
+import { addCase, editCase, getCaseDashboardData, getCaseDetail, getCaseList, getCaseMatrix, getCaseServerityChart } from "../api/case";
 import { notifySuccess } from "../utils/toastUtil";
 
 export const useCaseList = () => {
@@ -109,4 +109,24 @@ export const useEditCase = () => {
     }, [showLoader, hideLoader]);
 
     return {handleEditCase};
+};
+
+export const useAddCase = () => {
+    const {showLoader, hideLoader} = useLoader();
+ 
+    const handleAddCase = useCallback(async (payload) => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const data = await addCase(payload,controller.signal);
+            notifySuccess(data.message);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return {handleAddCase};
 };

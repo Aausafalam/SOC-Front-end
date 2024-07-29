@@ -154,6 +154,7 @@
 .container {
   max-width: 1200px;
   margin: auto;
+  padding:1rem;
 }
 
 /* Alert container styling */
@@ -193,17 +194,16 @@
   transition: max-height 0.3s ease;
   padding: 0 1rem;
 }
-
-/* Show class to expand the content */
 .show {
-  max-height: 1000px; /* Adjust based on your content */
+  max-height: 50vh; 
+  overflow: auto;
 }
 
 /* Table styling */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-block: 1rem;
 }
 
 th, td {

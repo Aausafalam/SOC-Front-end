@@ -1,83 +1,9 @@
 
 import React, { useState } from "react";
 import Styles from "../styles/case.module.css";
-import { ICON } from "../../../utils/icon";
+import Utils from "../../../utils";
 
-const alertData = [
-    {
-      id: 1087,
-      elasticId: "ingest-logs-prod-alert+0+507",
-      elasticIndex: "ingest-logs-prod-alert",
-      sourceIp: "89.248.163.200",
-      destinationIp: "172.26.234.88",
-      sourcePort: 40652,
-      destinationPort: 80,
-      severity: 2,
-      category: "Misc Attack",
-      signature: "Poor Reputation IP group 16",
-      origin: "NIDS",
-      timestamp: "2024-07-22T09:45:51.491Z",
-      alertState: 2,
-      alertStateName: "Escalated with CaseId",
-      intel: "sd",
-      remarks: "testing remarks",
-      timeout: "2024-07-22T14:24:40.890Z",
-      hashValue: "64cfb6db46075699f6a63b47169107aa1d79e2e28579fe5e5d40fd0ea44c92a0",
-      iocs: {
-        domains: ["dsdsd"],
-        ips: ["ds"],
-        urls: ["dd"]
-      },
-      pcapLink: "https://172.26.234.125:5000/pcaps/2111952249939086.pcap",
-      tactic: "Reconnaissance",
-      technique: "T1595 - Active Scanning",
-      controls: "SC-4 (Prevent unauthorized and unintended information transfer)",
-      whois: "http://whois.domaintools.com/89.248.163.200",
-      asn: "AS202425 ip volume inc",
-      countryName: "United Kingdom of Great Britain and Northern Ireland",
-      assetid: "NA",
-      createdAt: "2024-07-22T10:24:40.893Z",
-      updatedAt: "2024-07-25T11:44:51.623Z"
-    },
-    {
-      id: 1097,
-      elasticId: "ingest-logs-prod-alert+0+517",
-      elasticIndex: "ingest-logs-prod-alert",
-      sourceIp: "83.97.73.245",
-      destinationIp: "172.26.234.86",
-      sourcePort: 53866,
-      destinationPort: 80,
-      severity: 2,
-      category: "Misc Attack",
-      signature: "DROP Spamhaus DROP Listed Traffic Inbound group 9",
-      origin: "NIDS",
-      timestamp: "2024-07-22T13:20:22.368Z",
-      alertState: 2,
-      alertStateName: "Escalated with CaseId",
-      intel: "intell",
-      remarks: "sadfasdf",
-      timeout: "2024-07-23T09:27:42.158Z",
-      hashValue: "c5cae4396e6bda8daaf34a76a4de9eebc08c96074571f507be176b2dcb4fd0c8",
-      iocs: {
-        domains: ["sdfsdf", "sdf", "sdfsadf"],
-        ips: ["asdflkjlj", "werfdsf"],
-        urls: ["wersdfsdfw"]
-      },
-      file_hashes: ["asdfwefwef", "arwefs"],
-      pcapLink: "https://172.26.234.125:5000/pcaps/1864854323460606.pcap",
-      tactic: "Reconnaissance",
-      technique: "T1595 - Active Scanning",
-      controls: "SC-4 (Prevent unauthorized and unintended information transfer)",
-      whois: "http://whois.domaintools.com/83.97.73.245",
-      asn: "ASNone",
-      countryName: "Germany",
-      assetid: "NA",
-      createdAt: "2024-07-23T05:27:42.159Z",
-      updatedAt: "2024-07-25T11:44:47.584Z"
-    }
-  ];
-
-const RelatedAlerts = () => {
+const RelatedAlerts = ({data}) => {
   const [expanded, setExpanded] = useState(null);
 
   const handleToggle = (id) => {
@@ -99,7 +25,17 @@ const RelatedAlerts = () => {
 
   return (
     <div className={Styles.container}>
-      {alertData.map((alert) => (
+      {
+        data && data?.alerts?.length>0 ? 
+        Utils.renderJson(data?.alerts) : 
+        (
+          <div style={{textAlign:"center"}}>
+            <img src="empty.png" style={{width:"50%"}}/>
+            <p style={{textAlign:"center", paddingBottom:"3rem"}}>No Alerts Data Available.</p>
+          </div>
+        )
+      }
+      {/* {data && data?.alerts?.map((alert) => (
         <div key={alert.id} className={Styles.alertContainer}>
           <button
             className={Styles.accordionButton}
@@ -136,7 +72,7 @@ const RelatedAlerts = () => {
             </table>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

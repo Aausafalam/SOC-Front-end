@@ -26,6 +26,7 @@
   overflow-x: auto;
   white-space: nowrap;
   overflow-y: hidden;
+  color: black;
 }
 
 .tab_labels h3 {

@@ -9,9 +9,12 @@ import CaseStatsCards from "./components/CaseStatsCards";
 import CaseStateChart from "./components/Charts/CaseStateChart";
 import { constants } from "../../utils/constants";
 import CaseTabForm from "./components/CaseTabForm";
+import { ICON } from "../../utils/icon";
+import CaseForm from "./components/CaseForm";
 
 const Case = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [showAddCasePopup, setShowAddCasePopup] = useState(false);
   const [selectedCase, setSelectedCase] = useState(null);
   const { caseList, fetchCaseList } = useCase();
 
@@ -20,6 +23,7 @@ const Case = () => {
   }, []);
 
   const togglePopup = () => setShowPopup(prev => !prev);
+  const toggleAddCasePopup = () => setShowAddCasePopup(prev => !prev);
 
   const getStatusBadgeClass = (status) => {
     const statusMap = {
@@ -49,26 +53,33 @@ const Case = () => {
     }
   };
 
-  const handleSuccess = () => {
-    togglePopup();
-    fetchCaseList();
+  const handleSuccess = async (type="add") => {
+    if(type=="add"){
+      toggleAddCasePopup();
+    }else{
+      togglePopup();
+    }
+    await fetchCaseList();
   };
 
   const [filterOptions, setFilterOptions] = useState({
     radioButtons: [
-      { label: "Option 1", value: "14" },
-      { label: "Option 2", value: "11" },
+      { label: "High", value: "high" },
+      { label: "Medium", value: "medium" },
+      { label: "Low", value: "low" },
     ],
     selectBox: [
-      { label: "Select 1", value: "13" },
-      { label: "Select 2", value: "8" },
+      { label: "New", value: "new" },
+      { label: "InProgress", value: "inprogress" },
+      { label: "OnHold", value: "onhold" },
+      { label: "Closed", value: "closed" },
     ],
   });
 
   const getTableData = (data) => {
     return {
       ...Utils.GetTableData(),
-      title: "All Cases",
+      title: (<button className="btn-green" onClick={toggleAddCasePopup}>{ICON.PLUS}Create Case</button>),
       rows: data[0]?.map((item, index) => {
         const severity = getSeverity(item.severity);
         const severityClass = `badge-${severity}`;
@@ -132,7 +143,7 @@ const Case = () => {
     };
   };
 
-  const tableData = React.useMemo(() => getTableData(caseList), [caseList]);
+  const tableData = React.useMemo(() => getTableData(caseList), [caseList, toggleAddCasePopup]);
 
   return (
     <div>
@@ -146,8 +157,13 @@ const Case = () => {
       <div style={{ marginTop: "1rem" }}>
         <Table tableData={tableData} filterOptions={filterOptions} />
       </div>
+
+      <Popup width="70%" show={showAddCasePopup} onClose={toggleAddCasePopup} title="Add Case">
+        <CaseForm onSuccess={()=>handleSuccess("add")} onCancel={toggleAddCasePopup} /> 
+      </Popup>
+
       <Popup width="70%" show={showPopup} onClose={togglePopup} title={`Edit- Case Id: #${selectedCase?.id}`}>
-        <CaseTabForm data={selectedCase} onSuccess={handleSuccess} onCancel={togglePopup} />
+        <CaseTabForm data={selectedCase} onSuccess={()=>handleSuccess("edit")} onCancel={togglePopup} />
       </Popup>
     </div>
   );

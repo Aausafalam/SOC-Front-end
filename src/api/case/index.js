@@ -21,6 +21,11 @@ export const getCaseMatrix = async (signal) => {
     return response.data;
 };
 
+export const addCase = async (payload, signal) => {
+    const response = await apiClient.post(constants.API_URLS.CASE+"/create", payload, { signal });
+    return response.data;
+};
+
 export const editCase = async (id, payload, signal) => {
     const response = await apiClient.put(constants.API_URLS.CASE + "/update/"+id, payload, { signal });
     return response.data;
