@@ -5,62 +5,48 @@ import Styles from "../styles/case.module.css";
 import Card from "./Card";
 
 const CaseStatsCards = () => {
-    const {caseMatrixData, fetchCaseMatricesData} = useCase();
+    const { caseMatrixData, fetchCaseMatricesData } = useCase();
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchCaseMatricesData();
-    },[]);
+    }, [fetchCaseMatricesData]);
 
-    // const caseMatrixCounts = {
-    //     withoutCaseIdAlerts:{
-    //         count:0,
-    //         percentageChangeWeek:null,
-    //         percentageChangeMonth:null,
-    //     },
-    //     pendingCases:{
-    //         count:4,
-    //         percentageChangeWeek:-5,
-    //         percentageChangeMonth:6,
-    //     },
-    //     closedCases:{
-    //         count:1,
-    //         percentageChangeWeek:15,
-    //         percentageChangeMonth:-8,
-    //     }
-    // };
+    const safeParseInt = (value, fallback = 0) => {
+        const parsed = parseInt(value, 10);
+        return isNaN(parsed) ? fallback : parsed;
+    };
 
     return (
         <div className={Styles.case_overview_container}>
-            {
-                caseMatrixData ? (
-                    <>
+            {caseMatrixData ? (
+                <>
                     <Card 
-                            label="Without Case Id Alerts" 
-                            count={parseInt(caseMatrixData?.withoutCaseIdAlerts?.count)} 
-                            percentageChangeWeek={parseInt(caseMatrixData?.withoutCaseIdAlerts?.percentageChangeWeek)} 
-                            percentageChangeMonth={parseInt(caseMatrixData?.withoutCaseIdAlerts?.percentageChangeMonth)} 
-                            icon={ICON.ALERT}
-                        />
-                        <Card 
-                            label="Pending Cases" 
-                            count={parseInt(caseMatrixData?.pendingCases?.count)} 
-                            percentageChangeWeek={parseInt(caseMatrixData?.pendingCases?.percentageChangeWeek)} 
-                            percentageChangeMonth={parseInt(caseMatrixData?.pendingCases?.percentageChangeMonth)} 
-                            icon={ICON.PENDING}
-                        />
-                        <Card 
-                            label="Closed Cases" 
-                            count={parseInt(caseMatrixData?.closedCases?.count)} 
-                            percentageChangeWeek={parseInt(caseMatrixData?.closedCases?.percentageChangeWeek)} 
-                            percentageChangeMonth={parseInt(caseMatrixData?.closedCases?.percentageChangeMonth)} 
-                            icon={ICON.CLOSED}
-                        />
-                    </>
-                ) : <p>Loading....</p>
-            }
-            
+                        label="Without Case Id Alerts" 
+                        count={safeParseInt(caseMatrixData.withoutCaseIdAlerts?.count)} 
+                        percentageChangeWeek={safeParseInt(caseMatrixData.withoutCaseIdAlerts?.percentageChangeWeek)} 
+                        percentageChangeMonth={safeParseInt(caseMatrixData.withoutCaseIdAlerts?.percentageChangeMonth)} 
+                        icon={ICON.ALERT}
+                    />
+                    <Card 
+                        label="Pending Cases" 
+                        count={safeParseInt(caseMatrixData.pendingCases?.count)} 
+                        percentageChangeWeek={safeParseInt(caseMatrixData.pendingCases?.percentageChangeWeek)} 
+                        percentageChangeMonth={safeParseInt(caseMatrixData.pendingCases?.percentageChangeMonth)} 
+                        icon={ICON.PENDING}
+                    />
+                    <Card 
+                        label="Closed Cases" 
+                        count={safeParseInt(caseMatrixData.closedCases?.count)} 
+                        percentageChangeWeek={safeParseInt(caseMatrixData.closedCases?.percentageChangeWeek)} 
+                        percentageChangeMonth={safeParseInt(caseMatrixData.closedCases?.percentageChangeMonth)} 
+                        icon={ICON.CLOSED}
+                    />
+                </>
+            ) : (
+                <p>Loading....</p>
+            )}
         </div>
-        )
-}
+    );
+};
 
 export default CaseStatsCards;

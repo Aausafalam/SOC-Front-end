@@ -19,6 +19,7 @@ function App() {
   
   return (
     <Layout>
+      <Loader />
       <Routes>
       <Route path="/" element={<React.Suspense fallback={<Loader/>}><AssetsManagementModule /></React.Suspense>} />
           <Route path="/case" element={<React.Suspense fallback={<Loader/>}><Case /></React.Suspense>} />

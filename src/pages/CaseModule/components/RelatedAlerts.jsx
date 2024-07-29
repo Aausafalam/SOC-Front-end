@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Styles from "../styles/case.module.css";
 import Utils from "../../../utils";
+import { ICON } from "../../../utils/icon";
 
 const RelatedAlerts = ({data}) => {
   const [expanded, setExpanded] = useState(null);
@@ -25,17 +26,7 @@ const RelatedAlerts = ({data}) => {
 
   return (
     <div className={Styles.container}>
-      {
-        data && data?.alerts?.length>0 ? 
-        Utils.renderJson(data?.alerts) : 
-        (
-          <div style={{textAlign:"center"}}>
-            <img src="empty.png" style={{width:"50%"}}/>
-            <p style={{textAlign:"center", paddingBottom:"3rem"}}>No Alerts Data Available.</p>
-          </div>
-        )
-      }
-      {/* {data && data?.alerts?.map((alert) => (
+      { data && data?.alerts?.length>0 ?  data?.alerts?.map((alert) => (
         <div key={alert.id} className={Styles.alertContainer}>
           <button
             className={Styles.accordionButton}
@@ -52,27 +43,19 @@ const RelatedAlerts = ({data}) => {
               expanded === alert.id ? Styles.show : ""
             }`}
           >
-            <table>
-              <thead>
-                <tr>
-                  <th>Field</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(alert).map(([key, value]) => (
-                  <tr key={key}>
-                    <td>{key}</td>
-                    <td className={Styles.valueCell}>
-                      {formatValue(value)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {
+                Utils.renderJson(alert) 
+            }
           </div>
         </div>
-      ))} */}
+      )) : 
+      (
+        <div style={{textAlign:"center"}}>
+          <img src="empty.png" style={{width:"50%"}}/>
+          <p style={{textAlign:"center", paddingBottom:"3rem"}}>No Alerts Data Available.</p>
+        </div>
+      )
+    }
     </div>
   );
 };
