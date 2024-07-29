@@ -8,6 +8,7 @@ import ManualAssesment from './ManualAssesment'
 import { useVulnerability } from '../../context/VulnerabilityContext'
 import axios from 'axios';
 import {  toast } from 'react-toastify';
+import EChartsComponent from '../../components/Echarts'
 
 const VulnerabilitiesModule = () => {
   
@@ -48,16 +49,198 @@ const VulnerabilitiesModule = () => {
             console.log(error);
         });
       }
-   
+      const [radialPolarData, setRadialPolarData] = useState([]);
+      const [verticalStackedBarData, setVerticalStackedBarData] = useState([]);
+      const [pieDataStatus, setPieDataStatus] = useState([]);
+
+      const radialPolarOptions = {
+        title: {
+          text: 'Vulnerabilities per Operating System',
+          left: 'center',
+        },
+        tooltip: {},
+        polar: {
+          radius: '70%',
+        },
+        angleAxis: {
+          type: 'category',
+          data: radialPolarData.map(item => item.category),
+          axisLine: { lineStyle: { color: '#999' } },
+        },
+        radiusAxis: {
+          type: 'value',
+          min: 0,
+          max: Math.max(...radialPolarData.map(item => item.value)), // Adjust max value
+          axisLine: { lineStyle: { color: '#999' } },
+        },
+        series: [
+          {
+            type: 'bar',
+            data: radialPolarData.map(item => item.value),
+            coordinateSystem: 'polar',
+            stack: 'a',
+            emphasis: {
+              focus: 'series',
+            },
+            label: {
+              show: true,
+              position: 'middle',
+              formatter: '{c}'
+            },
+            itemStyle: {
+              color: (params) => {
+                const colors = ['#FF5733', '#33FF57', '#3357FF', '#F4C542', '#42F4C5'];
+                return colors[params.dataIndex];
+              }
+            }
+          },
+        ],
+      };
+       
+      useEffect(() => {
+        // Fetch data from server
+        const fetchData = () => {
+          // Fetch data for the radial polar chart
+          axios.get('http://192.168.40.52:5000/api/get_vuln_os_count')
+            .then(radialResponse => {
+              // Set the radial polar data from the response
+              setRadialPolarData(radialResponse.data);
+    
+              // Fetch data for the horizontal bar chart after radial data is successfully fetched
+              return axios.get('http://192.168.40.52:5000/api/get_status_count');
+            })
+            .then(pieResponse => {
+                // Set the horizontal bar data from the response
+                setPieDataStatus(pieResponse.data);
+    
+              // Fetch data for the vertical stacked bar chart
+              return axios.get('http://192.168.40.52:5000/api/get_reportedDate_count');
+            })
+            .then(verticalResponse => {
+              // Set the vertical stacked bar data from the response
+              setVerticalStackedBarData(verticalResponse.data);
+            })
+            .catch(error => {
+              // Handle errors for both requests
+              console.error('Error fetching data:', error.message);
+            });
+        };
+    
+        fetchData();
+      }, []);
+
+
       useEffect(() => {
         fetchSeverity()
       },[])
+
+      
+      const verticalStackedBarOptions = {
+        title: {
+          text: 'Vulnerabiities Detected by Day',
+          subtext: 'Daily Data for July',
+          left: 'center',
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        legend: {
+          data: ['Critical', 'High', 'Medium', 'Low'],
+          bottom: 0,
+          // color: '#ee6666'
+        },
+        xAxis: {
+          type: 'category',
+          data: Array.from({ length: 31 }, (_, i) => i + 1), // Days of July (1 to 31)
+          axisLine: { lineStyle: { color: '#999' } },
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: { formatter: '{value}' },
+          axisLine: { lineStyle: { color: '#999' } },
+        },
+        series: [
+          {
+            name: 'Critical',
+            type: 'bar',
+            stack: 'total',
+            data: verticalStackedBarData.map(item => item.critical),
+            itemStyle: { color: '#FF0000' },
+          },
+          {
+            name: 'High',
+            type: 'bar',
+            stack: 'total',
+            data: verticalStackedBarData.map(item => item.high),
+            itemStyle: { color: '#FF8C00' },
+          },
+          {
+            name: 'Medium',
+            type: 'bar',
+            stack: 'total',
+            data: verticalStackedBarData.map(item => item.medium),
+            itemStyle: { color: '#FFD700' },
+          },
+          {
+            name: 'Low',
+            type: 'bar',
+            stack: 'total',
+            data: verticalStackedBarData.map(item => item.low),
+            itemStyle: { color: '#32CD32' },
+          },
+        ],
+      };
+      
+      const pieOptionsStatus = {
+        title: {
+          text: 'Current Status of Tickets',
+          // subtext: 'Fake Data',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left'
+        },
+        series: [
+          {
+            name: 'Status',
+            type: 'pie',
+            radius: '50%',
+            data: pieDataStatus.map(item => ({ value: item.value, name: item.category }))
+          }
+        ]
+      };
+
+
 
 
   return (<div className={styles.container}>
     <div className={styles.body}>
         <div className={styles.vulnerability_stats}>
-        <VulnerabilityStatusStats initialData={serverity}/>
+          
+          <div className={styles.vulnerability_count}>
+          <VulnerabilityStatusStats initialData={serverity}/>
+          </div>
+
+          <div className="chart radial-polar-chart">
+          <EChartsComponent options={radialPolarOptions} />
+         </div>
+
+         <div className="chart vertical-stacked-bar-chart">
+          <EChartsComponent options={verticalStackedBarOptions} />
+        </div>
+
+        <div className="chart horizontal-bar-chart">
+          <EChartsComponent options={pieOptionsStatus} />
+        </div>
+
+
         </div>
     <div className={styles.vulnerability_header}>
     <div className={styles.tab}>

@@ -438,7 +438,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
           </div>
 
           {isLoading && <p>Loading...</p>}
-          {error && <p className="error-message">{error}</p>}
+          {/* {error && <p className="error-message">{error}</p>} */}
 
           <table className="table">
             <thead>

@@ -11,13 +11,13 @@ import axios from 'axios';
 
 const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInput,onSuccess}) => {
   
-    const states = [{label:"New", value:"New"}, {label:"Opened", value:"Opened"}, 
-    {label:"Escalated with CaseId", value:"Escalated with CaseId"},
-    {label:"Duplicate", value:"Duplicate"},
-    {label:"False Positive", value:"False Positive"},
-    {label:"Archived", value:"Archived"},
-    {label:"Closed", value:"Closed"},
-    {label:"Re-Assigned", value:"Re-Assigned"}, 
+    const states = [{label:"New", value:0}, {label:"Opened", value:1}, 
+    {label:"Escalated with CaseId", value:2},
+    {label:"Duplicate", value:3},
+    {label:"False Positive", value:4},
+    {label:"Archived", value:5},
+    {label:"Closed", value:6},
+    {label:"Re-Assigned", value:7}, 
 ];
  
 const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
@@ -29,13 +29,13 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
           name: "intel",
           label: "Intel",
           required: true,
-          grid:3,
+          grid:2,
         },
         {
             type: "select",
             name: "state",
             label: "State",
-            grid: 3,
+            grid: 2,
             required: true,
             options: states,
         },
@@ -58,35 +58,35 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             type: "textarea",
             name: "remarks",
             label: "Remarks",
-            grid: 3,
+            grid: 2,
             required: true,
         },
         {
             type:"text",
             name:"domains",
             label:"Domains",
-            grid:3,
+            grid:2,
             required:true
         },
         {
             type:"text",
             name:"ips",
             label:"IPS",
-            grid:3,
+            grid:2,
             required:true
         },
         {
             type:"text",
             name:"urls",
             label:"URLS",
-            grid:3,
+            grid:2,
             required:true
         },
         {
             type:"text",
             name:"file_hashes",
             label:"File Hashes",
-            grid:3,
+            grid:2,
             required:true
         }
       ];

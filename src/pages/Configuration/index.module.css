@@ -1,0 +1,24 @@
+.container {
+    /* height: 200vh; */
+    /* background-color: rgb(255, 255, 255); */
+    /* padding: 1rem; */
+    width: 100%;
+}
+
+.body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.body>div {
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-box);
+}
+
+.body>div:nth-child(2) {
+    grid-column: span 2;
+}

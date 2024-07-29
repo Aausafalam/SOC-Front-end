@@ -35,6 +35,18 @@ const Card = ({label, count = 0, icon, percentageChangeWeek = 0, percentageChang
           <div className={Style.textContainer}>
             <h4 className={Style.boxCount}>{count}</h4>
             <div className={Style.boxLabel}>{label}</div>
+            <div className={Style.footer}>
+          <div className={Style.footerItem} style={{paddingRight:"1rem"}}>
+            <span className={percentageChangeWeek >= 0 ? Style.increase : Style.decrease }>
+              {formatPercentage(percentageChangeWeek)} {weekArrow}<span className={Style.footerText}>than last week</span>
+            </span>
+          </div>
+          <div className={Style.footerItem} style={{borderLeft:"1px solid lightgray", paddingLeft:"1rem"}}>
+            <span className={percentageChangeMonth >= 0 ? Style.increase : Style.decrease }>
+              {formatPercentage(percentageChangeMonth)} {monthArrow}<span className={Style.footerText}>than last month</span>
+            </span>
+          </div>
+        </div>
           </div>
           <span className={Style.dotMenu}>
             <Dropdown
@@ -53,23 +65,11 @@ const Card = ({label, count = 0, icon, percentageChangeWeek = 0, percentageChang
           </span>
         </div>
 
-        <div className={Style.footer}>
-          <div className={Style.footerItem}>
-            <span className={Style.increase}>
-              {formatPercentage(percentageChangeWeek)} {weekArrow}
-            </span>
-            <span className={Style.footerText}>than last week</span>
-          </div>
-          <div className={Style.footerItem}>
-            <span className={Style.decrease}>
-              {formatPercentage(percentageChangeMonth)} {monthArrow}
-            </span>
-            <span className={Style.footerText}>than last month</span>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
 };
 
 export default Card;
+

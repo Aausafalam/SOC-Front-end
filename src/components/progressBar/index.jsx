@@ -21,7 +21,7 @@ const ProgressBar = ({data}) => {
                 <div className={styles.progress_bar}>
                      <Line strokeLinecap={"round"} percent={data.percentage} strokeWidth={3} trailWidth={2.5} strokeColor={data.strokeColor} />
                  
-                     <p>{data.percentage} %</p>
+                     <p className={styles.pecentage}>{data.percentage} %</p>
                  
                 </div> : 
                      <Line strokeLinecap={"round"} percent={data.percentage} strokeWidth={3} trailWidth={2.5} strokeColor={data.strokeColor} />

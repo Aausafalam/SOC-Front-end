@@ -64,13 +64,6 @@ useEffect(() => {
                 percentageChangeMonth={caseMatrixCounts.endPointAlerts.percentageChangeMonth} 
                 icon={ICON.CLOSED}
             />
-            <Card 
-                label="Pending Alerts" 
-                count={caseMatrixCounts.networkAlerts.count} 
-                percentageChangeWeek={caseMatrixCounts.networkAlerts.percentageChangeWeek} 
-                percentageChangeMonth={caseMatrixCounts.networkAlerts.percentageChangeMonth} 
-                icon={ICON.PENDING}
-            />
         </div>
         )
 }
