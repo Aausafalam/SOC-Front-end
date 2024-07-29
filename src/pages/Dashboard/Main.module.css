@@ -1,6 +1,7 @@
 /* Main Container */
 .Main {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   /* flex-wrap: wrap; */
   justify-content: space-between;
   gap: 1rem;
@@ -22,6 +23,8 @@
 }
 
 .first_main_box {
+
+  grid-column: span 2;
   width: 100%;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   /* border-radius: 8px; */
@@ -154,7 +157,7 @@
 }
 
 .log_first_child {
-  height: 20%;
+  height: 19.2rem;
   border: 1px solid #e0e0e0;
   /* margin-top: 2rem; */
   border-radius: 10px;
@@ -188,21 +191,20 @@
 
 .log_second_child {
 
-  height: 49%;
-  border: 1px solid #e0e0e0;
-  margin-top: 1%;
-  border-radius: 10px;
+  height: 38rem;
+  margin-top: .8rem;
   text-align: left;
   justify-content: center;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  background-color: var(--white);
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  /* transition: box-shadow 0.3s ease, transform 0.3s ease; */
-  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  */
+  
   color: var(--text-color);
   overflow: hidden;
+  overflow-y: scroll;
+
+  background-color: var(--white);
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-box);
 }
 
 /* 
@@ -316,6 +318,7 @@
 }
 .Data_display{
   width: 100%;
+  height: 38rem;
   
 
   background-color: var(--white);
@@ -327,8 +330,9 @@
 .main_data {
   width: 100%;
   background-color: var(--white);
-  overflow: auto;
-  border: 1px solid #ccc;
+  overflow: hidden;
+  overflow-y: auto;
+  /* border: 1px solid #ccc; */
   padding: 10px;
   /* height: 27rem; */
   /* flex: 1; */
@@ -584,25 +588,5 @@
 
 
 @media (min-width: 768px) {
-  .content {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
 
-  .query_count {
-    flex: 1;
-  }
-
-  .log_node_type {
-    flex: 2;
-    display: flex;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 767px) {
-  .log_node_type {
-    flex-direction: column;
-  }
 }

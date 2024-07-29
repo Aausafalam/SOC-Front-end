@@ -193,6 +193,8 @@ const MainDataDisplay = ({ data, onExpand }) => {
               <span><strong>Agent id:</strong> {log.agent?.id}</span>
               <span><strong>Agent ephemeral_id:</strong> {log.agent?.ephemeral_id}</span>
               <span><strong>Agent version:</strong> {log.agent?.version}</span>
+              {/* <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span> */}
+              {/* <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span> */}
 
               {/* 
               <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span>
