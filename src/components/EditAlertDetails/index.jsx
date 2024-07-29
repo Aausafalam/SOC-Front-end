@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styles from "./index.module.css";
 import EditAlertForm from '../../pages/Alert/components/forms/editAlert';
+import Utils from '../../utils';
 
-const EditAlertDetails = ({data,id,onCancel,onSuccess}) => {
+const EditAlertDetails = ({data,id,onCancel,onSuccess,source}) => {
    
   const [caseIds,setCaseIds] = useState({})
   const [caseIdInput,setCaseIdsInput] = useState("")
+  const [showMore,setShowMore] = useState(false)
 
   return (<div className={styles.container}>
       <div>
@@ -36,6 +38,10 @@ const EditAlertDetails = ({data,id,onCancel,onSuccess}) => {
 })}
             </tbody>
           </table>
+          <button onClick={() => setShowMore(!showMore)} className={styles.view_more}>{showMore ? "Hide" : "View"} More</button>
+          {
+           showMore &&  Utils.renderJson(source)
+          }
         </div>
       </div>
   </div>

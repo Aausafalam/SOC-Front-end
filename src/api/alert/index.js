@@ -10,7 +10,7 @@ export const getAlertList = async (signal) => {
 export const getAlertDetail = async (id, signal) => {
   // const response = await apiClient.get(constants.API_URLS.ALERT + "/"+id, { signal });
   const response = await axios.get(`http://192.168.40.48:8080/api/alerts/id/${id}`, { signal });
-  return response.data.data.alertDetails;
+  return response.data.data;
 };
 
 

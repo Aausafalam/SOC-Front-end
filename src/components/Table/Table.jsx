@@ -81,7 +81,6 @@ const TableComponent = ({ tableData, filterOptions }) => {
       {
         params.searchText = searchText;
       }
-      console.log("filter",filter)
       if(filter){
         params[filter.filterKey] = filter.value;
       }
@@ -268,7 +267,8 @@ const TableComponent = ({ tableData, filterOptions }) => {
             {data.title && <h2>{data.title}</h2>}
 
             <div className="search_export_print_container">
-              <div className="filter-container">
+              {
+                filterOptions &&  <div className="filter-container">
                 {filterOptions && filterOptions.radioButtons && (
                   <div className="radio-buttons">
                     {filterOptions.radioButtons?.data.map((option, index) => (
@@ -321,6 +321,8 @@ const TableComponent = ({ tableData, filterOptions }) => {
                   </select>
                 )}
               </div>
+              }
+             
             
               {data.searchBar && (
                 <form
@@ -468,7 +470,9 @@ const TableComponent = ({ tableData, filterOptions }) => {
             </thead>
             <tbody>
             {data.rows && data.rows.map((row, rowIndex) => (
-                <tr key={rowIndex}>
+                <tr onClick={ () => {
+                  data.rowClickHandler && data.rowClickHandler(row["Id"].value)
+                }} style={{cursor:data.rowClickHandler ? "pointer" : ""}} key={rowIndex}>
                   {Object.entries(row).map(([key, cell], cellIndex) => 
                     cell.type !== "hidden" && (
                       <td data-cell={key} key={cellIndex}>

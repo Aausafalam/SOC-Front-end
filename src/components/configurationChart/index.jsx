@@ -56,6 +56,9 @@ const EChartComponent = ({ isDarkMode, data }) => {
           focus: 'series',
         },
         data: formattedData.scoreData,
+        // itemStyle: {
+        //   color: 'blue',
+        // },
       },
       {
         name: 'Fail',
@@ -68,6 +71,9 @@ const EChartComponent = ({ isDarkMode, data }) => {
           focus: 'series',
         },
         data: formattedData.failData,
+        itemStyle: {
+          color: '#ff6347',
+        },
       },
       {
         name: 'Pass',
@@ -80,9 +86,13 @@ const EChartComponent = ({ isDarkMode, data }) => {
           focus: 'series',
         },
         data: formattedData.passData,
+        itemStyle: {
+          color: '#6fcd9e',
+        },
       }
     ],
   });
+  
 
   return <ReactECharts option={getOption()} />;
 };

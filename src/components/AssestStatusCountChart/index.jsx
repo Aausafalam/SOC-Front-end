@@ -67,10 +67,10 @@ const AssestStatusCountChart = ({initialData}) => {
             //  const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
             initialData &&  setData(transformInventoryData({
                 "Agent Installed" : initialData?.agentInstalled || 0,
-                "Vulnerable" : initialData?.vulnerable || 0,
-                "Verified" : initialData?.audited || 0,
+                "Vulnerable" : initialData?.vulnerable || 20,
+                "Verified" : initialData?.audited || 110,
                 "Warranty Expired" : initialData?.warrantyExpired || 0,
-                "Licence Expired": initialData?.licenceExpired || 0,
+                "Licence Expired": initialData?.licenceExpired || 1,
                 "High Risk": initialData?.criticalApplications || 0
               }));
             setLoading(false);

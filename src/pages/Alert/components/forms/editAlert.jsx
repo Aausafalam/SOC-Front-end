@@ -8,10 +8,13 @@ import Utils from '../../../../utils';
 import Table from '../../../../components/Table/Table';
 import { constants } from '../../../../utils/constants';
 import axios from 'axios';
+import { useAlert } from '../../../../context/AlertContext';
 
 const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInput,onSuccess}) => {
-  
-    const states = [{label:"New", value:0}, {label:"Opened", value:1}, 
+    
+  const {alertDetail} = useAlert()
+    const states = [
+    // {label:"New", value:0}, {label:"Opened", value:1}, 
     {label:"Escalated with CaseId", value:2},
     {label:"Duplicate", value:3},
     {label:"False Positive", value:4},
@@ -30,14 +33,16 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
           label: "Intel",
           required: true,
           grid:2,
+          defaultValue:alertDetail?.intel
         },
         {
             type: "select",
-            name: "state",
+            name: "alertState",
             label: "State",
             grid: 2,
             required: true,
             options: states,
+            defaultValue:parseInt(alertDetail?.alertState || alertDetail?.alertState)
         },
         // {
         //   type: "text",
@@ -60,34 +65,39 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             label: "Remarks",
             grid: 2,
             required: true,
+            defaultValue:alertDetail?.remarks
         },
         {
             type:"text",
             name:"domains",
             label:"Domains",
             grid:2,
-            required:true
+            defaultValue:alertDetail?.domain?.join(", ") || alertDetail?.iocs?.domains?.join(", ")
+            // required:true
         },
         {
             type:"text",
             name:"ips",
             label:"IPS",
             grid:2,
-            required:true
+            defaultValue:alertDetail?.ips?.join(", ")||  alertDetail?.iocs?.ips?.join(", ")
+            // required:true
         },
         {
             type:"text",
             name:"urls",
             label:"URLS",
             grid:2,
-            required:true
+            defaultValue:alertDetail?.urls?.join(", ") || alertDetail?.iocs?.urls?.join(", ")
+            // required:true
         },
         {
             type:"text",
             name:"file_hashes",
             label:"File Hashes",
             grid:2,
-            required:true
+            defaultValue:alertDetail?.file_hashes?.join(", ") ||  alertDetail?.iocs?.file_hashes?.join(", ")
+            // required:true
         }
       ];
   
@@ -203,8 +213,16 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
 
   const handleSubmit = async (formData) => {
     if (formData) {
-     console.log({...formData,caseid:Object.entries(caseIds).map(([key, value]) => value)})
-     axios.put(`http://192.168.40.48:8080/api/alerts/update/${id}`, {...formData,caseid:Object.entries(caseIds).map(([key, value]) => value)})
+     let requestBody = {
+      ...formData,
+      domains:formData.domains.split(", "),
+      ips: formData.ips.split(", "),
+      urls: formData.urls.split(", "),
+      file_hashes: formData.file_hashes.split(", "),
+      caseid:Object.entries(caseIds).map(([key, value]) => value)
+
+     }
+     axios.put(`http://192.168.40.48:8080/api/alerts/update/${id}`, requestBody)
      .then(response => {
          onSuccess(response.data);
         //setDetailModalIsOpen(false);

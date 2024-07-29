@@ -196,14 +196,13 @@ const MainDataDisplay = ({ data, onExpand }) => {
               <span><strong>Agent id:</strong> {log.agent?.id}</span>
               <span><strong>Agent ephemeral_id:</strong> {log.agent?.ephemeral_id}</span>
               <span><strong>Agent version:</strong> {log.agent?.version}</span>
+              {/* <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span> */}
+              {/* <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span> */}
+
+              {/* 
               <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span>
               <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span>
               <span><strong>@metadata:Pipeline</strong> {log['@metadata']?.pipeline || 'No Pipeline'}</span>
-              <span><strong>@metadata:version</strong> {log['@metadata']?.version || 'No version'}</span>
-
-              {/* 
-              
-              
               <span><strong>@metadata:Beat</strong> {log['@metadata']?.beat || 'No beat'}</span>
               <span><strong>@metadata:type</strong> {log['@metadata']?.type || 'No type'}</span>
               <span><strong>@metadata:version</strong> {log['@metadata']?.version || 'No version'}</span>

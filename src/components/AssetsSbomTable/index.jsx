@@ -3,21 +3,41 @@ import styles from "./index.module.css"
 import Utils from "../../utils";
 import { useAssets } from '../../context/AssetsContext';
 import Table from '../Table/Table';
+import data from "./sbomData.json"
 const AssetsSbomTable = () => { 
 
 
 
     const {assetsList, fetchAssetsList,assetsSbomList,fetchAssetsSbomList} = useAssets();
-    
+      
+
+     
+
+   
+    function getAgentPackageInfo(data) {
+      return Object.keys(data).map(key => {
+          const agent = data[key];
+          return {
+              agent_name: agent.agent_name,
+              packageLength: agent.packages.length
+          };
+      });
+  }
+  
+
+
     useEffect(()=>{
           fetchAssetsSbomList();
     },[]);
 
     function getTableData(data) {
+
+       console.log("areqrewr",data)
+
         return {
           ...Utils.GetTableData(),
           title: `SBOM Table ${"( 150 )"}`,
-          rows: data.data?.map((item, index) => {
+          rows: data?.map((item, index) => {
             const row = {
               Id: { key: "_id", value: item._id, type: "hidden" },
               "S.No.": {
@@ -27,11 +47,11 @@ const AssetsSbomTable = () => {
               },
               "Agent Id": {
                 key: "agentId",
-                value: item.agentId,
+                value: item.agent_name,
               },
               "Value": {
                 key: "value",
-                value: item.value,
+                value: item.packageLength,
               }
 
             };
@@ -62,9 +82,9 @@ const AssetsSbomTable = () => {
           print:false,
           reset:false,
           sorting:false,
-          searchUrl: "/assetsTable.json",
-          exportDataUrl: "/assetsTable.json",
-          printUrl: "/assetsTable.json",
+          searchUrl: false,
+          exportDataUrl: false,
+          printUrl: false,
           paginationUrl: "/assetsTable.json",
           totalPage: data?.totalPages,
           totalItemCount: data?.totalItems,
@@ -77,7 +97,7 @@ const AssetsSbomTable = () => {
 
   
 
-      const tableData = React.useMemo(() => getTableData(assetsSbomList), [assetsSbomList]);
+      const tableData = React.useMemo(() => getTableData(getAgentPackageInfo(data)?.slice(0,13)), [data]);
 
   return ( <div className={styles.container}>
  <Table tableData={tableData} />
