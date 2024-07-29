@@ -41,7 +41,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
       label: user.name,
   }));
 
-  const serverityOptions = [{label:"High", value:1}, {label:"Medium", value:2}, {label:"Low", value:3}];
+  const serverityOptions = [{label:"High", value:3}, {label:"Medium", value:2}, {label:"Low", value:1}];
   const caseStateOptions = [{label:"New", value:0}, {label:"InProgress", value:1},{label:"OnHold", value:2},{label:"Closed", value:3}];
 
   const formData = useMemo(
