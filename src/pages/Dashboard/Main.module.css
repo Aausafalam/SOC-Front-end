@@ -1,12 +1,5 @@
 
 
-body {
-  background-color: var(--light-background);
-  color: var(--light-dark);
-  font-family: Arial, sans-serif;
-  transition: background-color var(--transition-time), color var(--transition-time);
-}
-
 /* Main Container */
 .Main {
   display: flex;
