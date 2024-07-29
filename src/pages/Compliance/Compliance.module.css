@@ -1,0 +1,178 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .leftPanel {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+    gap: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .field {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between label and input */
+  }
+  
+  .label {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 8px;
+  }
+  
+  .fileInput, .dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--white);
+  }
+  
+  .fileInput:focus, .dropdown:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background-color: #ffffff;
+  }
+  
+  .dropdown {
+    appearance: none;
+    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#555" d="M2 0L0 2h4z"/></svg>') no-repeat right 10px center;
+    background-size: 10px 10px;
+    background-origin: content-box;
+  }
+  
+  .dotnut_chart, .chart_container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dotnut_chart {
+    height: 250px; /* Fixed height for the doughnut chart */
+  }
+  
+  .chart_container {
+    height: 300px; /* Fixed height for the gauge chart */
+  }
+  
+  @media (max-width: 768px) {
+    .leftPanel {
+      flex-direction: column; /* Stack items vertically on small screens */
+      padding: 15px;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .leftPanel {
+      flex-direction: row; /* Align items horizontally on larger screens */
+    }
+  }
+  
+  
+  
+  .label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .rightPanel {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav {
+    width: 99%;
+    background: rgb(180, 10, 10);
+    margin: auto;
+    text-align: left;
+    margin-block: 1%;
+    border-radius: 0.6rem;
+
+  }
+  .tabs{
+    align-items: center;
+
+  background-color: var(--light-gray-color);
+  column-gap: 1.2rem;
+  display: flex;
+  flex-wrap: nowrap !important;
+  height: 4rem;
+  margin: auto;
+  overflow-x: auto;
+  padding-left: 1rem;
+
+
+  }
+  
+  .tab {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    border-radius: 1px;
+    font-family: system-ui;
+    font-size: 1.22rem;
+    margin-right: 5px;
+  }
+  
+ 
+  
+  .activeTab {
+    font-weight: 650;
+    color: black;
+    border-top: 3px solid black;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    border-radius: 1px;
+    font-family: system-ui;
+    font-size: 1.22rem;
+  }
+  
+ 
+  
+  @media (max-width: 768px) {
+    .tab {
+      font-size: 14px;
+      padding: 10px 12px;
+    }
+  
+    .table thead th,
+    .table td {
+      padding: 8px 10px;
+    }
+  }
+  
+
+  .Compliance_table table tr td {
+    /* Optional: to see the container's boundaries */
+    text-align: justify !important;
+    padding-right:2rem !important;
+
+  }
+  .Compliance_table table tr th {
+    /* Optional: to see the container's boundaries */
+    text-align: justify !important;
+    padding-right:2rem !important;
+
+  }
