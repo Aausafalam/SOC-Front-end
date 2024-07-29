@@ -46,7 +46,7 @@ const GaugeChartComponent = ({ value, title }) => {
   return (
     <ReactECharts
       option={option}
-      style={{ height: '350px', width: '100%'  }}
+      style={{  width: '70%', alignSelf:'center', margin:'0'  }}
     />
   );
 };
