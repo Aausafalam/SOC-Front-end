@@ -234,9 +234,21 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
            setCaseIdsInput(event.target.value)
       }} type="text" id="caseid" name="caseid" class="form-control" required="true"/>
       </div>
-      <button onClick={() => {setShowCaseIdPopUp(true);
-      fetchCaseList();}}>Show Case Ids</button>
+      <button onClick={() => {setShowCaseIdPopUp(!showCaseIdPopUp);
+      fetchCaseList();}}>{showCaseIdPopUp ? "Hide" : "Show"} Case Ids</button>
     </div>
+
+    {
+      showCaseIdPopUp && 
+      <div>
+            <Table tableData={tableData} />
+     <button type='button' className={styles.save_button} onClick={() => {
+        setCaseIdsInput(Object.entries(caseIds).map(([key, value]) => value).join(","));
+         togglePopup();
+     }}>Save</button>
+      </div>
+     }
+
 
     <DynamicForm
         formData={formData}
@@ -244,13 +256,18 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
         onSubmit={handleSubmit}
       />
      
-     <Popup  width="70%" show={showCaseIdPopUp} onClose={togglePopup} title={`Case Id List`}>
-     <Table tableData={tableData} />
+     {/* <Popup  width="70%" show={showCaseIdPopUp} onClose={togglePopup} title={`Case Id List`}> */}
+     {/* {
+      showCaseIdPopUp && 
+      <div>
+            <Table tableData={tableData} />
      <button type='button' className={styles.save_button} onClick={() => {
         setCaseIdsInput(Object.entries(caseIds).map(([key, value]) => value).join(","));
          togglePopup();
      }}>Save</button>
-     </Popup>
+      </div>
+     } */}
+     {/* </Popup> */}
      
      
 
