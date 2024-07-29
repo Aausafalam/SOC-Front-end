@@ -1,0 +1,72 @@
+/* Popup.css */
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+/* Modal Content */
+.modal-content {
+  background: var(--white);
+  border-radius: 0.3rem;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 500px;
+  z-index: 1051;
+  position: relative;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  padding-inline: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 1.4rem;
+}
+
+.modal-title {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Modal Body */
+.modal-body {
+  position: relative;
+  padding: 1rem;
+  padding-bottom: 0px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.modal-close-icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+}

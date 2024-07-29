@@ -10,14 +10,16 @@ const AsstesTable = () => {
     const {assetsList, fetchAssetsList} = useAssets();
     
     useEffect(()=>{
-        // fetchAssetsList();
+         fetchAssetsList();
     },[]);
 
     function getTableData(data) {
+
+        console.log(data)
         return {
           ...Utils.GetTableData(),
           title: "Assets Table",
-          rows: data?.map((item, index) => {
+          rows: data?.data?.map((item, index) => {
             const row = {
               Id: { key: "_id", value: item._id, type: "hidden" },
               "S.No.": {
@@ -29,7 +31,7 @@ const AsstesTable = () => {
                 key: "inventoryId",
                 value: item.inventoryId,
               },
-              "asset Type": {
+              "Asset Type": {
                 key: "assetTypeName",
                 value: Utils.capitalizeEachWord(item.assetTypeName),
               },
@@ -37,7 +39,7 @@ const AsstesTable = () => {
                 key: "custodianName",
                 value: Utils.capitalizeEachWord(item.custodianName),
               },
-              "Asstes Status": {
+              "Asset Status": {
                 key: "statusName",
                 value: Utils.capitalizeEachWord(item.statusName),
               },
@@ -75,10 +77,10 @@ const AsstesTable = () => {
           searchUrl: "/assetsTable.json",
           exportDataUrl: "/assetsTable.json",
           printUrl: "/assetsTable.json",
-          paginationUrl: "/assetsTable.json",
-          totalPage: data?.totalPages,
-          totalItemCount: data?.totalItems,
-          autoSuggestionUrl: "/assetsTable.json",
+          paginationUrl: "https://backend.assets.k8.c3ihub/assetList?page=input&limit=count",
+          totalPage: data?.pagination?.totalPages,
+          totalItemCount: data?.pagination?.totalItems,
+          // autoSuggestionUrl: "/assetsTable.json",
           initialSort: "inventoryId",
           getTableData: getTableData,
         };

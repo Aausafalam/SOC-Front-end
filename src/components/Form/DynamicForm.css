@@ -1,0 +1,21 @@
+.add-row svg{
+    width:15px;
+}
+
+.add-row{
+    padding: 0.6rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #d9ffda;
+    padding-inline: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.5rem;
+    margin-left: auto;
+    margin-right:3rem;
+    font-size: 0.9rem;
+}
+

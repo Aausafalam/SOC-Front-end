@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ChartComponent from '../Chart';
 import { ICON } from '../../utils/icon';
 
-const AssestStatusCountChart = () => {
+const AssestStatusCountChart = ({initialData}) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const roles = [
@@ -46,14 +46,45 @@ const AssestStatusCountChart = () => {
             };
         }
     };
+     
+    function transformInventoryData(inventoryAssetTypeCounts) {
+        const labels = Object.keys(inventoryAssetTypeCounts);
+        const data = Object.values(inventoryAssetTypeCounts);
+    
+        return {
+            labels: labels,
+            datasets: [{
+                label: 'Assets Counts',
+                // backgroundColor: ['blue', 'red', 'orange', 'green', 'purple'],
+                data: data,
+            }]
+        };
+    }
+    
 
     useEffect(() => {
         (async () => {
-            const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
-            setData(initialData);
+            //  const initialData = await fetchDataInitially("http://172.29.26.147:3001/inventory/dashboard", "your-token-here");
+            initialData &&  setData(transformInventoryData({
+                "Agent Installed" : initialData?.agentInstalled || 0,
+                "Vulnerable" : initialData?.vulnerable || 0,
+                "Verified" : initialData?.audited || 0,
+                "Warranty Expired" : initialData?.warrantyExpired || 0,
+                "Licence Expired": initialData?.licenceExpired || 0,
+                "High Risk": initialData?.criticalApplications || 0
+              }));
             setLoading(false);
         })();
-    }, []);
+    }, [initialData]);
+
+    // const datas = {
+    //   "Agent Installed" : initialData?.agentInstalled || 0,
+    //   "Vulnerable" : initialData?.vulnerable || 0,
+    //   "Verified" : initialData?.audited || 0,
+    //   "Warranty Expired" : initialData?.warrantyExpired || 0,
+    //   "Licence Expired": initialData?.licenceExpired || 0,
+    //   "High Risk": initialData?.criticalApplications || 0
+    // }
 
     return (
         <div>

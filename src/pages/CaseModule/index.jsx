@@ -1,149 +1,154 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useCase } from "../../context/CaseContext";
 import Utils from "../../utils";
 import Table from "../../components/Table/Table";
 import Styles from "./styles/case.module.css";
-import { ICON } from "../../utils/icon";
-import Card from "./components/Card";
-import CaseCountChart from "../../components/CaseCountChart";
+import Popup from "../../components/Popup/Popup";
+import SeverityCountChart from "./components/Charts/SeverityCountChart";
+import CaseStatsCards from "./components/CaseStatsCards";
+import CaseStateChart from "./components/Charts/CaseStateChart";
+import { constants } from "../../utils/constants";
+import CaseTabForm from "./components/CaseTabForm";
 
 const Case = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedCase, setSelectedCase] = useState(null);
   const { caseList, fetchCaseList } = useCase();
 
   useEffect(() => {
     fetchCaseList();
   }, []);
 
+  const togglePopup = () => setShowPopup(prev => !prev);
+
   const getStatusBadgeClass = (status) => {
-    switch (status.toLowerCase()) {
-      case "new":
-        return "badge-violet";
-      case "inprogress":
-        return "badge-green";
-      case "onhold":
-        return "badge-orange";
-      case "closed":
-        return "badge-red";
+    const statusMap = {
+      new: "badge-violet",
+      inprogress: "badge-green",
+      onhold: "badge-orange",
+      closed: "badge-red"
+    };
+    return statusMap[status.toLowerCase()] || "";
+  };
+
+  const getSeverity = (severity) => {
+    const severityMap = {
+      1: "critical",
+      2: "high",
+      3: "medium",
+      4: "low"
+    };
+    return severityMap[severity] || "NA";
+  };
+
+  const handleEditCaseDetails = (id, data, type) => {
+    const caseData = data[0]?.find((item) => item.id === id);
+    if (caseData) {
+      setSelectedCase({ ...caseData, type });
+      togglePopup();
     }
   };
 
-  function getTableData(data) {
+  const handleSuccess = () => {
+    togglePopup();
+    fetchCaseList();
+  };
+
+  const [filterOptions, setFilterOptions] = useState({
+    radioButtons: [
+      { label: "Option 1", value: "14" },
+      { label: "Option 2", value: "11" },
+    ],
+    selectBox: [
+      { label: "Select 1", value: "13" },
+      { label: "Select 2", value: "8" },
+    ],
+  });
+
+  const getTableData = (data) => {
     return {
       ...Utils.GetTableData(),
       title: "All Cases",
-      rows: data?.map((item, index) => {
-        const row = {
-          Id: { key: "_id", value: item._id, type: "hidden" },
-          "S.No.": {
-            key: "S.No.",
-            value: index + 1,
-            removeFromAutoSuggestion: true,
-          },
-          "Case ID": {
-            key: "caseId",
-            value: Utils.capitalizeEachWord(item.caseId),
-          },
-          Title: {
-            key: "title",
-            value: Utils.capitalizeEachWord(item.title),
-          },
-          "Start Date": {
-            key: "startDate",
-            value: Utils.getFormatedDate(item.startDate),
-          },
-          "Updated At": {
-            key: "updatedAt",
-            value: Utils.getFormatedDate(item.updatedAt),
-          },
-        };
+      rows: data[0]?.map((item, index) => {
+        const severity = getSeverity(item.severity);
+        const severityClass = `badge-${severity}`;
+        const statusClass = getStatusBadgeClass(item.caseStateName);
 
-        const severityClass = `badge-${item.severity.toLowerCase()}`;
-        row["Severity"] = {
-          key: "severity",
-          value: (
-            <span className={severityClass}>
-              {Utils.capitalizeEachWord(item.severity)}
-            </span>
-          ),
-          originalValue: item.severity,
+        return {
+          Id: { key: "id", value: item.id, type: "hidden" },
+          "S.No.": { key: "S.No.", value: index + 1, removeFromAutoSuggestion: true },
+          "Case ID": { key: "id", value: item.id },
+          Title: { key: "title", value: Utils.capitalizeEachWord(item.title) },
+          "Created At": { key: "createdAt", value: Utils.getFormatedDate(item.createdAt) },
+          "Updated At": { key: "updatedAt", value: Utils.getFormatedDate(item.updatedAt) },
+          Severity: {
+            key: "severity",
+            value: <span className={severityClass}>{Utils.capitalizeEachWord(severity)}</span>,
+            originalValue: severity
+          },
+          "Case State": {
+            key: "caseStateName",
+            value: <span className={statusClass}>{Utils.capitalizeEachWord(item.caseStateName)}</span>,
+            originalValue: item.caseStateName
+          }
         };
-
-        const statusClass = `${getStatusBadgeClass(item.status)}`;
-        row["Status"] = {
-          key: "status",
-          value: (
-            <span className={statusClass}>
-              {Utils.capitalizeEachWord(item.status)}
-            </span>
-          ),
-          originalValue: item.status,
-        };
-
-        return row;
       }),
       actionData: [
         {
           name: "Open",
-          functions: (index) => {
-            // handleEditNotice(index, data);
-          },
+          functions: (index) => handleEditCaseDetails(index, data),
           label: "Open",
-          Id: "Id",
+          Id: "Id"
         },
         {
           name: "delete",
-          functions: (index) => {
-            // deleteNotice(index, data);
-          },
+          functions: (index) => { /* deleteNotice(index, data); */ },
           label: "Remove",
-          Id: "Id",
+          Id: "Id"
         },
         {
           name: "Alert",
-          functions: (index) => {
-            // deleteNotice(index, data);
-          },
+          functions: (index) => { /* deleteNotice(index, data); */ },
           label: "Open Alerts",
-          Id: "Id",
+          Id: "Id"
         },
         {
           name: "Close",
-          functions: (index) => {
-            // deleteNotice(index, data);
-          },
+          functions: (index) => { /* deleteNotice(index, data); */ },
           label: "Close",
-          Id: "Id",
-        },
+          Id: "Id"
+        }
       ],
       action: true,
-      searchUrl: "/caseData.json",
-      exportDataUrl: "/caseData.json",
-      printUrl: "/caseData.json",
-      paginationUrl: "/caseData.json",
-      totalPage: data?.totalPages,
-      totalItemCount: data?.totalDocuments,
-      autoSuggestionUrl: "/caseData.json",
+      searchUrl: constants.API_URLS.SEARCH_CASE,
+      exportDataUrl: false,
+      printUrl: false,
+      paginationUrl: constants.API_URLS.PAGINATE_CASE,
+      totalPage: parseInt(data[1]?.totalRecords/data[1]?.limit),
+      totalItemCount: data[1]?.totalRecords,
+      // autoSuggestionUrl: "/caseData.json",
       initialSort: "severity",
-      getTableData: getTableData,
+      getTableData: getTableData
     };
-  }
+  };
 
   const tableData = React.useMemo(() => getTableData(caseList), [caseList]);
 
   return (
     <div>
       <div className={Styles.main_container}>
-        <div className={Styles.case_overview_container}>
-          <Card label="Without Case Id Alerts" count={20} icon={ICON.ALERT} />
-          <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
-          <Card label="Closed" count={60} icon={ICON.CLOSED} />
-          <Card label="Pending Cases" count={150} icon={ICON.PENDING} />
-        </div>
-        <div className={Styles.case_chart_container} >
-          <CaseCountChart/>
+        <CaseStatsCards />
+        <div className={Styles.case_chart_container}>
+          <div><SeverityCountChart /></div>
+          <div><CaseStateChart /></div>
         </div>
       </div>
-      <Table tableData={tableData} />
+      <div style={{ marginTop: "1rem" }}>
+        <Table tableData={tableData} filterOptions={filterOptions} />
+      </div>
+      <Popup width="70%" show={showPopup} onClose={togglePopup} title={`Edit- Case Id: #${selectedCase?.id}`}>
+        <CaseTabForm data={selectedCase} onSuccess={handleSuccess} onCancel={togglePopup} />
+      </Popup>
     </div>
   );
 };

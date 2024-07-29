@@ -49,3 +49,28 @@
     font-size: 1.2rem;
     color: var(--text-color);
 }
+
+@media screen and (max-width: 1250px) {
+    .body {
+        grid-template-columns: repeat(2, 1fr);
+    } 
+    .assets_table {
+        grid-column: span 2;
+    }
+    .assets_status_count_chart
+    {
+        grid-column: span 1;
+    }
+}
+@media screen and (max-width: 750px) {
+    .body {
+        grid-template-columns: repeat(1, 1fr);
+    } 
+    .assets_table {
+        grid-column: span 1;
+    }
+    .assets_status_count_chart
+    {
+        grid-column: span 1;
+    }
+}
