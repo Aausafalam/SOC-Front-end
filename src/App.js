@@ -6,6 +6,7 @@ import AssetsManagementModule from "./pages/AssetsManagementModule";
 import Layout from "./layout";
 import VulnerabilitiesModule from "./pages/VulnerabilitiesModule";
 import Alert from "./pages/Alert";
+import Main from "./pages/Dashboard/Main";
 const Case = React.lazy(() => import("./pages/CaseModule"));
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
           <Route path="/assetsmanagement" element={<React.Suspense fallback={<Loader/>}><AssetsManagementModule /></React.Suspense>} />
           <Route path="/vulnerability" element={<React.Suspense fallback={<Loader/>}><VulnerabilitiesModule /></React.Suspense>} />
           <Route path="/alerts" element={<React.Suspense fallback={<Loader/>}><Alert /></React.Suspense>} />
+          <Route path="/histogram" element={<React.Suspense fallback={<Loader/>}><Main /></React.Suspense>} />
+          
     </Routes>
     </Layout>
     
