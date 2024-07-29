@@ -1,0 +1,5 @@
+.echarts-for-react {
+  height: 200vh !important;
+  /* max-height: 780px; */
+  overflow: hidden;
+}

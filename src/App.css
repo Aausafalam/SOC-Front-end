@@ -242,9 +242,11 @@ input[type="checkbox"]:focus-visible {
 }
 
 input[type="checkbox"] {
-  -webkit-appearance: none !important;
-  appearance: none !important;
-  outline: none !important;
+  /* -webkit-appearance: none !important; */
+  /* appearance: none !important;
+  outline: none !important; */
+  /* transform: scale(6); */
+  background-color: white !important;
 }
 
 label {

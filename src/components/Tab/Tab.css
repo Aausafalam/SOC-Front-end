@@ -1,0 +1,52 @@
+.tab_labels h3.active,
+.tab_labels h3.active:hover {
+  background: var(--primary-color);
+  border-radius: inherit;
+  color: white;
+  font-weight: 600;
+}
+
+.tab_labels h3:hover {
+  background: #f486341a;
+  border-radius: inherit;
+}
+
+.tab_labels {
+  /* width: 100%; */
+  width: fit-content;
+  /* margin: auto; */
+  background: #fafafa;
+  border-radius: 5px;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+  color: black;
+}
+
+.tab_labels h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+  height: 90%;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab_content {
+  margin-top: 1rem;
+}
+
+.tab_wrapper {
+  width: 100%;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}

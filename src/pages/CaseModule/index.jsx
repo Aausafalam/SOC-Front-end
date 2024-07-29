@@ -3,15 +3,18 @@ import { useCase } from "../../context/CaseContext";
 import Utils from "../../utils";
 import Table from "../../components/Table/Table";
 import Styles from "./styles/case.module.css";
-import Card from "./components/Card";
 import Popup from "../../components/Popup/Popup";
-import CaseForm from "./components/CaseForm";
 import SeverityCountChart from "./components/Charts/SeverityCountChart";
 import CaseStatsCards from "./components/CaseStatsCards";
 import CaseStateChart from "./components/Charts/CaseStateChart";
+import { constants } from "../../utils/constants";
+import CaseTabForm from "./components/CaseTabForm";
+import { ICON } from "../../utils/icon";
+import CaseForm from "./components/CaseForm";
 
 const Case = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [showAddCasePopup, setShowAddCasePopup] = useState(false);
   const [selectedCase, setSelectedCase] = useState(null);
   const { caseList, fetchCaseList } = useCase();
 
@@ -20,6 +23,7 @@ const Case = () => {
   }, []);
 
   const togglePopup = () => setShowPopup(prev => !prev);
+  const toggleAddCasePopup = () => setShowAddCasePopup(prev => !prev);
 
   const getStatusBadgeClass = (status) => {
     const statusMap = {
@@ -42,23 +46,47 @@ const Case = () => {
   };
 
   const handleEditCaseDetails = (id, data, type) => {
-    const caseData = data?.result?.find((item) => item.id === id);
+    const caseData = data[0]?.find((item) => item.id === id);
     if (caseData) {
       setSelectedCase({ ...caseData, type });
       togglePopup();
     }
   };
 
-  const handleSuccess = () => {
-    togglePopup();
-    fetchCaseList();
+  const handleSuccess = async (type="add") => {
+    if(type=="add"){
+      toggleAddCasePopup();
+    }else{
+      togglePopup();
+    }
+    await fetchCaseList();
   };
+
+  const [filterOptions, setFilterOptions] = useState({
+    radioButtons: {
+      key : "severity",
+      data : [
+        { label: "High", value: "3" },
+        { label: "Medium", value: "2" },
+        { label: "Low", value: "1" },
+      ]
+    },
+    selectBox: {
+      key:"caseState",
+      data:[
+        { label: "New", value: "0" },
+        { label: "InProgress", value: "1" },
+        { label: "OnHold", value: "2" },
+        { label: "Closed", value: "3" },
+      ],
+    }
+  });
 
   const getTableData = (data) => {
     return {
       ...Utils.GetTableData(),
-      title: "All Cases",
-      rows: data?.result?.map((item, index) => {
+      title: (<button className="btn-green" onClick={toggleAddCasePopup}>{ICON.PLUS}Create Case</button>),
+      rows: data[0]?.map((item, index) => {
         const severity = getSeverity(item.severity);
         const severityClass = `badge-${severity}`;
         const statusClass = getStatusBadgeClass(item.caseStateName);
@@ -89,39 +117,21 @@ const Case = () => {
           label: "Open",
           Id: "Id"
         },
-        {
-          name: "delete",
-          functions: (index) => { /* deleteNotice(index, data); */ },
-          label: "Remove",
-          Id: "Id"
-        },
-        {
-          name: "Alert",
-          functions: (index) => { /* deleteNotice(index, data); */ },
-          label: "Open Alerts",
-          Id: "Id"
-        },
-        {
-          name: "Close",
-          functions: (index) => { /* deleteNotice(index, data); */ },
-          label: "Close",
-          Id: "Id"
-        }
       ],
       action: true,
-      searchUrl: "/caseData.json",
-      exportDataUrl: "/caseData.json",
-      printUrl: "/caseData.json",
-      paginationUrl: "/caseData.json",
-      totalPage: data?.totalPages,
-      totalItemCount: data?.totalDocuments,
-      autoSuggestionUrl: "/caseData.json",
+      searchUrl: constants.API_URLS.SEARCH_CASE,
+      exportDataUrl: false,
+      printUrl: false,
+      paginationUrl: constants.API_URLS.PAGINATE_CASE,
+      totalPage: parseInt(data[1]?.totalRecords/data[1]?.limit),
+      totalItemCount: data[1]?.totalRecords,
+      // autoSuggestionUrl: "/caseData.json",
       initialSort: "severity",
       getTableData: getTableData
     };
   };
 
-  const tableData = React.useMemo(() => getTableData(caseList), [caseList]);
+  const tableData = React.useMemo(() => getTableData(caseList), [caseList, toggleAddCasePopup]);
 
   return (
     <div>
@@ -133,10 +143,15 @@ const Case = () => {
         </div>
       </div>
       <div style={{ marginTop: "1rem" }}>
-        <Table tableData={tableData} />
+        <Table tableData={tableData} filterOptions={filterOptions} />
       </div>
+
+      <Popup width="70%" show={showAddCasePopup} onClose={toggleAddCasePopup} title="Add Case">
+        <CaseForm onSuccess={()=>handleSuccess("add")} onCancel={toggleAddCasePopup} /> 
+      </Popup>
+
       <Popup width="70%" show={showPopup} onClose={togglePopup} title={`Edit- Case Id: #${selectedCase?.id}`}>
-        <CaseForm data={selectedCase} onSuccess={handleSuccess} onCancel={togglePopup} />
+        <CaseTabForm data={selectedCase} onSuccess={()=>handleSuccess("edit")} onCancel={togglePopup} />
       </Popup>
     </div>
   );

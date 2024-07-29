@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import DynamicForm from "../../../components/Form/DynamicForm";
 import { ICON } from "../../../utils/icon";
+import { useCase } from "../../../context/CaseContext";
+import { useUser } from "../../../context/UserContext";
 
 const CaseForm = ({ data, onSuccess, onCancel }) => {
+  const {handleEditCase, handleAddCase } = useCase();
+  const {UserList, fetchUserList} = useUser();
+
+  useEffect(()=>{
+    fetchUserList();
+  },[]);
+
   const handleSubmit = async (formData) => {
     if (data) {
-      //edit
-    } else {
-        //add
+      handleEditCase(data?.id, formData);
+    }else{
+      handleAddCase(formData);
     }
     onSuccess();
   };
@@ -27,11 +36,16 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
     },
   ];
 
-  const userOptions = [{label:"User1", value:1}, {label:"User2", value:2}, {label:"User3", value:3}];
-  const serverityOptions = [{label:"High", value:1}, {label:"Medium", value:2}, {label:"Low", value:3}];
-  const caseStateOptions = [{label:"New", value:1}, {label:"InProgress", value:2}, {label:"Closed", value:3},{label:"OnHold", value:4}];
+  const userOptions = UserList && UserList?.map((user) => ({
+      value: user.id,
+      label: user.name,
+  }));
 
-  const formData = [
+  const serverityOptions = [{label:"High", value:3}, {label:"Medium", value:2}, {label:"Low", value:1}];
+  const caseStateOptions = [{label:"New", value:0}, {label:"InProgress", value:1},{label:"OnHold", value:2},{label:"Closed", value:3}];
+
+  const formData = useMemo(
+    () =>[
     {
       type: "text",
       name: "title",
@@ -58,7 +72,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
       },
     {
         type: "select",
-        name: "serverity",
+        name: "severity",
         label: "Severity",
         grid: 4,
         required: true,
@@ -81,7 +95,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 2,
         required: true,
         options: userOptions,
-        defaultValue: data?.assignedTo,
+        defaultValue: data?.assignedTo?.id,
     },
     {
       type: "textarea",
@@ -115,7 +129,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         style: {input:{ height: "100px" }},
         defaultValue: data?.learning,
       },
-  ];
+  ],[data, userOptions, caseStateOptions, serverityOptions]);
 
   return (
     <div>

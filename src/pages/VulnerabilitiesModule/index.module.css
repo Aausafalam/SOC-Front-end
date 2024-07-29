@@ -12,9 +12,78 @@
     /* gap: 1rem; */
 }
 
-.body>div {
+.vulnerability_stats>div {
+    background-color: var(--white);
+    border-radius: 1rem;
+    border: 1px solid var(--border-box);
+    padding: 0.8rem;
+}
+
+
+
+.vulnerability_stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.vulnerability_count {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+
+.assets_table {
     background-color: var(--white);
     border-radius: 1rem;
     padding: 1rem;
     border: 1px solid var(--border-box);
+}
+
+.tab {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e1e1e1;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    margin-bottom: 0.7rem;
+}
+
+.tab h2 {
+    border-radius: 1.5rem;
+    font-size: 1.1rem;
+    padding-block: 0.4rem;
+    text-align: center;
+
+    border-radius: 1.5rem;
+    padding-inline: 1.5rem;
+    cursor: pointer;
+}
+
+.tab h2.active {
+    background-color: #253db6;
+    color: white;
+}
+
+.vulnerability_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vulnerability_header>div button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.8rem;
+    outline: none;
+    border: none;
+    border-radius: 0.37rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.1s all;
+    background-color: #4361ee;
 }

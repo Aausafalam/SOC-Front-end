@@ -6,7 +6,7 @@ import { useCase } from '../../../../context/CaseContext';
 
 const SeverityCountChart = () => {
     const [loading, setLoading] = useState(false);
-    const {caseDashboardData, fetchCaseDashboardData} = useCase();
+    const {caseServerityChartData, fetchCaseSevertityChartData} = useCase();
     // const caseDashboardData = [
     //     {
     //         name:"severity1",
@@ -39,17 +39,17 @@ const SeverityCountChart = () => {
 
     useEffect(() => {
         (async () => {
-            await fetchCaseDashboardData();
+            await fetchCaseSevertityChartData();
             setLoading(false);
         })();
     }, []);
 
     return (
         <div>
-            {loading ? <span className="chart-loading">{ICON.LOADING}</span>: caseDashboardData && (
+            {loading ? <span className="chart-loading">{ICON.LOADING}</span>: caseServerityChartData && (
                 <ChartComponent
                     type="doughnut"
-                    data={transformInventoryData(caseDashboardData)}
+                    data={transformInventoryData(caseServerityChartData)}
                     options={{
                         responsive: true,
                         plugins: {

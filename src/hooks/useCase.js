@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useLoader } from "../context/LoaderContext";
-import { getCaseDashboardData, getCaseList } from "../api/case";
+import { addCase, editCase, getCaseDashboardData, getCaseDetail, getCaseList, getCaseMatrix, getCaseServerityChart } from "../api/case";
+import { notifySuccess } from "../utils/toastUtil";
 
 export const useCaseList = () => {
     const [caseList, setCaseList] = useState([]);
@@ -24,24 +25,108 @@ export const useCaseList = () => {
     return { caseList, fetchCaseList };
 };
 
-export const useCaseDashboardData = () => {
-    const [caseDashboardData, setCaseDashboardData] = useState([]);
+export const useCaseSeverityChartData = () => {
+    const [caseServerityChartData, setCaseServerityChartData] = useState([]);
     const {showLoader, hideLoader} = useLoader();
 
-    const fetchCaseDashboardData = useCallback(async () => {
+    const fetchCaseSevertityChartData = useCallback(async () => {
         const controller = new AbortController();
         showLoader();
         try {
-            const list = await getCaseDashboardData(controller.signal);
-            setCaseDashboardData(list);
+            const list = await getCaseServerityChart(controller.signal);
+            setCaseServerityChartData(list);
         } catch (error) {
-            setCaseDashboardData([]);
-            console.error("Error fetching Case Dashboard data:", error);
+            setCaseServerityChartData([]);
+            console.error("Error fetching Case Severity Chart data:", error);
         } finally {
             hideLoader();
         }
         return () => controller.abort();
     }, [showLoader, hideLoader]);
 
-    return { caseDashboardData, fetchCaseDashboardData };
+    return { caseServerityChartData, fetchCaseSevertityChartData };
 }
+
+export const useCaseMatricesData = () => {
+    const [caseMatrixData, setCaseMatrixData] = useState([]);
+    const {showLoader, hideLoader} = useLoader();
+
+    const fetchCaseMatricesData = useCallback(async () => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const list = await getCaseMatrix(controller.signal);
+            setCaseMatrixData(list);
+        } catch (error) {
+            setCaseMatrixData([]);
+            console.error("Error fetching Case Matrices data:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return { caseMatrixData, fetchCaseMatricesData };
+}
+
+export const useGetCaseDetail = () => {
+    const [caseDetail, setCaseDetail] = useState([]);
+    const {showLoader, hideLoader} = useLoader();
+
+    const fetchCaseDetail = useCallback(async (id) => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const list = await getCaseDetail(id, controller.signal);
+            setCaseDetail(list);
+        } catch (error) {
+            setCaseDetail([]);
+            console.error("Error fetching Case detail data:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return { caseDetail, fetchCaseDetail };
+}
+
+export const useEditCase = () => {
+    const {showLoader, hideLoader} = useLoader();
+ 
+    const handleEditCase = useCallback(async (id, payload) => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const data = await editCase(id, payload,controller.signal);
+            notifySuccess(data.message);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return {handleEditCase};
+};
+
+export const useAddCase = () => {
+    const {showLoader, hideLoader} = useLoader();
+ 
+    const handleAddCase = useCallback(async (payload) => {
+        const controller = new AbortController();
+        showLoader();
+        try {
+            const data = await addCase(payload,controller.signal);
+            notifySuccess(data.message);
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            hideLoader();
+        }
+        return () => controller.abort();
+    }, [showLoader, hideLoader]);
+
+    return {handleAddCase};
+};

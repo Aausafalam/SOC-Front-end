@@ -70,6 +70,7 @@ class Utils {
     };
 
     static appendTokenToUrl = (url, token) => {
+      if(!url) return null;
       const hasQueryParams = url.includes('?');
       return `${url}${hasQueryParams ? '&' : '?'}token=${token}`;
     }
@@ -86,6 +87,28 @@ class Utils {
       const parts = dateString.split("-");
       return `${parts[2]}-${parts[0]}-${parts[1]}`;
     };
+
+    static renderJson = (json) => {
+      const formatJson = (obj) => {
+        return Object.entries(obj).map(([key, value]) => {
+          const isObject = value && typeof value === 'object';
+          return (
+            <div key={key} style={{ marginBottom: '10px' }}>
+              <span style={{ color: '#ff9800', fontWeight: 'bold' }}>{key}: </span>
+              {isObject ? (
+                <div style={{ paddingLeft: '20px' }}>
+                  {formatJson(value)}
+                </div>
+              ) : (
+                <span style={{ color: '#4caf50' }}>{JSON.stringify(value)}</span>
+              )}
+            </div>
+          );
+        });
+      };
+  
+      return formatJson(json);
+    };
 }
 
-module.exports = Utils;
+export default Utils;

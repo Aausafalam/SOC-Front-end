@@ -9,6 +9,9 @@ import { AssetsProvider } from "./context/AssetsContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { VulnerabilityProvider } from "./context/VulnerabilityContext";
 import { AlertProvider } from "./context/AlertContext";
+import { ConfigurationProvider } from "./context/AlertContext copy";
+import { UserProvider } from "./context/UserContext";
+import { ComplianceProvider } from "./context/ComplianceContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,7 +22,13 @@ root.render(
           <AssetsProvider>
             <VulnerabilityProvider>
            <AlertProvider>
-           <App />
+            <ConfigurationProvider>
+            <UserProvider>
+            <ComplianceProvider>
+            <App />
+            </ComplianceProvider>
+            </UserProvider>
+            </ConfigurationProvider>
            </AlertProvider>
             </VulnerabilityProvider>
           </AssetsProvider>

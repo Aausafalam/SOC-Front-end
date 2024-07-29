@@ -1,12 +1,12 @@
 .main_container{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   gap:1rem;
 }
 .case_overview_container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
     border-radius: 10px;
     padding: 0px;
@@ -17,8 +17,9 @@
 
   .case_chart_container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap:1rem;
+    grid-column: span 2;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -26,7 +27,10 @@
     width: 100%;
     text-align: center;
   }
-
+  .case_chart_container>div:nth-child(2)
+  {
+    grid-column: span 2;
+  }
   .case_chart_container>div{
     background-color: var(--white);
     padding:1rem;
@@ -54,13 +58,28 @@
     }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 900px) {
+    .case_chart_container{
+      grid-column: span 1;
+    }
+    .case_chart_container>div:nth-child(1)
+    {
+      grid-column: span 3;
+    }
+    .case_chart_container>div:nth-child(2)
+    {
+      grid-column: span 3;
+    }
+  }
+
+  @media (max-width: 840px) {
     .case_overview_container {
       grid-template-columns: 1fr;
     }
     .case_chart_container{
       max-width: 100%;
       margin-inline:0px;
+      grid-column: span 1;
     }
   }
 
@@ -115,3 +134,88 @@
    width:100px;
    height: 100px;
   }
+
+  .alert_details_view
+  {
+    height: 100%;
+    max-height: 800px;
+  }
+  .alert_details_view tbody td
+  {
+   word-break: break-all;
+  }
+  .alert_details_view tbody td:first-of-type
+  {
+    text-transform: capitalize;
+  }
+
+
+  /* Container styling */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding:1rem;
+}
+
+/* Alert container styling */
+.alertContainer {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Accordion button styling */
+.accordionButton {
+  background: #f4f4f4;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Icon styling */
+.icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Accordion content styling */
+.accordionContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 1rem;
+}
+.show {
+  max-height: 50vh; 
+  overflow: auto;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 1rem;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background: #f4f4f4;
+}
+
+.valueCell {
+  color: #F48634;
+}

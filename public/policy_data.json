@@ -1,0 +1,170 @@
+[
+    {
+        "section(CERT-In)":"13. Vulnerability and \npatch management\n13.2 Threat Assessment",
+        "policy(CERT-In)":"The organisation must identify the possible threat vectors, exploitation points, tools\nand techniques, which can compromise the security of the organisation.",
+        "similarity_score":0.6771662235,
+        "section(MbPA-CCMP)":"2.Nature of Cyber\n crisis and contingencies\nTable 2.1 cyber crisis\npossible targets and \nimpacts.",
+        "policy(MbPA-CCMP)":"Table 2.1 provides a snapshot of nature of cyber security incidents that can trigger a\ncrisis at individual\/organization, multiple organizations or state level",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"14. Security Monitoring and Incident Management",
+        "policy(CERT-In)":"Organisation should create a dedicated cyber security team under the leadership of\ndedicated CISO.This cyber security team shall directly report to the senior management of the organisation.\n",
+        "similarity_score":0.7400966883,
+        "section(MbPA-CCMP)":"3. Incident Prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautionary measures\nNomination of Chief Information Security \nOfficer.",
+        "policy(MbPA-CCMP)":"Shri V B S V RAO, is Nominated Chief \nInformation Security Officers to coordinate\n the security related issues\/implementation \nwithin the organization as well as coordination\n and interface with CERT-In, NCIIPC for \nCritical Information Infrastructure and Ministry \nof Shipping. ",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"3.Policy Measures",
+        "policy(CERT-In)":"Formulate security policies and procedures\n for building cyber resiliency. Prepare, test\nand implement Business Continuity Plan (BCP)\n and Disaster Recovery (DR) plan.",
+        "similarity_score":0.7490831614,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\n measures\nBusiness Continuity Plan(BCP)\nDisaster Continuity Plan(DRP)",
+        "policy(MbPA-CCMP)":"IT Contingency Plan (Business Continuity Plan)\nto counteract interruptions to business\noperations\/activities and protect critical \noperations\/business processes from effect\nof major disaster is developed.\nA Business Continuity and Disaster Recovery plan has been established by MbPT. This document defines the policy and the recovery requirements. Recovery procedures for applications have been defined in the BCP Plan along with the total time that would be taken execute the recovery procedures.Requirement to conduct BCP testing has been defined in the BCP Plan. In need to validate the plan, BCP tests\/drill shall be conducted. The BCP and DRP document is under review and shall be implemented",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"4.Network and Infrastructure Security\n4.1 Key Principles and Measures\n4.3 Network Diagram",
+        "policy(CERT-In)":"Define an appropriate network architecture \nincluding the network perimeter, any\ninternal networks, and links with other organisations \nsuch as service providers or partners. Manage\n the network perimeter by controlled access \nto ports, protocols and applications by filtering \nand inspecting all traffic at the network perimeter \nto ensure that only traffic which is required to\nsupport the business is being exchanged. Control\nand manage all inbound and outbound network\nconnections and deploy technical\ncontrols to scan for malicious content.\n4.1.2 Network should be properly segmented, with separate VLANs for different functional\nrequirements. \n4.3.1 The organisation shall develop an accurate mapping of the core components,\nconnections and information of the network to build organisation\u2019s network diagram\nincluding network components such as routers, switches, firewall and other Perimeter Security devices, computer systems, IP addresses, data flow routes, blacklisted or\nwhite listed systems\/IP addresses, open\/entry ports, subnet mask, administrative\ninterface, zones, access control lists, network name etc. Organisation must store this\ndocument in confidential manner as this contains sensitive information.",
+        "similarity_score":0.5480167866,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity of Information Infrastructure and Network.\n",
+        "policy(MbPA-CCMP)":"The core IT infrastructure and network \nInfrastructure is hosted at Server room in\n Ambedkar Bhavan which is managed by the EDP department. The servers are hosted at Ambedkar Bhavan, Applications such as VTMS and CCTV are hosted at BPX and Yantra Bhavan respectively with separate network. A backup network at Critical Locations is also in place through RF Link.The users of these IT services are spread across various locations within Mumbai Port area such as NirmanBhavan, YantraBhavan, Hamallage Bhavan, etc. as well outside the port area such as Pirpau, Wadala, JNPT, etc. The port is connected through 48 core fibre optic cable star network backbone with 1 Gbps capacity. Core L3 switch hosted at Data Centre Ambedkarbhavan is at the center of the star network from where connectivity to other port areas and external locations is provided via 8 separate VLAN\u2019s. The backbone is connected with other network equipment\u2019s such as switches. Structured cabling is done at certain locations of MbPT which is connected to the backbone network. Structured and Non-structured cabling is over 10 years old. The cabling is under review and shall be taken up under current Enterprise Business solution",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"4.Network and Infrastructure Security\n4.1 Key Principles and Measures",
+        "policy(CERT-In)":"Use firewalls to create a buffer zone \nbetween the Internet (and other untrusted\nnetworks) and the networks used by the \nbusiness. The firewall rule set should deny\ntraffic by default and a whitelist should be\n applied that only allows authorised\nprotocols, ports and applications to exchange \ndata across the boundary. This will\nreduce the exposure of systems to network \nbased attacks. Employ effective processes\nfor managing changes to avoid workarounds. \nAn internal firewall for controlling\nconnections within the LAN should also be \ndeployed and properly maintained.",
+        "similarity_score":0.8257071972,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity of Information Infrastructure and Network.\n",
+        "policy(MbPA-CCMP)":"Firewall is installed by MbPT to protect internal network from intruders, hackers and malicious code. This firewall acts as a barrier between the cyber space and the server room. The firewall filters these packets to see if they meet certain criteria set by a series of rules, and thereafter blocks or allows the data. A software based firewall is installed at MbPT running on Linux Operating System. The traffic at the firewall is filtered based on port no\u2019s allowed in the rule set at the firewall. The traffic coming from external network is being filtered at the firewall and then allowed access to the server room.",
+        "conformity":"Positive findings"
+    },
+    {
+        "section(CERT-In)":"4.Network and Infrastructure Security\n4.1 Key Principles and Measures",
+        "policy(CERT-In)":"Network Intrusion detection \/ prevention\nand other appropriate security devices\nshould be deployed and monitored for North-South\n(Internet to LAN) and East-West (Between \nIntranet for monitoring unauthorized lateral \nmovements) by trained\/certified personnel.\nAlerts generated from the devices should be\nthoroughly verified as most of them could be\nindicating an imminent attack.",
+        "similarity_score":0.8043323159,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity of Information Infrastructure and Network.\n",
+        "policy(MbPA-CCMP)":"MbPT is on evaluation forUnified Threat \nmanagement device to replace the firewall \nwith Unified Threat Management devices for \ninfrastructure monitoring. The device shall \nbe capable of monitoring the network traffic \nfor detecting intusion attempts and prevent \nthem timely. In support to that, MbPT would \ndeploy appropriate log monitoring and analysis\ntechnique.",
+        "conformity":"Positive findings"
+    },
+    {
+        "section(CERT-In)":"4.Network and Infrastructure Security\n4.5 Network Security Measures",
+        "policy(CERT-In)":"All devices placed within the network should have logging enabled. Logs of\nperimeter security devices and end points should be integrated with Security\nInformation and Event Management (SIEM) and alerts from SIEM should be\nmonitored and acted upon. Logs of perimeter security devices and SIEM should be stored for a rolling period of 180 days.",
+        "similarity_score":0.7146818638,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity of Information Infrastructure and Network.\n",
+        "policy(MbPA-CCMP)":"Currently the logs generated at Firewall, \nProxy Server and Mail Servers are being \nbacked up to detect network scanning, \nprobing and Reconnaissance attempts. \nAppropriate devices and methods to log and monitor the events are also being planned to regularly review and analyze the logs for initiating necessary preventive measures. ",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"4.Network and Infrastructure Security\n4.5 Network Security Measures",
+        "policy(CERT-In)":"The organisation should conduct cyber security audit including vulnerability\nassessment to test network security measures.",
+        "similarity_score":0.764657855,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity of Information Infrastructure and Network.\n",
+        "policy(MbPA-CCMP)":"MbPTis presently carring security audit to understand the gap and accordingly have planned to upgrade the System, Application and Network",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"4.Network and Infrastructure Security\n4.6 Network Segmentation",
+        "policy(CERT-In)":"Ensure segmentation of the network to create security zones for isolating sensitive traffic and secure critical IT systems.\n4.6.2 Limit and segment user rights for access by implementing proper Access Control Lists\n(ACLs) in the network. Access control lists should be configured on devices such as\nrouters and\/or switches.\n4.6.4  Critical servers should be either made stand-alone or member of a dedicated secure\nzone and the servers need not communicate amongst themselves unless they are part\nof same application with dedicated ports and authenticated applications.\n4.6.5 Applications \/ servers and systems in the Intranet should be separated from Internet\nfacing networks\/ systems.",
+        "similarity_score":0.7532242537,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautionary\nmeasures\nIsolation of Critical Network\n",
+        "policy(MbPA-CCMP)":"The critical networks like CCTV and VTMS are isolated from main MbPT production network. Instructions are being issued to ensure No transfer of data from intranet\/internet based network to a critical network or vice versa be allowed. In case required, it should be under strict control and thoroughly screened. There are malicious codes specifically designed to target critical infrastructure systems by means of spreading through systems connected over internet. Risk assessment and regular monitoring of critical networks is essential for security of critical infrastructure.",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"5. Identity and Access Management",
+        "policy(CERT-In)":"All employees must be allotted a unique ID. User identity scheme must be defined and identity provisioning process should follow a workflow with proper checks and must be reviewed at least every six months and report in this regard to be submitted to the head of the department\/organisation.",
+        "similarity_score":0.6012037396,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nManpower Engaged in Cyber Security Activities\n",
+        "policy(MbPA-CCMP)":"Background verification checks on all employees engaged in implementing and monitoring cyber security and crisis management plan was already done during their initial employment",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"8. Third Party Access and Outsourcing",
+        "policy(CERT-In)":"Wherever any activity is outsourced or awarded as work contract to any 3rd party \/ vendor, it shall be ensured that the contract specifies the information security requirements, and the same are complied with, in addition to the regular contractual details.",
+        "similarity_score":0.5454038382,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nManpower Engaged in Cyber Security Activities\n",
+        "policy(MbPA-CCMP)":"Contractors, and third party users who are given access to the system is done based on their possessing passport or Police verification. However , for Contractors \/ Third Party users who does not possess passport or police verification are allowed to access under IT supervision..",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"8. Third Party Access and Outsourcing",
+        "policy(CERT-In)":"The following information security requirements should be documented as part of the\ncontract",
+        "similarity_score":0.7846815586,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nManpower Engaged in Cyber Security Activities\n",
+        "policy(MbPA-CCMP)":"Security roles and responsibilities of employees, contractors and third party users should be defined and documented in accordance with the organization\u2019s information security policy. Security roles and responsibilities should include the requirement to",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"8. Third Party Access and Outsourcing",
+        "policy(CERT-In)":"External party personnel should comply with the information security policies, processes and procedures of the organisation.",
+        "similarity_score":0.5936534405,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nManpower Engaged in Cyber Security Activities\n",
+        "policy(MbPA-CCMP)":"Security roles and responsibilities for individuals \nnot engaged via the organization\u2019s employment \nprocess, e.g. engaged via a third party \norganization, should also be clearly defined \nand communicated.",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"15. Security Auditing Guidelines\n15.2 Risk Assessment and Security Auditing Requirements.",
+        "policy(CERT-In)":"The organisation must hold meetings with all stakeholders and heads of the\ndepartment to chalk out the requirements for security audits such as the following",
+        "similarity_score":0.5794734955,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nAudit and Assurance\n",
+        "policy(MbPA-CCMP)":"MbPT has undertaken comprehensive Systemsecurity audit by Cert-in Empanelled auditors and alsohas done IT Environment Assessment of the entire IT infrastructure including Local Area Network and Wide Area Network by independent auditor to discover the gaps with respect to best security practices and take appropriate corrective actions.",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"15. Security Auditing Guidelines\n15.3 Periodicity and Nature of Audits",
+        "policy(CERT-In)":"The scope of audit should be comprehensive so as to cover entire ICT infrastructure of the organisation.\n15.3.2 Internal information security audit to be performed at least once in 6 months.",
+        "similarity_score":0.7447223663,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nAudit and Assurance\n",
+        "policy(MbPA-CCMP)":"MbPT has undertaken comprehensive \nPresently, we are carrying IT infrastrucute security audit to identify the gap for further enhancement.As per our security, we shall carry regular audit periodically to assess and maintain the acceptable security posture.",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"11. User Awareness and Training\n11.1 Awareness Training Program",
+        "policy(CERT-In)":"Information Security Awareness training including simulated phishing to be\nprovided to all the employees for creating awareness about threats such as\nidentity theft, adware, spear phishing, whaling, malware downloads etc.",
+        "similarity_score":0.6205102205,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity Training and Awareness.\n",
+        "policy(MbPA-CCMP)":"All employees of the organization and, where relevant, contractors and third party users should receive appropriate awareness training and regular updates in organizational policies and procedures, as relevant for their job function.",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"11. User Awareness and Training\n11.1 Awareness Training Program",
+        "policy(CERT-In)":"Awareness training must be provided to new joiners as part of Induction training.\nFurther, it should be provided to all employees every 6 months. Attendance to\nsuch training should be recorded in the Annual Performance reports.",
+        "similarity_score":0.670966506,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity Training and Awareness.\n",
+        "policy(MbPA-CCMP)":"Awareness training should commence with a formal induction process designed to introduce the organization\u2019s security policies and expectations before access to information or services is granted.",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"11. User Awareness and Training\n11.2 Role Based Training",
+        "policy(CERT-In)":"The organisation must ensure that role-based training is provided to all\npersonnel within the organisation to familiarize them with their roles and\nresponsibilities in order to support security requirements.",
+        "similarity_score":0.7960191965,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSecurity Training and Awareness.\n",
+        "policy(MbPA-CCMP)":"The security awareness, education, and training activities should be suitable and relevant to the person\u2019s role, responsibilities and skills.Training to enhance awareness is intended to allow individuals to recognize information security problems and incidents, and respond according to the needs of their work role.",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"14.Security monitoring and incident management.",
+        "policy(CERT-In)":"The organisation must ensure that apart from addressing an incident, the organisation\nshall mandatorily report cyber incidents to CERT-In within 6 hours of noticing such\nincidents or being brought to notice about such incidents. Also, the information about\nits occurrence shall be shared with relevant stakeholders such as NIC-CERT, sectoral\nCSIRT, Regulators etc. as applicable.",
+        "similarity_score":0.7236601114,
+        "section(MbPA-CCMP)":"3.Incident prevention\n3.1 Incident Prevention and security measures.\nTable 3.1 Prevention and Precautioanry\nmeasures\nSharing of information pertaining to incident\n",
+        "policy(MbPA-CCMP)":"All organizations should provide and share all information pertaining to cyber security incidents with CERT-In and other designated agencies.",
+        "conformity":"Minor non-conformity"
+    },
+    {
+        "section(CERT-In)":"13. Vulnerability and \npatch management\n13.2 Threat Assessment",
+        "policy(CERT-In)":"The organisation must identify the possible threat vectors, exploitation points, tools\nand techniques, which can compromise the security of the organisation.",
+        "similarity_score":0.6215616465,
+        "section(MbPA-CCMP)":"4 Crisis Recognition,Mitigation and Management\n4.1 Incident Recognition",
+        "policy(MbPA-CCMP)":"The crises arising out of cyber attacks are categorized and prioritized from level 1 to Level 4. The color in the table 4.1 below outlines the threat levels, spread of attack and related conditions that become the basis for declaration of a crisis. The table also outlines the crisis\/contingency affecting the systems of individual organization, multiple organizations, states and nation leading to crisis of different levels. The levels of crisis are interrelated. Each subsequent level will follow preceding one. No level other than level 1 will come in isolation.",
+        "conformity":"Major non-conformity"
+    },
+    {
+        "section(CERT-In)":"14.Security monitoring and incident management.",
+        "policy(CERT-In)":"The organisation must ensure that apart from addressing an incident, the organisation\nshall mandatorily report cyber incidents to CERT-In within 6 hours of noticing such\nincidents or being brought to notice about such incidents. Also, the information about\nits occurrence shall be shared with relevant stakeholders such as NIC-CERT, sectoral\nCSIRT, Regulators etc. as applicable.",
+        "similarity_score":0.7180444598,
+        "section(MbPA-CCMP)":"4 Crisis Recognition,Mitigation and Management\n4.2 Crisis Management: Roles and Responsibilities",
+        "policy(MbPA-CCMP)":"As and when a cyber crisis situation develops, respective organizations will immediately convey to the respective Ministry of shipping, NCIIPC and Cert-in through any quickest possible means..",
+        "conformity":"Minor non-conformity"
+    }
+]
