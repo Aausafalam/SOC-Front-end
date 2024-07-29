@@ -3,15 +3,11 @@ import SearchBar from './SearchBar';
 import LogSource from './LogSource';
 import HistogramChart from './HistogramChart';
 import TimeFrameSelector from './TimeFrameSelector';
-import { parseISO, isWithinInterval, subDays, formatISO } from 'date-fns';
+import { parseISO, isWithinInterval, subDays} from 'date-fns';
 import Style from './Main.module.css'; // Import CSS module
+import { Category } from '@mui/icons-material';
 
-const sampleHistogramData = [
-  { time: '10:00', count: 15 },
-  { time: '11:00', count: 30 },
-  { time: '12:00', count: 9 },
-  // ...more sample data
-];
+
 
 const Main = () => {
   const [logs, setLogs] = useState([]);
@@ -22,10 +18,11 @@ const Main = () => {
   const [error, setError] = useState(null);
   const [expandedData, setExpandedData] = useState(null); // State for expanded data
   const [histogramData, setHistogramData] = useState([]);
+  
 
   useEffect(() => {
     fetchLogs();
-  }, [timeFrame]);
+  }, [timeFrame, query]);
 
   useEffect(() => {
     if (filteredLogs.length > 0) {
@@ -37,25 +34,25 @@ const Main = () => {
     setLoading(true);
     setError(null);
 
-    const endTime = new Date();
+    let endTime = new Date();
+    
     let startTime;
-
     if (typeof timeFrame === 'string') {
       switch (timeFrame) {
         case '1h':
-          startTime = subDays(endTime, 0);
+          startTime = new Date(endTime.getTime() - 60 * 60 * 1000); // 1 hour ago
           break;
         case '24h':
-          startTime = subDays(endTime, 1);
+          startTime = new Date(endTime.getTime() - 24 * 60 * 60 * 1000); // 24 hours ago
           break;
         case '7d':
-          startTime = subDays(endTime, 7);
+          startTime = new Date(endTime.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
           break;
         case '30d':
-          startTime = subDays(endTime, 30);
+          startTime = new Date(endTime.getTime() - 30 * 24 * 60 * 60 * 1000); // 30 days ago
           break;
         default:
-          startTime = new Date(0);
+          startTime = new Date(0); // Unix epoch
       }
     } else {
       const { start, end, startTime: sTime, endTime: eTime } = timeFrame;
@@ -63,9 +60,10 @@ const Main = () => {
       endTime = new Date(`${end}T${eTime}`);
     }
 
-    const startISO = formatISO(startTime);
-    const endISO = formatISO(endTime);
-    const url = `http://192.168.42.39:3000/pagedEvents?page=1&start_time=2024-07-27T12:44:00Z&end_time=2024-07-27T13:44:00Z`;
+    const startISO = startTime.toISOString();
+    const endISO = endTime.toISOString();
+    const url = `http://192.168.42.39:3000/pagedEvents?page=1&start_time=${startISO}&end_time=${endISO}`;
+    console.log(startISO)
 
     try {
       const response = await fetch(url);
@@ -82,6 +80,8 @@ const Main = () => {
         time: new Date(key).toLocaleTimeString(), // Format as desired
         count: value
       }));
+
+
       console.log(">=================", histogramData)
       setHistogramData(histogramData);
     } catch (error) {
@@ -138,6 +138,9 @@ const Main = () => {
     return isWithinInterval(logDate, { start: startTime, end: now });
   };
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className={Style.Main}>
       <div className={Style.first_main_box}>
@@ -146,7 +149,7 @@ const Main = () => {
           <TimeFrameSelector onChange={handleTimeFrameChange} />
         </div>
         <div className={Style.histogram_main_data}>
-          <HistogramChart data={sampleHistogramData} />
+          <HistogramChart data={histogramData} />
           <div className={Style.Data_display}>
           <MainDataDisplay data={filteredLogs} onExpand={setExpandedData} />
           </div>
@@ -193,13 +196,14 @@ const MainDataDisplay = ({ data, onExpand }) => {
               <span><strong>Agent id:</strong> {log.agent?.id}</span>
               <span><strong>Agent ephemeral_id:</strong> {log.agent?.ephemeral_id}</span>
               <span><strong>Agent version:</strong> {log.agent?.version}</span>
-              {/* <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span> */}
-              {/* <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span> */}
-
-              {/* 
               <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span>
               <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span>
               <span><strong>@metadata:Pipeline</strong> {log['@metadata']?.pipeline || 'No Pipeline'}</span>
+              <span><strong>@metadata:version</strong> {log['@metadata']?.version || 'No version'}</span>
+
+              {/* 
+              
+              
               <span><strong>@metadata:Beat</strong> {log['@metadata']?.beat || 'No beat'}</span>
               <span><strong>@metadata:type</strong> {log['@metadata']?.type || 'No type'}</span>
               <span><strong>@metadata:version</strong> {log['@metadata']?.version || 'No version'}</span>

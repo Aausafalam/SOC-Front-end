@@ -15,7 +15,7 @@ const SearchBar = ({ onSearch }) => {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter KQL query"
+        placeholder="Search Logs"
         className={Style.search_input}
       />
       <button type="submit" className={Style.search_button}>Search</button>

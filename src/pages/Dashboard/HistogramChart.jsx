@@ -24,7 +24,7 @@ const HistogramChart = ({ data }) => {
         labels: data.map(d => d.time),
         datasets: [
           {
-            label: 'Query Count',
+            label: `Log Count (${data.length})`,
             data: data.map(d => d.count),
             backgroundColor: 'rgba(75, 192, 192, 0.6)',
             borderColor: isDarkTheme ? 'white' : 'rgba(75, 192, 192, 1)', // Use white for dark theme
