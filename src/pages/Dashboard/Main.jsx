@@ -146,7 +146,7 @@ const Main = () => {
           <TimeFrameSelector onChange={handleTimeFrameChange} />
         </div>
         <div className={Style.histogram_main_data}>
-          <HistogramChart data={sampleHistogramData} />
+          <HistogramChart data={histogramData} />
           <div className={Style.Data_display}>
           <MainDataDisplay data={filteredLogs} onExpand={setExpandedData} />
           </div>
