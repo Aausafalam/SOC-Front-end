@@ -73,7 +73,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
   }, []);
 
   const fetchPageData = useCallback(
-    async (page, limit, sortBy, order, searchText, filter) => {
+    async (page, limit, sortBy, order, searchText, filter=null) => {
       setIsLoading(true);
       setError(null);
       let params = { sortBy, order };
@@ -81,8 +81,9 @@ const TableComponent = ({ tableData, filterOptions }) => {
       {
         params.searchText = searchText;
       }
+      console.log("filter",filter)
       if(filter){
-        params.searchText = filter;
+        params[filter.filterKey] = filter.value;
       }
       try {
         const response = await axios.get(
@@ -111,8 +112,8 @@ const TableComponent = ({ tableData, filterOptions }) => {
   }, [tableData, generateSuggestions]);
 
   useEffect(() => {
-    fetchPageData(currentPage, itemsPerPage, sortBy, order, searchText, selectedFilter);
-  }, [currentPage, itemsPerPage, sortBy, order, selectedFilter]);
+    fetchPageData(currentPage, itemsPerPage, sortBy, order, searchText);
+  }, [currentPage, itemsPerPage, sortBy, order]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -270,7 +271,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
               <div className="filter-container">
                 {filterOptions && filterOptions.radioButtons && (
                   <div className="radio-buttons">
-                    {filterOptions.radioButtons.map((option, index) => (
+                    {filterOptions.radioButtons?.data.map((option, index) => (
                       <label key={index}>
                         <input
                           type="radio"
@@ -285,7 +286,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
                               sortBy,
                               order,
                               searchText,
-                              option.value
+                              {filterKey:filterOptions.radioButtons?.key,  value:option.value}
                             );
                           }}
                         />
@@ -306,13 +307,13 @@ const TableComponent = ({ tableData, filterOptions }) => {
                         itemsPerPage,
                         sortBy,
                         order,
-                        searchText,
-                        value
+                        searchText, 
+                        {filterKey: filterOptions.selectBox?.key, value:value}
                       );
                     }}
                   >
                     <option value="">Select...</option>
-                    {filterOptions.selectBox.map((option, index) => (
+                    {filterOptions.selectBox?.data.map((option, index) => (
                       <option key={index} value={option.value}>
                         {option.label}
                       </option>
