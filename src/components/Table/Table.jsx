@@ -467,7 +467,9 @@ const TableComponent = ({ tableData, filterOptions }) => {
             </thead>
             <tbody>
             {data.rows && data.rows.map((row, rowIndex) => (
-                <tr key={rowIndex}>
+                <tr onClick={ () => {
+                  data.rowClickHandler && data.rowClickHandler(row["Id"].value)
+                }} style={{cursor:data.rowClickHandler ? "pointer" : ""}} key={rowIndex}>
                   {Object.entries(row).map(([key, cell], cellIndex) => 
                     cell.type !== "hidden" && (
                       <td data-cell={key} key={cellIndex}>

@@ -24,4 +24,9 @@
     cursor: pointer;
     transition: 0.1s all;
     background-color: rgb(33 150 243/1);
+    margin-top: 0.7rem;
+}
+
+.save_button {
+    margin-bottom: 1rem;
 }

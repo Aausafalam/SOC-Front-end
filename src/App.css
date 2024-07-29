@@ -81,6 +81,10 @@ body {
   color: #ff6347;
 }
 
+.badge-critical {
+  color: #ff2600;
+}
+
 .badge-violet {
   /* background-color: #e8e6fc; */
   color: #7367f0;

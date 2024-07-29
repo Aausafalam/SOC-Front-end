@@ -10,7 +10,7 @@ import DetailsTable from './DetailsTable';
 const ConfigurationTable = () => {
 
    
-    const {configurationList} = useConfiguration();
+    const {configurationList,fetchConfigurationDetail,configurationDetail} = useConfiguration();
     const [showPopUp,setShowPopUp] = useState(false)
     const [id,setId] = useState(null)
    
@@ -581,7 +581,7 @@ const ConfigurationTable = () => {
       title: "Configuration Table",
       rows: data?.map((item, index) => {
         const row = {
-          Id: { key: "id", value: item._id, type: "hidden" },
+          Id: { key: "id", value: item.id, type: "hidden" },
           "S.No.": {
             key: "S.No.",
             value: index + 1,
@@ -615,7 +615,8 @@ const ConfigurationTable = () => {
         {
           name: "View",
           functions: (index) => {
-            setId(index);
+            setId(index)
+            fetchConfigurationDetail(index)
             togglePopup()
           },
           label: "View Details",
@@ -640,26 +641,28 @@ const ConfigurationTable = () => {
   const cardData = [
     {
       name:"Pass",
-      count:"20",
-      color:"#388e3c"
+      count:configurationDetail?.pass,
+      color:"#6fcd9e"
     },
     {
       name:"Fail",
-      count:"50",
+      count:configurationDetail?.fail,
       color:"#eb032c"
     },
     {
       name:"Score",
-      count:"40",
-      color:"#6fcd9e"
+      count:configurationDetail?.score,
+      color:"#5371c8"
     },
     {
       name:"last Scan",
-      count:"28 july 2024",
-      color:"#9460ff"
+      count:Utils.getFormatedDate(configurationDetail?.last_scan),
+      color:"#333"
     }
   ]
+ 
 
+  console.log("sasdfds",id)
 
   const tableData = React.useMemo(() => getTableData(configurationList), [configurationList]);
    
@@ -679,12 +682,12 @@ const ConfigurationTable = () => {
        </div>
        <div className={styles.policy_name}>
      <h2>{"Policy Name : "}</h2>
-     <h1> Anti-discrimination and harassment policy</h1>
+     <h1> { configurationDetail?.description || "" }</h1>
   </div>
 
 
 
-     <DetailsTable/>
+     <DetailsTable data={configurationDetail}/>
 
 
 
