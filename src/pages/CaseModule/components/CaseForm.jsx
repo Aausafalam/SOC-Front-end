@@ -5,12 +5,8 @@ import { useCase } from "../../../context/CaseContext";
 import { useUser } from "../../../context/UserContext";
 
 const CaseForm = ({ data, onSuccess, onCancel }) => {
-  const {caseDetail, fetchCaseDetail, handleEditCase } = useCase();
+  const {handleEditCase, handleAddCase } = useCase();
   const {UserList, fetchUserList} = useUser();
-
-  useEffect(()=>{
-    fetchCaseDetail(data?.id);
-  },[data?.id]);
 
   useEffect(()=>{
     fetchUserList();
@@ -19,8 +15,10 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
   const handleSubmit = async (formData) => {
     if (data) {
       handleEditCase(data?.id, formData);
-      onSuccess();
-    } 
+    }else{
+      handleAddCase(formData);
+    }
+    onSuccess();
   };
 
   const buttons = [
@@ -38,12 +36,10 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
     },
   ];
 
-  const userOptions = useMemo(() => {
-    return UserList?.map((user) => ({
+  const userOptions = UserList && UserList?.map((user) => ({
       value: user.id,
       label: user.name,
-    })) || [];
-  }, [UserList]);
+  }));
 
   const serverityOptions = [{label:"High", value:1}, {label:"Medium", value:2}, {label:"Low", value:3}];
   const caseStateOptions = [{label:"New", value:1}, {label:"InProgress", value:2}, {label:"Closed", value:3},{label:"OnHold", value:4}];
@@ -56,7 +52,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
       label: "Title",
       required: true,
       grid:4,
-      defaultValue: caseDetail?.title,
+      defaultValue: data?.title,
     },
     {
         type: "text",
@@ -64,7 +60,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "TLP",
         required: true,
         grid:4,
-        defaultValue: caseDetail?.tlp,
+        defaultValue: data?.tlp,
       },
       {
         type: "text",
@@ -72,16 +68,16 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "PAP",
         required: true,
         grid:4,
-        defaultValue: caseDetail?.pap,
+        defaultValue: data?.pap,
       },
     {
         type: "select",
-        name: "serverity",
+        name: "severity",
         label: "Severity",
         grid: 4,
         required: true,
         options: serverityOptions,
-        defaultValue: caseDetail?.severity,
+        defaultValue: data?.severity,
     },
     {
         type: "select",
@@ -90,7 +86,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 2,
         required: true,
         options: caseStateOptions,
-        defaultValue: caseDetail?.caseState,
+        defaultValue: data?.caseState,
     },
     {
         type: "select",
@@ -99,7 +95,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         grid: 2,
         required: true,
         options: userOptions,
-        defaultValue: caseDetail?.assignedTo?.id,
+        defaultValue: data?.assignedTo?.id,
     },
     {
       type: "textarea",
@@ -107,7 +103,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
       label: "Intel",
       grid: 2,
       style: {input:{ height: "100px" }},
-      defaultValue: caseDetail?.intel,
+      defaultValue: data?.intel,
     },
     {
         type: "textarea",
@@ -115,7 +111,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "Remarks",
         grid: 2,
         style: {input:{ height: "100px" }},
-        defaultValue: caseDetail?.remarks,
+        defaultValue: data?.remarks,
       },
       {
         type: "textarea",
@@ -123,7 +119,7 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "Observation",
         grid: 2,
         style: {input:{ height: "100px" }},
-        defaultValue: caseDetail?.observation,
+        defaultValue: data?.observation,
       },
       {
         type: "textarea",
@@ -131,9 +127,9 @@ const CaseForm = ({ data, onSuccess, onCancel }) => {
         label: "Learning",
         grid: 2,
         style: {input:{ height: "100px" }},
-        defaultValue: caseDetail?.learning,
+        defaultValue: data?.learning,
       },
-  ],[caseDetail]);
+  ],[data, userOptions, caseStateOptions, serverityOptions]);
 
   return (
     <div>

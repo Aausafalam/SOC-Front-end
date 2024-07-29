@@ -265,61 +265,62 @@ const TableComponent = ({ tableData, filterOptions }) => {
         <div className="table-container">
           <div className="table-heading">
             {data.title && <h2>{data.title}</h2>}
-            <div className="filter-container">
-            {filterOptions && filterOptions.radioButtons && (
-              <div className="radio-buttons">
-                {filterOptions.radioButtons.map((option, index) => (
-                  <label key={index}>
-                    <input
-                      type="radio"
-                      name="filter"
-                      value={option.value}
-                      checked={selectedFilter === option.value}
-                      onChange={() => {
-                        setSelectedFilter(option.value);
-                        fetchPageData(
-                          currentPage,
-                          itemsPerPage,
-                          sortBy,
-                          order,
-                          searchText,
-                          option.value
-                        );
-                      }}
-                    />
-                    {option.label}
-                  </label>
-                ))}
-              </div>
-            )}
-
-            {filterOptions && filterOptions.selectBox && (
-              <select
-                value={selectedFilter}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setSelectedFilter(value);
-                  fetchPageData(
-                    currentPage,
-                    itemsPerPage,
-                    sortBy,
-                    order,
-                    searchText,
-                    value
-                  );
-                }}
-              >
-                <option value="">Select...</option>
-                {filterOptions.selectBox.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
 
             <div className="search_export_print_container">
+              <div className="filter-container">
+                {filterOptions && filterOptions.radioButtons && (
+                  <div className="radio-buttons">
+                    {filterOptions.radioButtons.map((option, index) => (
+                      <label key={index}>
+                        <input
+                          type="radio"
+                          name="filter"
+                          value={option.value}
+                          checked={selectedFilter === option.value}
+                          onChange={() => {
+                            setSelectedFilter(option.value);
+                            fetchPageData(
+                              currentPage,
+                              itemsPerPage,
+                              sortBy,
+                              order,
+                              searchText,
+                              option.value
+                            );
+                          }}
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                )}
+
+                {filterOptions && filterOptions.selectBox && (
+                  <select
+                    value={selectedFilter}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setSelectedFilter(value);
+                      fetchPageData(
+                        currentPage,
+                        itemsPerPage,
+                        sortBy,
+                        order,
+                        searchText,
+                        value
+                      );
+                    }}
+                  >
+                    <option value="">Select...</option>
+                    {filterOptions.selectBox.map((option, index) => (
+                      <option key={index} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            
               {data.searchBar && (
                 <form
                   onSubmit={(event) => {

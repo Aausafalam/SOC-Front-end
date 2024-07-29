@@ -36,7 +36,7 @@ const EChartsComponent = ({ options }) => {
           {options?.title?.text}
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-              <g fill="none" stroke="currentColor" stroke-width="0.50">
+              <g fill="none" stroke="currentColor" strokeWidth="0.50">
                 <circle cx="5" cy="12" r="2"></circle>
                 <circle cx="12" cy="12" r="2"></circle>
                 <circle cx="19" cy="12" r="2"></circle>

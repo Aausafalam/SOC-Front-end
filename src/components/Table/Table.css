@@ -402,17 +402,15 @@
 
 
 
-
 /* General container styles */
 .filter-container {
     display: flex;
     gap: 1rem;
     align-items: center;
-    position: relative;
-    right: 13rem;
-    border:1px solid lightgray;
+    border:1px solid #dddada;
     border-radius: 10px;
-    padding:0.3rem;
+    padding:0.5rem;
+    box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
   
   /* Radio buttons styles */
