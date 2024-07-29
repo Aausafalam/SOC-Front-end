@@ -7,9 +7,7 @@ import { LoaderProvider } from "./context/LoaderContext";
 import { CaseProvider } from "./context/CaseContext";
 import { AssetsProvider } from "./context/AssetsContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { VulnerabilityProvider } from "./context/VulnerabilityContext";
-import { AlertProvider } from "./context/AlertContext";
-import { ConfigurationProvider } from "./context/AlertContext copy";
+import { ComplianceProvider } from "./context/ComplianceContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,14 +15,10 @@ root.render(
     <ThemeProvider>
       <LoaderProvider>
         <CaseProvider>
-          <AssetsProvider>
-            <VulnerabilityProvider>
-           <AlertProvider>
-            <ConfigurationProvider>
-            <App />
-            </ConfigurationProvider>
-           </AlertProvider>
-            </VulnerabilityProvider>
+        <AssetsProvider>
+          <ComplianceProvider>
+          <App />
+          </ComplianceProvider>
           </AssetsProvider>
         </CaseProvider>
       </LoaderProvider>
