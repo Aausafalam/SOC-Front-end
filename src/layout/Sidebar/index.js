@@ -89,5 +89,10 @@ export const data = [
     name: "Configuration Management",
     icon: ConfigrationIcon,
     url: "/configuration"
+  },
+  {
+    name: "Log Management",
+    icon: LogManagementIcon,
+    url: "/logmanagement"
   }
 ];
