@@ -57,7 +57,7 @@ export const data = [
     url: "/"
   },
   {
-    name: "Risk Management",
+    name: "Alert Management",
     icon: RiskManagementIcon,
     url: "/alerts"
   },

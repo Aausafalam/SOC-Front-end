@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from "./index.module.css"
 import DynamicForm from '../../../../components/Form/DynamicForm';
 import { ICON } from '../../../../utils/icon';
@@ -8,10 +8,13 @@ import Utils from '../../../../utils';
 import Table from '../../../../components/Table/Table';
 import { constants } from '../../../../utils/constants';
 import axios from 'axios';
+import { useAlert } from '../../../../context/AlertContext';
 
-const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInput,onSuccess}) => {
-  
-    const states = [{label:"New", value:0}, {label:"Opened", value:1}, 
+const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInput,onSuccess,cases}) => {
+    
+  const {alertDetail} = useAlert()
+    const states = [
+    // {label:"New", value:0}, {label:"Opened", value:1}, 
     {label:"Escalated with CaseId", value:2},
     {label:"Duplicate", value:3},
     {label:"False Positive", value:4},
@@ -21,7 +24,8 @@ const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInp
 ];
  
 const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
-
+  
+console.log("alrt",alertDetail?.alertDetails)
 
     const formData = [
         {
@@ -30,14 +34,18 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
           label: "Intel",
           required: true,
           grid:2,
+          defaultValue:
+          // alertDetail?.intel || 
+          alertDetail?.alertDetails?.intel
         },
         {
             type: "select",
-            name: "state",
+            name: "alertState",
             label: "State",
             grid: 2,
             required: true,
             options: states,
+            defaultValue:parseInt(alertDetail?.alertDetails?.alertState)
         },
         // {
         //   type: "text",
@@ -60,34 +68,49 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             label: "Remarks",
             grid: 2,
             required: true,
-        },
+            defaultValue:
+            // alertDetail?.remarks || 
+            alertDetail?.alertDetails?.remarks
+        }, 
         {
             type:"text",
             name:"domains",
             label:"Domains",
             grid:2,
-            required:true
+            defaultValue:
+            // alertDetail?.domain?.join(", ") || alertDetail?.iocs?.domains?.join(", ") || 
+            alertDetail?.alertDetails?.iocs?.domains?.join(", ")
+            // required:true
         },
         {
             type:"text",
             name:"ips",
             label:"IPS",
             grid:2,
-            required:true
+            defaultValue:
+            // alertDetail?.ips?.join(", ")||  alertDetail?.iocs?.ips?.join(", ")||
+            alertDetail?.alertDetails?.iocs?.ips?.join(", ")
+            // required:true
         },
         {
             type:"text",
             name:"urls",
             label:"URLS",
             grid:2,
-            required:true
+            defaultValue:
+            // alertDetail?.urls?.join(", ") || alertDetail?.iocs?.urls?.join(", ") || 
+            alertDetail?.alertDetails?.iocs?.urls?.join(", ")
+            // required:true
         },
         {
             type:"text",
             name:"file_hashes",
             label:"File Hashes",
             grid:2,
-            required:true
+            defaultValue:
+            // alertDetail?.file_hashes?.join(", ") ||  alertDetail?.iocs?.file_hashes?.join(", ") || 
+            alertDetail?.alertDetails?.iocs?.file_hashes?.join(", ")
+            // required:true
         }
       ];
   
@@ -198,13 +221,25 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
   
   console.log( "rerwetey>>>>>>>>>>>>>>>",caseIds)
    
-   
+
    
 
   const handleSubmit = async (formData) => {
     if (formData) {
-     console.log({...formData,caseid:Object.entries(caseIds).map(([key, value]) => value)})
-     axios.put(`http://192.168.40.48:8080/api/alerts/update/${id}`, {...formData,caseid:Object.entries(caseIds).map(([key, value]) => value)})
+     let requestBody = {
+      ...formData,
+      iocs:{
+        domains:formData.domains.split(", "),
+        ips: formData.ips.split(", "),
+        urls: formData.urls.split(", "),
+        file_hashes: formData.file_hashes.split(", ")
+      },
+      case:Object.entries(caseIds).map(([key, value]) => {
+        return {id:value}
+      })
+
+     }
+     axios.put(`http://192.168.40.48:8080/api/alerts/update/${id}`, requestBody)
      .then(response => {
          onSuccess(response.data);
         //setDetailModalIsOpen(false);
@@ -219,7 +254,15 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
     }
      
   };
+  const showCaseIdPopUpRef = useRef(false);
 
+  const caseIdstogglePopup = () => {
+    showCaseIdPopUpRef.current = !showCaseIdPopUpRef.current;
+    // Force a re-render if needed, but typically avoid this
+    forceUpdate();
+  };
+
+  const forceUpdate = React.useReducer(() => ({}), {})[1];
 
 
   return (<div className={styles.container}>
@@ -234,21 +277,25 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
            setCaseIdsInput(event.target.value)
       }} type="text" id="caseid" name="caseid" class="form-control" required="true"/>
       </div>
-      <button onClick={() => {setShowCaseIdPopUp(!showCaseIdPopUp);
-      fetchCaseList();}}>{showCaseIdPopUp ? "Hide" : "Show"} Case Ids</button>
+      <button onClick={() => {caseIdstogglePopup();
+      fetchCaseList();}}>{showCaseIdPopUpRef.current ? "Hide" : "Show"} Case Ids</button>
     </div>
 
-    {
-      showCaseIdPopUp && 
-      <div>
-            <Table tableData={tableData} />
-     <button type='button' className={styles.save_button} onClick={() => {
-        setCaseIdsInput(Object.entries(caseIds).map(([key, value]) => value).join(","));
-         togglePopup();
-     }}>Save</button>
-      </div>
-     }
-
+    {showCaseIdPopUpRef.current && 
+        <Popup  width="70%" show={showCaseIdPopUpRef.current} onClose={caseIdstogglePopup} title={`Case Id List`}>
+          <Table tableData={tableData} />
+          <button
+            type='button'
+            className={styles.save_button}
+            onClick={() => {
+              setCaseIdsInput(Object.entries(caseIds).map(([key, value]) => value).join(", "));
+              caseIdstogglePopup();
+            }}
+          >
+            Save
+          </button>
+        </Popup>
+      }
 
     <DynamicForm
         formData={formData}

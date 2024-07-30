@@ -19,7 +19,7 @@ const Alert = () => {
     const [showEditPop,setShowEditPopup] = useState(false);
     const [id,setId] = useState(null);
     const [caseIds,setCaseIds] = useState([]) 
-
+    const [showMore,setShowMore] = useState(false)
 
     useEffect(() => {
         fetchAlertList();
@@ -93,7 +93,7 @@ const Alert = () => {
           const statusClass = "";
   
           return {
-            Id: { key: "id", value: item.id, type: "hidden" },
+            Id: { key: "id", value: item.id},
             "Created At": { key: "createdAt", value: Utils.getFormatedDate(item.createdAt) },
             "Updated At": { key: "updatedAt", value: Utils.getFormatedDate(item.updatedAt) },
             "Status": { key: "alertStateName", value: item.alertStateName },
@@ -112,12 +112,12 @@ const Alert = () => {
           };
         }),
         actionData: [
-          {
-            name: "Open",
-            functions: (index) => handleViewDetail(index),
-            label: "Open",
-            Id: "Id"
-          },
+          // {
+          //   name: "Open",
+          //   functions: (index) => handleViewDetail(index),
+          //   label: "Open",
+          //   Id: "Id"
+          // },
           // {
           //   name: "delete",
           //   functions: (index) => { /* deleteNotice(index, data); */ },
@@ -153,6 +153,9 @@ const Alert = () => {
         autoSuggestionUrl: "/caseData.json",
         initialSort: "severity",
         getTableData: getTableData,
+        rowClickHandler: (id) => {
+          handleViewDetail(id)
+        }
       };
     };
     
@@ -184,7 +187,7 @@ const Alert = () => {
               </tr>
             </thead>
             <tbody>
-            {alertDetail && Object.entries(alertDetail)?.map(([key, value]) => {
+            {alertDetail && Object.entries(alertDetail.alertDetails || {})?.map(([key, value]) => {
                 if(typeof value === "object")
                 {
                   return <tr key={key}>
@@ -199,10 +202,14 @@ const Alert = () => {
 })}
             </tbody>
           </table>
+          <button onClick={() => setShowMore(!showMore)} className={Styles.view_more}>{showMore ? "Hide" : "View"} More</button>
+          {
+            showMore && Utils.renderJson(alertDetail?._source || {})
+          }
         </div>
       </div>
       <Popup width="90%" show={showEditPop} onClose={togglePopup} title={`Details`}>
-        <EditAlertDetails  setCaseIds={setCaseIds} data={alertDetail} id={id} onCancel={togglePopup} onSuccess={handleSubmit}/>
+        <EditAlertDetails cases={alertDetail?.cases || []}  setCaseIds={setCaseIds} data={alertDetail?.alertDetails || {}} source={alertDetail?._source} id={id} onCancel={togglePopup} onSuccess={handleSubmit}/>
       </Popup>
     </div>
   );

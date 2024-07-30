@@ -76,6 +76,10 @@
 
 .chart_container {
   height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   /* Fixed height for the gauge chart */
 }
 

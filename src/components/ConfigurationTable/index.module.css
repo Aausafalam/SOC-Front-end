@@ -19,11 +19,12 @@
 }
 
 .policy_name h2 {
-    font-size: 1.2rem;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 
 .policy_name h2 span {
@@ -33,5 +34,5 @@
 }
 
 .policy_name h1 {
-    font-size: 1.2rem;
+    font-size: 0.95rem;
 }

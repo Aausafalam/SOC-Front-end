@@ -83,8 +83,8 @@ const AssestCriticalCount = ({initialData}) => {
         },
         {
             title:"Software License Expired",
-            value:initialData?.licenceExpired || 0,
-            total:initialData?.software || 0,
+            value:initialData?.licenceExpired || 1,
+            total:initialData?.software || 5,
             strokeColor:"#ff8e06",
             icon:softwareIcon
         },
