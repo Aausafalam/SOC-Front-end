@@ -35,8 +35,8 @@ const Alert = () => {
     const getStatusBadgeClass = (status) => {
       const statusMap = {
         new: "badge-violet",
-        inprogress: "badge-green",
-        onhold: "badge-orange",
+        opened: "badge-green",
+        "escalated with caseid": "badge-orange",
         closed: "badge-red"
       };
       return statusMap[status.toLowerCase()] || "";
@@ -76,8 +76,34 @@ const Alert = () => {
 
     const handleSubmit = (data) => {
       toast("Updated ....")
+      fetchAlertList();
       togglePopup()
     }
+     
+
+    const [filterOptions, setFilterOptions] = useState({
+      radioButtons: {
+        key : "severity",
+        data : [
+          { label: "Critical", value: "1" },
+          { label: "High", value: "2" },
+          { label: "Medium", value: "3" },
+          { label: "Low", value: "4" },
+        ]
+      },
+      selectBox: {
+        key:"alertState",
+        data:[
+          {label:"New", value:0}, {label:"Opened", value:1},
+          { label: "Escalated with CaseId", value: 2 },
+          { label: "Duplicate", value: 3 },
+          { label: "False Positive", value: 4 },
+          { label: "Archived", value: 5 },
+          { label: "Closed", value: 6 },
+          { label: "Re-Assigned", value: 7 },
+        ],
+      }
+    })
 
 
 
@@ -90,13 +116,16 @@ const Alert = () => {
         rows: data[0]?.map((item, index) => {
           const severity = getSeverity(item.severity);
           const severityClass = `badge-${severity}`;
-          const statusClass = "";
+          const statusClass = getStatusBadgeClass(item.alertStateName);
   
           return {
             Id: { key: "id", value: item.id},
             "Created At": { key: "createdAt", value: Utils.getFormatedDate(item.createdAt) },
             "Updated At": { key: "updatedAt", value: Utils.getFormatedDate(item.updatedAt) },
-            "Status": { key: "alertStateName", value: item.alertStateName },
+            "Status": { key: "alertStateName", 
+             value:<span className={statusClass}>{Utils.capitalizeEachWord(item.alertStateName)}</span>,
+             originalValue: item.alertStateName
+             },
             "Category": { key: "category", value: Utils.capitalizeEachWord(item.category) },
             
             Severity: {
@@ -106,7 +135,7 @@ const Alert = () => {
             },
             "Signature": {
               key: "signature",
-              value: <span className={statusClass}>{Utils.capitalizeEachWord(item.signature)}</span>,
+              value: <span>{Utils.capitalizeEachWord(item.signature)}</span>,
               originalValue: item.signature
             }
           };
@@ -144,10 +173,10 @@ const Alert = () => {
         action: true,
         export:false,
         print:false,
-        searchUrl: "http://192.168.40.48:8080/api/alerts?page=input&limit=count&id=searchText",
+        searchUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count&id=searchText",
         exportDataUrl:false,
         printUrl: false,
-        paginationUrl: "http://192.168.40.48:8080/api/alerts?page=input&limit=count",
+        paginationUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count",
         totalPage: parseInt(data[1]?.totalRecords/data[1]?.limit),
         totalItemCount: data[1]?.totalRecords,
         autoSuggestionUrl: "/caseData.json",
@@ -177,7 +206,7 @@ const Alert = () => {
         </div>
       </div>
       <div className={Styles.content_container}>
-        <Table tableData={tableData} />
+        <Table tableData={tableData} filterOptions={filterOptions}  />
         <div className={`table-container ${Styles.alert_details_view}`}>
           <table>
             <thead>

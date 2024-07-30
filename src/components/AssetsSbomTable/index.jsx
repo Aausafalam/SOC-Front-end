@@ -33,10 +33,16 @@ const AssetsSbomTable = () => {
     function getTableData(data) {
 
        console.log("areqrewr",data)
-
+       let count = 0 
+      
+      //  console.log("qwrerewtrweT", data.map((data) => count += data.packageLength))
+      data.forEach((item) => {
+        count += item.packageLength
+      })
+      // console.log("eqwrqeo",count)
         return {
           ...Utils.GetTableData(),
-          title: `SBOM Table ${"( 150 )"}`,
+          title: `SBOM Table ( ${count} )`,
           rows: data?.map((item, index) => {
             const row = {
               Id: { key: "_id", value: item._id, type: "hidden" },

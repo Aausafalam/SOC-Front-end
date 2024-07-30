@@ -16,7 +16,7 @@ const EditAlertDetails = ({ data, id, onCancel, onSuccess, source, cases }) => {
 
   function generateIdObject(arr) {
     return arr.reduce((acc, item) => {
-      acc[item.id] = true;
+      acc[item.id] = item.id;
       return acc;
     }, {});
   }
