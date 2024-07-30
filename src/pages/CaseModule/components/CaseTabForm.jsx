@@ -13,8 +13,6 @@ const CaseTabForm = ({ data, onSuccess, onCancel }) => {
     }
   },[data]);
 
-  console.log("====",caseDetail);
-
   const tabs = React.useMemo(() => [
     { label: "Edit Case", content: <CaseForm data={caseDetail} onSuccess={onSuccess} onCancel={onCancel} /> },
     { label: "Related Alerts", content: <RelatedAlerts data={caseDetail} /> }
