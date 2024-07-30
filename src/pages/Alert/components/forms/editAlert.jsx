@@ -165,7 +165,8 @@ const EditAlertForm = ({
     };
     return severityMap[severity] || "NA";
   };
-
+   
+  console.log(">>>>>>>>",caseIds)
   const getTableData = (data) => {
     return {
       ...Utils.GetTableData(),
@@ -187,11 +188,11 @@ const EditAlertForm = ({
             onchange: (event) => {
               if (event.target.checked) {
                 setCaseIds((data) => {
-                  return { ...data, [event.target.name]: event.target.value };
+                  return { ...data, [event.target.name]: parseInt(event.target.value) };
                 });
               } else {
                 setCaseIds((data) => {
-                  return { ...data, [event.target.name]: null };
+                  return { ...data, [event.target.name]: undefined };
                 });
               }
             },
@@ -243,7 +244,7 @@ const EditAlertForm = ({
     };
   };
 
-  const tableData = React.useMemo(() => getTableData(caseList), [caseList]);
+  const tableData = React.useMemo(() => getTableData(caseList), [caseList,caseIds]);
 
   console.log("rerwetey>>>>>>>>>>>>>>>", caseIds);
 
@@ -262,7 +263,7 @@ const EditAlertForm = ({
         }),
       };
       axios
-        .put(`http://192.168.40.48:8080/api/alerts/update/${id}`, requestBody)
+        .put(`http://172.29.25.0:8080/api/alerts/update/${id}`, requestBody)
         .then((response) => {
           onSuccess(response.data);
           //setDetailModalIsOpen(false);
@@ -330,9 +331,9 @@ const EditAlertForm = ({
             className={styles.save_button}
             onClick={() => {
               setCaseIdsInput(
-                Object.entries(caseIds)
-                  .map(([key, value]) => value)
-                  .join(", ")
+                Object.values(caseIds)
+                .filter(value => value !== undefined)
+                .join(', ')
               );
               caseIdstogglePopup();
             }}

@@ -100,7 +100,7 @@ class Utils {
                   {formatJson(value)}
                 </div>
               ) : (
-                <span style={{ color: '#4caf50' }}>{JSON.stringify(value)}</span>
+                <span style={{ color: '#4caf50',wordBreak:"break-all" }}>{JSON.stringify(value)}</span>
               )}
             </div>
           );
