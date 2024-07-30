@@ -191,31 +191,34 @@ const MainDataDisplay = ({ data, onExpand }) => {
           return (
             <div key={item._id} className={Style.data_item}>
 
-              <span><strong>ID:</strong> {log?.id_copy}</span>
+              <span><strong style={{fontWeight: '700'}}>ID:</strong> {log?.id_copy}</span>
               <span><strong>Agent Name:</strong> {log.agent?.name}</span>
-              <span><strong>Agent id:</strong> {log.agent?.id}</span>
-              <span><strong>Agent ephemeral_id:</strong> {log.agent?.ephemeral_id}</span>
               <span><strong>Agent version:</strong> {log.agent?.version}</span>
-              {/* <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span> */}
-              {/* <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span> */}
+              <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span>
+              <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span>
+              <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span>
 
-              {/* 
+
               <span><strong>File Path:</strong> {log.log?.file?.path || 'No file path'}</span>
               <span><strong>Offset:</strong> {log.log?.offset || 'No offset'}</span>
               <span><strong>@metadata:Pipeline</strong> {log['@metadata']?.pipeline || 'No Pipeline'}</span>
               <span><strong>@metadata:Beat</strong> {log['@metadata']?.beat || 'No beat'}</span>
               <span><strong>@metadata:type</strong> {log['@metadata']?.type || 'No type'}</span>
               <span><strong>@metadata:version</strong> {log['@metadata']?.version || 'No version'}</span>
+              <span><strong>Agent id:</strong> {log.agent?.id}</span>
+              <span><strong>Agent ephemeral_id:</strong> {log.agent?.ephemeral_id}</span>
 
-              <span><strong>Tags:</strong> {log.log?.tags?.join(', ') || 'No tags'}</span> */}
+
+
+              {/* <span><strong>Tags:</strong> {log.log?.tags[0]?.join(', ') || 'No tags'}</span>  */}
               {/* <span><strong>Timestamp:</strong> {log['@timestamp'] || 'No timestamp'}</span>
               <span><strong>Event Created:</strong> {log.event?.created || 'No event created'}</span>
               <span><strong>Source Address:</strong> {log.source?.address || 'No source address'}</span>
               <span><strong>Source Port:</strong> {log.source?.port || 'No source port'}</span>
               <span><strong>Source Ip:</strong> {log.source?.ip || 'No source ip'}</span>
               <span><strong>Destination Address:</strong> {log.destination?.address || 'No destination address'}</span>
-              <span><strong>Transport:</strong> {log.network?.transport || 'No transport'}</span> */}
-              {/* <span><strong>Community ID:</strong> {log.network?.community_id || 'No community ID'}</span> */}
+              <span><strong>Transport:</strong> {log.network?.transport || 'No transport'}</span>
+              <span><strong>Community ID:</strong> {log.network?.community_id || 'No community ID'}</span> */}
               <button
                 onClick={() => onExpand(log)}
                 className={Style.expand_button}
