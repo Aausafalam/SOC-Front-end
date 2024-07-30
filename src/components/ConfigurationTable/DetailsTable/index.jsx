@@ -53,7 +53,7 @@ const DetailsTable = ({data}) => {
                             </tr>
                             {expanded === item.id && (
                                 <tr>
-                                    <td colSpan="4">
+                                    <td className={styles.expended_row} colSpan="4">
                                         <table className={styles.detailsTable}>
                                             {/* <thead>
                                                 <tr>

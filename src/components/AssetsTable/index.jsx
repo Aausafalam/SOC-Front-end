@@ -77,7 +77,7 @@ const AsstesTable = () => {
           searchUrl: "/assetsTable.json",
           exportDataUrl: false,
           printUrl: false,
-          paginationUrl: "https://backend.assets.k8.c3ihub/assetList?page=input&limit=count",
+          paginationUrl: "http://172.29.25.0:8080/api/assets/assetList?page=input&limit=count",
           totalPage: data?.pagination?.totalPages,
           totalItemCount: data?.pagination?.totalItems,
           // autoSuggestionUrl: "/assetsTable.json",

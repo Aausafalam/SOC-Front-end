@@ -71,9 +71,9 @@ function Compliance() {
         };
       }),
       searchUrl: "/assetsTable.json",
-      exportDataUrl: "/assetsTable.json",
-      printUrl: "/assetsTable.json",
-      paginationUrl: "/assetsTable.json",
+      exportDataUrl: false,
+      printUrl: false,
+      paginationUrl: false,
       totalPage: data?.totalPages,
       totalItemCount: data?.totalItems,
       autoSuggestionUrl: "/assetsTable.json",

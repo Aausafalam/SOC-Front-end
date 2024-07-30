@@ -8,16 +8,16 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${JSON.parse(token)}`;
-    }
-    if (!config.headers["Content-Type"]) {
-      config.headers["Content-Type"] = "application/json";
-    }
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   config.headers["Authorization"] = `Bearer ${JSON.parse(token)}`;
+    // }
+    // if (!config.headers["Content-Type"]) {
+    //   config.headers["Content-Type"] = "application/json";
+    // }
 
-    config.headers["Content-Security-Policy"] =
-      "default-src 'self'; img-src 'self' data: blob:;";
+    // config.headers["Content-Security-Policy"] =
+    //   "default-src 'self'; img-src 'self' data: blob:;";
     return config;
   },
   (error) => {

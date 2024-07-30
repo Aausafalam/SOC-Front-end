@@ -9,7 +9,12 @@ const EChartsComponent = ({ options }) => {
 
   useEffect(() => {
     const chartInstance = echarts.init(chartRef.current, theme);
-    chartInstance.setOption({ ...options, title: { ...options.title, text: "" } });
+    const updatedOptions = {
+      ...options,
+      backgroundColor: 'transparent',
+      title: { ...options.title, text: "" },
+    };
+    chartInstance.setOption(updatedOptions);
 
     return () => {
       chartInstance.dispose();

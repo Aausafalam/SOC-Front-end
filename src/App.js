@@ -29,7 +29,7 @@ function App() {
           <Route path="/vulnerability/analytics" element={<React.Suspense fallback={<Loader/>}><VulnerabilityAnalyticsPage /></React.Suspense>} />
           <Route path="/alerts" element={<React.Suspense fallback={<Loader/>}><Alert /></React.Suspense>} />
           <Route path="/configuration" element={<React.Suspense fallback={<Loader/>}><Configuration /></React.Suspense>} />
-          <Route path="/histogram" element={<React.Suspense fallback={<Loader/>}><Main /></React.Suspense>} />
+          <Route path="/logmanagement" element={<React.Suspense fallback={<Loader/>}><Main /></React.Suspense>} />
           
     </Routes>
     <ToastContainer />
