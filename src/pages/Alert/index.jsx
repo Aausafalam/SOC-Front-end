@@ -76,6 +76,7 @@ const Alert = () => {
 
     const handleSubmit = (data) => {
       toast("Updated ....")
+      fetchAlertList();
       togglePopup()
     }
      
