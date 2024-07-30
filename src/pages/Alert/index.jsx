@@ -209,7 +209,7 @@ const Alert = () => {
         </div>
       </div>
       <Popup width="90%" show={showEditPop} onClose={togglePopup} title={`Details`}>
-        <EditAlertDetails  setCaseIds={setCaseIds} data={alertDetail?.alertDetails || {}} source={alertDetail?._source} id={id} onCancel={togglePopup} onSuccess={handleSubmit}/>
+        <EditAlertDetails cases={alertDetail?.cases || []}  setCaseIds={setCaseIds} data={alertDetail?.alertDetails || {}} source={alertDetail?._source} id={id} onCancel={togglePopup} onSuccess={handleSubmit}/>
       </Popup>
     </div>
   );

@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import './index.css'; // Import the CSS file
 
 const EChartComponent = ({ isDarkMode, data }) => {
   const formattedData = formatDataForECharts(data);
+  const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'light');
+
+  useEffect(() => {
+    const themeChangeHandler = () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(newTheme);
+    };
+
+    window.addEventListener('themechange', themeChangeHandler);
+
+    return () => {
+      window.removeEventListener('themechange', themeChangeHandler);
+    };
+  }, []);
 
   const getOption = () => ({
     tooltip: {
@@ -15,7 +29,7 @@ const EChartComponent = ({ isDarkMode, data }) => {
     legend: {
       data: ['Score', 'Fail', 'Pass'],
       textStyle: {
-        color: isDarkMode ? '#fff' : '#000',
+        color: theme === "light" ? '#000' : '#fff',
       },
     },
     grid: {
@@ -28,7 +42,7 @@ const EChartComponent = ({ isDarkMode, data }) => {
       {
         type: 'value',
         axisLabel: {
-          color: isDarkMode ? '#fff' : '#000',
+          color: theme === "light" ? '#000' : '#fff',
         },
       },
     ],
@@ -39,7 +53,7 @@ const EChartComponent = ({ isDarkMode, data }) => {
           show: false,
         },
         axisLabel: {
-          color: isDarkMode ? '#fff' : '#000',
+          color: theme === "light" ? '#000' : '#fff',
         },
         data: formattedData.yAxisData,
       },
@@ -51,14 +65,12 @@ const EChartComponent = ({ isDarkMode, data }) => {
         label: {
           show: true,
           position: 'inside',
+          color: theme === "light" ? '#000' : '#fff',
         },
         emphasis: {
           focus: 'series',
         },
         data: formattedData.scoreData,
-        // itemStyle: {
-        //   color: 'blue',
-        // },
       },
       {
         name: 'Fail',
@@ -66,6 +78,7 @@ const EChartComponent = ({ isDarkMode, data }) => {
         stack: 'Total',
         label: {
           show: true,
+          color: theme === "light" ? '#000' : '#fff',
         },
         emphasis: {
           focus: 'series',
@@ -81,6 +94,7 @@ const EChartComponent = ({ isDarkMode, data }) => {
         stack: 'Total',
         label: {
           show: true,
+          color: theme === "light" ? '#000' : '#fff',
         },
         emphasis: {
           focus: 'series',
@@ -91,8 +105,8 @@ const EChartComponent = ({ isDarkMode, data }) => {
         },
       }
     ],
+    backgroundColor: 'transparent',
   });
-  
 
   return <ReactECharts option={getOption()} />;
 };

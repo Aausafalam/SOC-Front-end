@@ -19,9 +19,9 @@ const AssetsSbomTable = () => {
           const agent = data[key];
           return {
               agent_name: agent.agent_name,
-              packageLength: agent.packages.length
+              packageLength: agent.packages.length,
           };
-      });
+      }).sort((a, b) => { return b.packageLength - a.packageLength});
   }
   
 

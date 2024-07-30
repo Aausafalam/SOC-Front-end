@@ -19,7 +19,7 @@
 }
 
 .policy_name h2 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -34,5 +34,5 @@
 }
 
 .policy_name h1 {
-    font-size: 1rem;
+    font-size: 0.95rem;
 }

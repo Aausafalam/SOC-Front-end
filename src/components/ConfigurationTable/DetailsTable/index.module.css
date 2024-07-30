@@ -80,9 +80,14 @@ td {
 }
 
 th {
-    background: #f4f4f4;
+    background: var(--border-box);
+    font-weight: 800;
 }
 
 .valueCell {
     color: #F48634;
+}
+
+.expended_row {
+    padding-inline: 1rem;
 }

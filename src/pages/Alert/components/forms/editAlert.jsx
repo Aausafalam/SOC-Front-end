@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from "./index.module.css"
 import DynamicForm from '../../../../components/Form/DynamicForm';
 import { ICON } from '../../../../utils/icon';
@@ -10,7 +10,7 @@ import { constants } from '../../../../utils/constants';
 import axios from 'axios';
 import { useAlert } from '../../../../context/AlertContext';
 
-const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInput,onSuccess}) => {
+const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInput,onSuccess,cases}) => {
     
   const {alertDetail} = useAlert()
     const states = [
@@ -24,7 +24,8 @@ const EditAlertForm = ({id,onCancel,caseIds,setCaseIds,setCaseIdsInput,caseIdInp
 ];
  
 const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
-
+  
+console.log("alrt",alertDetail?.alertDetails)
 
     const formData = [
         {
@@ -33,7 +34,9 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
           label: "Intel",
           required: true,
           grid:2,
-          defaultValue:alertDetail?.intel
+          defaultValue:
+          // alertDetail?.intel || 
+          alertDetail?.alertDetails?.intel
         },
         {
             type: "select",
@@ -42,7 +45,7 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             grid: 2,
             required: true,
             options: states,
-            defaultValue:parseInt(alertDetail?.alertState || alertDetail?.alertState)
+            defaultValue:parseInt(alertDetail?.alertDetails?.alertState)
         },
         // {
         //   type: "text",
@@ -65,14 +68,18 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             label: "Remarks",
             grid: 2,
             required: true,
-            defaultValue:alertDetail?.remarks
-        },
+            defaultValue:
+            // alertDetail?.remarks || 
+            alertDetail?.alertDetails?.remarks
+        }, 
         {
             type:"text",
             name:"domains",
             label:"Domains",
             grid:2,
-            defaultValue:alertDetail?.domain?.join(", ") || alertDetail?.iocs?.domains?.join(", ")
+            defaultValue:
+            // alertDetail?.domain?.join(", ") || alertDetail?.iocs?.domains?.join(", ") || 
+            alertDetail?.alertDetails?.iocs?.domains?.join(", ")
             // required:true
         },
         {
@@ -80,7 +87,9 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             name:"ips",
             label:"IPS",
             grid:2,
-            defaultValue:alertDetail?.ips?.join(", ")||  alertDetail?.iocs?.ips?.join(", ")
+            defaultValue:
+            // alertDetail?.ips?.join(", ")||  alertDetail?.iocs?.ips?.join(", ")||
+            alertDetail?.alertDetails?.iocs?.ips?.join(", ")
             // required:true
         },
         {
@@ -88,7 +97,9 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             name:"urls",
             label:"URLS",
             grid:2,
-            defaultValue:alertDetail?.urls?.join(", ") || alertDetail?.iocs?.urls?.join(", ")
+            defaultValue:
+            // alertDetail?.urls?.join(", ") || alertDetail?.iocs?.urls?.join(", ") || 
+            alertDetail?.alertDetails?.iocs?.urls?.join(", ")
             // required:true
         },
         {
@@ -96,7 +107,9 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
             name:"file_hashes",
             label:"File Hashes",
             grid:2,
-            defaultValue:alertDetail?.file_hashes?.join(", ") ||  alertDetail?.iocs?.file_hashes?.join(", ")
+            defaultValue:
+            // alertDetail?.file_hashes?.join(", ") ||  alertDetail?.iocs?.file_hashes?.join(", ") || 
+            alertDetail?.alertDetails?.iocs?.file_hashes?.join(", ")
             // required:true
         }
       ];
@@ -208,18 +221,22 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
   
   console.log( "rerwetey>>>>>>>>>>>>>>>",caseIds)
    
-   
+
    
 
   const handleSubmit = async (formData) => {
     if (formData) {
      let requestBody = {
       ...formData,
-      domains:formData.domains.split(", "),
-      ips: formData.ips.split(", "),
-      urls: formData.urls.split(", "),
-      file_hashes: formData.file_hashes.split(", "),
-      caseid:Object.entries(caseIds).map(([key, value]) => value)
+      iocs:{
+        domains:formData.domains.split(", "),
+        ips: formData.ips.split(", "),
+        urls: formData.urls.split(", "),
+        file_hashes: formData.file_hashes.split(", ")
+      },
+      case:Object.entries(caseIds).map(([key, value]) => {
+        return {id:value}
+      })
 
      }
      axios.put(`http://192.168.40.48:8080/api/alerts/update/${id}`, requestBody)
@@ -237,7 +254,15 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
     }
      
   };
+  const showCaseIdPopUpRef = useRef(false);
 
+  const caseIdstogglePopup = () => {
+    showCaseIdPopUpRef.current = !showCaseIdPopUpRef.current;
+    // Force a re-render if needed, but typically avoid this
+    forceUpdate();
+  };
+
+  const forceUpdate = React.useReducer(() => ({}), {})[1];
 
 
   return (<div className={styles.container}>
@@ -252,21 +277,25 @@ const [showCaseIdPopUp,setShowCaseIdPopUp] = useState(false)
            setCaseIdsInput(event.target.value)
       }} type="text" id="caseid" name="caseid" class="form-control" required="true"/>
       </div>
-      <button onClick={() => {setShowCaseIdPopUp(!showCaseIdPopUp);
-      fetchCaseList();}}>{showCaseIdPopUp ? "Hide" : "Show"} Case Ids</button>
+      <button onClick={() => {caseIdstogglePopup();
+      fetchCaseList();}}>{showCaseIdPopUpRef.current ? "Hide" : "Show"} Case Ids</button>
     </div>
 
-    {
-      showCaseIdPopUp && 
-      <div>
-            <Table tableData={tableData} />
-     <button type='button' className={styles.save_button} onClick={() => {
-        setCaseIdsInput(Object.entries(caseIds).map(([key, value]) => value).join(","));
-         togglePopup();
-     }}>Save</button>
-      </div>
-     }
-
+    {showCaseIdPopUpRef.current && 
+        <Popup  width="70%" show={showCaseIdPopUpRef.current} onClose={caseIdstogglePopup} title={`Case Id List`}>
+          <Table tableData={tableData} />
+          <button
+            type='button'
+            className={styles.save_button}
+            onClick={() => {
+              setCaseIdsInput(Object.entries(caseIds).map(([key, value]) => value).join(", "));
+              caseIdstogglePopup();
+            }}
+          >
+            Save
+          </button>
+        </Popup>
+      }
 
     <DynamicForm
         formData={formData}
