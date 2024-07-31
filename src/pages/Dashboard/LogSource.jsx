@@ -53,9 +53,9 @@ const LogSource = ({ expandedData, handleTabClick }) => {
       <div className={Style.log_first_child}>
         <h3>Log Source</h3>
         <ul>
-          <li><a href="#" className={selectedTab === 'All' ? Style.active : ''} onClick={() => onTabClick('All')}>All</a></li>
-          <li><a href="#" className={selectedTab === 'Network' ? Style.active : ''} onClick={() => onTabClick('Network')}>Network</a></li>
-          <li><a href="#" className={selectedTab === 'EndPoints' ? Style.active : ''} onClick={() => onTabClick('EndPoints')}>EndPoints</a></li>
+          <li><button className={selectedTab === 'All' ? Style.active : ''} onClick={() => onTabClick('All')}>All</button></li>
+          <li><button className={selectedTab === 'Network' ? Style.active : ''} onClick={() => onTabClick('Network')}>Network</button></li>
+          <li><button className={selectedTab === 'EndPoints' ? Style.active : ''} onClick={() => onTabClick('EndPoints')}>EndPoints</button></li>
         </ul>
       </div>
       <div className={Style.log_second_child}>

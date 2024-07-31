@@ -5,7 +5,7 @@ import HistogramChart from './HistogramChart';
 import TimeFrameSelector from './TimeFrameSelector';
 import { parseISO, isWithinInterval, subDays} from 'date-fns';
 import Style from './Main.module.css'; // Import CSS module
-import { Category } from '@mui/icons-material';
+// import { Category } from '@mui/icons-material';
 
 
 
@@ -18,11 +18,12 @@ const Main = () => {
   const [error, setError] = useState(null);
   const [expandedData, setExpandedData] = useState(null); // State for expanded data
   const [histogramData, setHistogramData] = useState([]);
+  const [index, setIndex] = useState('*');
   
 
   useEffect(() => {
     fetchLogs();
-  }, [timeFrame, query]);
+  }, [timeFrame, query, index]);
 
   useEffect(() => {
     if (filteredLogs.length > 0) {
@@ -62,8 +63,8 @@ const Main = () => {
 
     const startISO = startTime.toISOString();
     const endISO = endTime.toISOString();
-    const url = `http://192.168.42.39:3000/pagedEvents?page=1&start_time=${startISO}&end_time=${endISO}`;
-    console.log(startISO)
+    const url = `https://ndr-bff.soc.k8.c3ihub/pagedEvents?page=1&start_time=${startISO}&end_time=${endISO}&index=${index}`; 
+    console.log(index )
 
     try {
       const response = await fetch(url);
@@ -100,6 +101,23 @@ const Main = () => {
   const handleTimeFrameChange = (newTimeFrame) => {
     setTimeFrame(newTimeFrame);
   };
+
+  const handleTabClick = (category) => {
+    switch (category) {
+      case 'All':
+        setIndex('*');
+        break;
+      case 'Network':
+        setIndex('hids-ingest-logs-prod');
+        break;
+      case 'EndPoints':
+        setIndex('ingest-logs-prod');
+        break;
+      default:
+        setIndex('*');
+    }
+  };
+
 
   const filterLogs = (query, logs) => {
     const filtered = logs.filter(log =>
@@ -159,7 +177,10 @@ const Main = () => {
       <div className={Style.content}>
      
         <div className={Style.log_node_type}>
-          <LogSource logs={filteredLogs} expandedData={expandedData} />
+        <LogSource 
+            expandedData={expandedData} 
+            handleTabClick={handleTabClick} 
+          />
         </div>
       </div>
     </div>
