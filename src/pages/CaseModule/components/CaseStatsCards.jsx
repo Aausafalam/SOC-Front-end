@@ -9,7 +9,7 @@ const CaseStatsCards = () => {
 
     useEffect(() => {
         fetchCaseMatricesData();
-    }, [fetchCaseMatricesData]);
+    }, []);
 
     const safeParseInt = (value, fallback = 0) => {
         const parsed = parseInt(value, 10);
