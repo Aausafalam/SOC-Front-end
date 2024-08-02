@@ -173,7 +173,7 @@ const Alert = () => {
         action: true,
         export:false,
         print:false,
-        searchUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count&id=searchText",
+        searchUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count&searchText=input",
         exportDataUrl:false,
         printUrl: false,
         paginationUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count",
