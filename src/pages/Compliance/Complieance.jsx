@@ -15,7 +15,7 @@ function Compliance() {
 
   useEffect(() => {
     fetchComplianceList();
-  }, [fetchComplianceList]);
+  }, [selectedTab]);
 
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
