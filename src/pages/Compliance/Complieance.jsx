@@ -27,7 +27,7 @@ function Compliance() {
     const similarityScores = data.map(item => item.similarity_score || 0);
     const sum = similarityScores.reduce((acc, score) => acc + score, 0);
     const average = sum / similarityScores.length;
-    console.log("Average Similarity Score:", average);
+    //console.log("Average Similarity Score:", average);
     return Math.round(average * 100); // Multiply by 100 and round to integer
   };
 

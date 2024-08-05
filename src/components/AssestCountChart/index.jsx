@@ -55,7 +55,7 @@ const AssetsCountChart = ({initialData}) => {
             setLoading(false);
         })();
     }, [initialData]);
-   console.log(data,initialData)
+   //console.log(data,initialData)
     return (
         <div>
             {loading ? <span className="chart-loading">{ICON.LOADING}</span>:data && (

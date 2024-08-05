@@ -16,7 +16,7 @@ const AssetsManagementModule = () => {
     fetchAssetsDashboardData()
   },[])
    
-  console.log("qerewt",assetsDashboardData)
+  //console.log("qerewt",assetsDashboardData)
 
   return (<div className={styles.container}>
      {/* <h1>Assets Management Module</h1> */}

@@ -36,7 +36,7 @@ function AlertSingleView({ alertID }) {
   if (!alertData) {
     return <div id="alert-single-view-container">Loading...</div>;
   }
-console.log(alertID)
+//console.log(alertID)
   return (
     <div id="alert-single-view-container">
       <div id="alert-items-container"><p>Key</p><p>Values</p></div>

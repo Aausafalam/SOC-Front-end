@@ -24,16 +24,16 @@ const EditAlertForm = ({
   const states = [
     // {label:"New", value:0}, {label:"Opened", value:1},
     { label: "Escalated with CaseId", value: 2 },
-    { label: "Duplicate", value: 3 },
-    { label: "False Positive", value: 4 },
-    { label: "Archived", value: 5 },
-    { label: "Closed", value: 6 },
-    { label: "Re-Assigned", value: 7 },
+    { label: "Escalated without CaseId", value: 3 },
+    { label: "False Positive", value: 5 },
+    { label: "Archived", value: 6 },
+    { label: "Closed", value: 7 },
+    { label: "Re-Assigned", value: 8 },
   ];
 
   const [showCaseIdPopUp, setShowCaseIdPopUp] = useState(false);
 
-  console.log("alrt", alertDetail?.alertDetails);
+  //console.log("alrt", alertDetail?.alertDetails);
 
   const formData = useMemo(
     () => [
@@ -143,7 +143,7 @@ const EditAlertForm = ({
   const togglePopup = () => setShowCaseIdPopUp(!showCaseIdPopUp);
 
   const { caseList, fetchCaseList } = useCase();
-  console.log(caseList);
+  //console.log(caseList);
   useEffect(() => {}, []);
 
   const getStatusBadgeClass = (status) => {
@@ -166,7 +166,7 @@ const EditAlertForm = ({
     return severityMap[severity] || "NA";
   };
    
-  console.log(">>>>>>>>",caseIds)
+  //console.log(">>>>>>>>",caseIds)
   const getTableData = (data) => {
     return {
       ...Utils.GetTableData(),
@@ -246,7 +246,7 @@ const EditAlertForm = ({
 
   const tableData = React.useMemo(() => getTableData(caseList), [caseList,caseIds]);
 
-  console.log("rerwetey>>>>>>>>>>>>>>>", caseIds);
+  //console.log("rerwetey>>>>>>>>>>>>>>>", caseIds);
 
   const handleSubmit = async (formData) => {
     if (formData) {

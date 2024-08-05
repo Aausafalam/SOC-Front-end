@@ -15,7 +15,7 @@ const AsstesTable = () => {
 
     function getTableData(data) {
 
-        console.log(data)
+        //console.log(data)
         return {
           ...Utils.GetTableData(),
           title: "Assets Table",

@@ -53,7 +53,7 @@ const ManualAssesment = ({onCancel,onSuccess}) => {
    
     const handleSubmit = async (formData) => {
         if (formData) {
-         console.log(formData)
+         //console.log(formData)
          axios.post('http://192.168.40.52:5000/api/create_ticket', {  ...formData })
          .then(response => {
              onSuccess(response.data.status);

@@ -34,7 +34,7 @@
   .case_chart_container>div{
     background-color: var(--white);
     padding:1rem;
-    border-radius: .30rem;
+    border-radius: .80rem;
     height: 100%;
   }
 

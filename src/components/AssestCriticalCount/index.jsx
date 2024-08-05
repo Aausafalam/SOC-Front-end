@@ -99,7 +99,7 @@ const AssestCriticalCount = ({initialData}) => {
     ]
 
 
-    console.log( "qrerewrttwrt>>..................", initialData)
+    //console.log( "qrerewrttwrt>>..................", initialData)
 
     return (
         <div className={styles.container}>

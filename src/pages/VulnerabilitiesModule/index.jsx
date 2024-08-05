@@ -43,10 +43,10 @@ const VulnerabilitiesModule = () => {
      
       const fetchSeverity = () =>{
         axios.get("http://192.168.40.52:5000/api/severity_count").then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             setSeverity(response.data)
         }).catch((error) => {
-            console.log(error);
+            //console.log(error);
         });
       }
       const [radialPolarData, setRadialPolarData] = useState([]);

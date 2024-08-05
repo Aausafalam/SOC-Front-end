@@ -49,7 +49,7 @@ const CaseStateChart = () => {
     //     })();
     // }, []);
 
-    // console.log("=========", caseDashboardData);
+    // //console.log("=========", caseDashboardData);
 
     return (
         <div>

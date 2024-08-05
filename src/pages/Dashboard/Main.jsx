@@ -63,7 +63,7 @@ const Main = () => {
     const startISO = startTime.toISOString();
     const endISO = endTime.toISOString();
     const url = `http://192.168.42.39:3000/pagedEvents?page=1&start_time=${startISO}&end_time=${endISO}`;
-    console.log(startISO)
+    //console.log(startISO)
 
     try {
       const response = await fetch(url);
@@ -71,18 +71,18 @@ const Main = () => {
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
       const data = await response.json();
-      console.log('Fetched data:', data); // Debugging line
+      //console.log('Fetched data:', data); // Debugging line
       setLogs(data[0][0]?.hits.hits); // Adjust based on actual API response structure
       filterLogs(query, data[0][0]?.hits.hits);
 
-      // console.log("asdlfkjasl", data[0][2])
+      // //console.log("asdlfkjasl", data[0][2])
       const histogramData = Object.entries(data[0][2]).map(([key, value]) => ({
         time: new Date(key).toLocaleTimeString(), // Format as desired
         count: value
       }));
 
 
-      console.log(">=================", histogramData)
+      //console.log(">=================", histogramData)
       setHistogramData(histogramData);
     } catch (error) {
       console.error('Fetch error:', error);

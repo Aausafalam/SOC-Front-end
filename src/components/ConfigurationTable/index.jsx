@@ -17,7 +17,7 @@ const ConfigurationTable = () => {
     const togglePopup = () => setShowPopUp(!showPopUp);
 
 
-  console.log(configurationList)
+  //console.log(configurationList)
   function getTableData(data) {
     if(data?.length === 0 || !data)
     {
@@ -575,7 +575,7 @@ const ConfigurationTable = () => {
       ]
       
     }
-    console.log(data)
+    //console.log(data)
     return {
       ...Utils.GetTableData(),
       title: "Configuration Table",
@@ -662,7 +662,7 @@ const ConfigurationTable = () => {
   ]
  
 
-  // console.log("sasdfds",id)
+  // //console.log("sasdfds",id)
 
   const tableData = React.useMemo(() => getTableData(configurationList), [configurationList]);
    

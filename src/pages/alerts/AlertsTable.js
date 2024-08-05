@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TableComponent from '../../components/Table/Table';
 
 function getTableData(data, setAlertID) {
-  console.log(data);
+  //console.log(data);
 
   return {
     title: "Alerts Table",
@@ -33,7 +33,7 @@ function getTableData(data, setAlertID) {
         label:"view",
         name:"view",
         functions:(id) => {
-          console.log(id);
+          //console.log(id);
           setAlertID(id);
         }
       }

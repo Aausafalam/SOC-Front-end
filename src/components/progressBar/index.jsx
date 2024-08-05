@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import { Line, Circle } from 'rc-progress';
 import { ReactSVG } from 'react-svg';
 const ProgressBar = ({data}) => {
-    console.log(data)
+    //console.log(data)
   return (
     <div className={styles.container}>
         <div style={{background:data.icon ? data.strokeColor : ""}} className={styles.icon}>

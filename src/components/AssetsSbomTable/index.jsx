@@ -32,14 +32,14 @@ const AssetsSbomTable = () => {
 
     function getTableData(data) {
 
-       console.log("areqrewr",data)
+       //console.log("areqrewr",data)
        let count = 0 
       
-      //  console.log("qwrerewtrweT", data.map((data) => count += data.packageLength))
+      //  //console.log("qwrerewtrweT", data.map((data) => count += data.packageLength))
       data.forEach((item) => {
         count += item.packageLength
       })
-      // console.log("eqwrqeo",count)
+      // //console.log("eqwrqeo",count)
         return {
           ...Utils.GetTableData(),
           title: `SBOM Table ( ${count} )`,

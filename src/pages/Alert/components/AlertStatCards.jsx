@@ -30,13 +30,13 @@ const AlertStatCards = () => {
     const fetchData = () => {
         axios.get("http://172.29.25.0:8080/api/alerts/metrics")
         .then((response) => {
-            console.log("wetrwtr",response.data)
+            //console.log("wetrwtr",response.data)
             setMatricsData(response.data)
         }).catch((error) => {
-            console.log(error)
+            //console.log(error)
         })
     }
-// console.log("rewrwt",matricsData)
+// //console.log("rewrwt",matricsData)
    
 useEffect(() => {
     fetchData()

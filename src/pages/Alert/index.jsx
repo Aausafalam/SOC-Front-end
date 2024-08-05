@@ -70,7 +70,7 @@ const Alert = () => {
     };
     
     const onSuccess = (data) => {
-      console.log(data)
+      //console.log(data)
     }
 
 
@@ -109,7 +109,7 @@ const Alert = () => {
 
     // const togglePopup = () => setShowPopup(prev => !prev);
     const getTableData = (data) => {
-      console.log( " dfdsfdsf",data[1])
+      //console.log( " dfdsfdsf",data[1])
       return {
         ...Utils.GetTableData(),
         title: "All Alerts",
@@ -174,6 +174,7 @@ const Alert = () => {
         export:false,
         print:false,
         searchUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count&searchText=input",
+        autoSuggestionUrl:false,
         exportDataUrl:false,
         printUrl: false,
         paginationUrl: "http://172.29.25.0:8080/api/alerts?page=input&limit=count",
@@ -189,7 +190,7 @@ const Alert = () => {
     };
     
 
-   console.log(alertDetail)
+   //console.log(alertDetail)
 
     
     

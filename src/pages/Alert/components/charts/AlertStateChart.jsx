@@ -49,7 +49,7 @@ const AlertStateChart = () => {
     //     })();
     // }, []);
 
-    // console.log("=========", caseDashboardData);
+    // //console.log("=========", caseDashboardData);
 
     return (
         <div>

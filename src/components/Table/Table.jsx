@@ -27,7 +27,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
   const [order, setOrder] = useState();
   const [isLoadingExport, setIsLoadingExport] = useState(false);
 
-  console.log(tableData);
+  //console.log(tableData);
   const debounce = (func, delay) => {
     let debounceTimer;
     return (...args) => {
@@ -81,6 +81,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
       {
         params.searchText = searchText;
       }
+      //console.log(searchText)
       if(filter){
         params[filter.filterKey] = filter.value;
       }
@@ -100,7 +101,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
         setIsLoading(false);
       }
     },
-    [data, generateSuggestions]
+    [data, generateSuggestions,searchText]
   );
 
   useEffect(() => {
@@ -197,15 +198,13 @@ const TableComponent = ({ tableData, filterOptions }) => {
     fetchPageData(1, itemsPerPage, sortBy, order, "");
   };
 
-  const handleInputChange = useCallback(
+  const handleInputChange = 
     (event) => {
       setSearchText(event.target.value);
       if (event.target.value.length > 0) {
         fetchSuggestions(event.target.value);
       }
-    },
-    [fetchSuggestions]
-  );
+    }
 
   const handleItemsPerPageChange = useCallback((event) => {
     setItemsPerPage(parseInt(event.target.value, 10));
@@ -333,8 +332,9 @@ const TableComponent = ({ tableData, filterOptions }) => {
                       itemsPerPage,
                       sortBy,
                       order,
-                      selectedFilter,
-                      searchText
+                      searchText,
+                      selectedFilter
+                     
                     );
                   }}
                   ref={searchRef}
@@ -351,11 +351,11 @@ const TableComponent = ({ tableData, filterOptions }) => {
                   {showSuggestions && suggestions.length > 0 && (
                     <ul className="suggestions-list">
                       {suggestions.map((suggestion, index) => (
-                        <li
+                       typeof suggestion === 'string' && <li
                           key={index}
                           onClick={() => handleSuggestionClick(suggestion)}
                         >
-                          {suggestion}
+                          {suggestion} 
                         </li>
                       ))}
                     </ul>
@@ -504,7 +504,7 @@ const TableComponent = ({ tableData, filterOptions }) => {
                     )
                   )}
                   {data.action && (
-                    <td data-cell="Action">
+                    <td onClick={(event) => event.stopPropagation()} data-cell="Action">
                       <Dropdown
                         trigger={<span>{ICON.DOT_MENU}</span>}
                         content={data.actionData.map((action, actionIndex) => 

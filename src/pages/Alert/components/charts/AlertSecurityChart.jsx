@@ -40,13 +40,13 @@ const AlertSecurityChart = () => {
     const fetchData = () => {
         axios.get("http://172.29.25.0:8080/api/alerts/severity-chart")
         .then((response) => {
-            // console.log("wetrwtr",response.data)
+            // //console.log("wetrwtr",response.data)
             setChartData(response.data.severity)
         }).catch((error) => {
-            console.log(error)
+            //console.log(error)
         })
     }
-// console.log("rewrwt",matricsData)
+// //console.log("rewrwt",matricsData)
    
 useEffect(() => {
     fetchData()

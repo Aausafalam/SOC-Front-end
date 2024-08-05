@@ -7,7 +7,7 @@ import './alerts-style.css';
 
 function Alerts() {
   const [alertID, setAlertID] = useState(null);
-console.log(alertID)
+//console.log(alertID)
   // const alertFunc = (alert_id)=>{
   //   setAlertID(alert_id)
   // }
